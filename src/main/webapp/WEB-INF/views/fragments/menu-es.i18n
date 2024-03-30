@@ -47,6 +47,11 @@ master.menu.administrator.shut-down = Parar el sistema
 master.menu.administrator.banner = Banner
 
 
+# master.menu.client ###################################################
+
+master.menu.client = Cliente
+master.menu.client.contracts = Lista de mis Contratos
+
 # master.menu.provider ########################################################
 
 master.menu.provider = Proveedor
