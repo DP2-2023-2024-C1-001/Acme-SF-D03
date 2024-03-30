@@ -32,7 +32,10 @@ master.menu.anonymous.guille = 45813076C: Gomez Romero, Guillermo
 master.menu.anonymous.josemaria = 29588315B: Baquero Rodriguez, Jose Maria
 
 
+# master.menu.developer ###################################################
 
+master.menu.developer = Desarrollador
+master.menu.developer.training-module = Lista de Módulos de Entrenamiento
 
 
 
