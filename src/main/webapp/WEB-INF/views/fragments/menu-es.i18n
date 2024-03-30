@@ -45,6 +45,11 @@ master.menu.administrator.populate-initial = Poblar BD (inicial)
 master.menu.administrator.populate-sample = Poblar BD (ejemplos)
 master.menu.administrator.shut-down = Parar el sistema
 
+# master.menu.client ###################################################
+
+master.menu.client = Cliente
+master.menu.client.contracts = Lista de mis Contratos
+
 # master.menu.provider ########################################################
 
 master.menu.provider = Proveedor
