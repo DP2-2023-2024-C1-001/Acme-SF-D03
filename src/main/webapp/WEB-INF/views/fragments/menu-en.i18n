@@ -53,6 +53,11 @@ master.menu.client.contracts = List my Contracts
 master.menu.sponsor = Sponsor
 master.menu.sponsor.sponsorships = List my Sponsorships
 
+# master.menu.auditor ###################################################
+
+master.menu.auditor = Auditor
+master.menu.auditor.codeaudits = List my Code audits
+
 # master.menu.provider ########################################################
 
 master.menu.provider = Provider
