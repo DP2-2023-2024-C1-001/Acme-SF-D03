@@ -20,7 +20,7 @@ master.menu.sign-out = Salir
 
 master.menu.authenticated = Autenticado
 master.menu.authenticated.list-all-claims = Lista de reclamaciones
-
+master.menu.authenticated.projects = Listado de proyectos
 
 # master.menu.anonymous #######################################################
 
