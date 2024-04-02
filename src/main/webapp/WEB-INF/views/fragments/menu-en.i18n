@@ -48,6 +48,11 @@ master.menu.administrator.banner = Banner
 master.menu.client = Client
 master.menu.client.contracts = List my Contracts
 
+# master.menu.manager #########################################################
+
+master.menu.manager = Manager
+master.menu.manager.projects = List projects
+
 # master.menu.sponsor ###################################################
 
 master.menu.sponsor = Sponsor
