@@ -18,6 +18,12 @@ administrator.banner.form.label.displayPeriodFinal = Fin de Periodo de visualiza
 administrator.banner.form.label.picture = Foto:
 administrator.banner.form.label.link = Link: 
 
-
+administrator.banner.form.button.create = Crear
+administrator.banner.form.button.update = Actualizar
+administrator.banner.form.button.delete = Borrar
+ 
+ 
 administrator.banner.list.label.slogan = Eslogan
 administrator.banner.list.label.instantiationUpdateMoment = Momento de Instanciación/Actualización
+
+administrator.banner.list.button.create = Crear
