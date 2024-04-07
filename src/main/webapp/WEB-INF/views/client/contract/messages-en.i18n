@@ -19,6 +19,7 @@ client.contract.form.label.goals = Goals:
 client.contract.form.label.budget = Budget:
 client.contract.form.label.project = Project:
 client.contract.form.label.published = Published:
+client.contract.form.button.progressLogs = List Progress Logs
 
 
 

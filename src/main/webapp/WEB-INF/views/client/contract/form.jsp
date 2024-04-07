@@ -27,4 +27,11 @@
 	<acme:input-select code="client.contract.form.label.project" path="project" choices= "${projects}"/>
 	<acme:input-checkbox code="client.contract.form.label.published" path="published"/>
 		
+
+	
+	<jstl:choose>	 
+		<jstl:when test="${_command == 'show' }">
+			<acme:button code="client.contract.form.button.progressLogs" action="/client/progress-log/list?masterId=${id}"/>			
+		</jstl:when>	
+	</jstl:choose>	
 </acme:form>

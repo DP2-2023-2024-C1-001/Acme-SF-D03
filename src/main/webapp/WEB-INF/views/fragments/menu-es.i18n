@@ -44,11 +44,18 @@ master.menu.administrator.user-accounts = Cuentas de usuario
 master.menu.administrator.populate-initial = Poblar BD (inicial)
 master.menu.administrator.populate-sample = Poblar BD (ejemplos)
 master.menu.administrator.shut-down = Parar el sistema
+master.menu.administrator.banner = Banner
+
 
 # master.menu.client ###################################################
 
 master.menu.client = Cliente
 master.menu.client.contracts = Lista de mis Contratos
+
+# master.menu.sponsor ###################################################
+
+master.menu.sponsor = Patrocinador
+master.menu.sponsor.sponsorships = Lista de mis patrocinios
 
 # master.menu.provider ########################################################
 
