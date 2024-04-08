@@ -25,10 +25,12 @@
 			<acme:menu-suboption code="master.menu.anonymous.guille" action="https://en.realbetisbalompie.es/"/>
 			<acme:menu-suboption code="master.menu.anonymous.manu" action="https://github.com/"/>
 			<acme:menu-suboption code="master.menu.anonymous.josemaria" action="https://en.realbetisbalompie.es/"/>
+			<acme:menu-suboption code="master.menu.anonymous.list-all-claims" action="/any/claim/list"/>
+			
 		</acme:menu-option>
 		
 		<acme:menu-option code="master.menu.authenticated" access="isAuthenticated()">
-			<acme:menu-suboption code="master.menu.authenticated.list-all-claims" action="/any/claim/list"/>
+			<acme:menu-suboption code="master.menu.anonymous.list-all-claims" action="/any/claim/list"/>
 		
 		</acme:menu-option>
 
