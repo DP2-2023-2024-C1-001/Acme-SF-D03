@@ -21,6 +21,8 @@ administrator.banner.form.label.link = Link:
 administrator.banner.form.button.create = Create
 administrator.banner.form.button.update = Update
 administrator.banner.form.button.delete = Delete
+administrator.banner.form.error.invalidPeriodInitial = Display period initial must start at any moment after the instantiation/update moment 
+administrator.banner.form.error.too-close = Display period must last for at least one week
 
 
 administrator.banner.list.label.slogan = Slogan

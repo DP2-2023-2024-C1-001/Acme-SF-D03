@@ -1,11 +1,15 @@
 
 package acme.features.administrator.banner;
 
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.accounts.Administrator;
 import acme.client.data.models.Dataset;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
 import acme.entities.banner.Banner;
 
@@ -46,6 +50,17 @@ public class AdministratorBannerUpdateService extends AbstractService<Administra
 	@Override
 	public void validate(final Banner object) {
 		assert object != null;
+
+		if (!super.getBuffer().getErrors().hasErrors("displayPeriodInitial"))
+			super.state(MomentHelper.isAfter(object.getDisplayPeriodInitial(), object.getInstantiationUpdateMoment()), "displayPeriodInitial", "administrator.banner.form.error.invalidPeriodInitial");
+
+		if (!super.getBuffer().getErrors().hasErrors("displayPeriodFinal")) {
+			Date minimumDisplayPeriodFinal;
+
+			minimumDisplayPeriodFinal = MomentHelper.deltaFromMoment(object.getDisplayPeriodInitial(), 7, ChronoUnit.DAYS);
+			super.state(MomentHelper.isAfterOrEqual(object.getDisplayPeriodFinal(), minimumDisplayPeriodFinal), "displayPeriodFinal", "administrator.banner.form.error.too-close");
+
+		}
 	}
 
 	@Override
