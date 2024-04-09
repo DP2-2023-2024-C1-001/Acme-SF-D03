@@ -26,7 +26,17 @@ public class AuditorCodeAuditShowService extends AbstractService<Auditor, CodeAu
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+		int masterId;
+		CodeAudit codeAudit;
+		Auditor auditor;
+
+		masterId = super.getRequest().getData("id", int.class);
+		codeAudit = this.repository.findOneCodeAuditById(masterId);
+		auditor = codeAudit == null ? null : codeAudit.getAuditor();
+		status = super.getRequest().getPrincipal().hasRole(auditor);
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -53,7 +63,7 @@ public class AuditorCodeAuditShowService extends AbstractService<Auditor, CodeAu
 		projects = this.repository.findProjectByCodeAuditId(id);
 		choices = SelectChoices.from(projects, "code", object.getProject());
 
-		dataset = super.unbind(object, "code", "execution", "type", "correctiveActions", "link");
+		dataset = super.unbind(object, "code", "execution", "type", "correctiveActions", "link", "published");
 		dataset.put("projects", choices);
 
 		super.getResponse().addData(dataset);

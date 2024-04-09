@@ -16,6 +16,7 @@ auditor.code-audit.form.label.execution = Execution:
 auditor.code-audit.form.label.type = Code Audit Type:
 auditor.code-audit.form.label.correctiveActions = Corrective Actions:
 auditor.code-audit.form.label.project = Project:
+auditor.code-audit.form.label.project = Published:
 
 
 

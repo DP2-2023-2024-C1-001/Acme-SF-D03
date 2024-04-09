@@ -24,4 +24,6 @@
 	<acme:input-textarea code="auditor.code-audit.form.label.correctiveActions" path="correctiveActions"/>
 	<acme:input-url code="auditor.code-audit.form.label.link" path="link"/>
 	<acme:input-select code="auditor.code-audit.form.label.project" path="project" choices= "${project}"/>	
+	<acme:input-checkbox code="auditor.code-audit.form.label.published" path="pulished"/>
+	
 </acme:form>
