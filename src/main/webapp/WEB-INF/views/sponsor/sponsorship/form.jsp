@@ -25,5 +25,10 @@
 	<acme:input-email code="sponsor.sponsorship.form.label.email" path="email"/>
 	<acme:input-url code="sponsor.sponsorship.form.label.link" path="link"/>
 	<acme:input-integer code="sponsor.sponsorship.form.label.duration" path="duration"/>
-	<acme:input-select code="sponsor.sponsorship.form.label.project" path="project" choices= "${project}"/>	
+	<acme:input-select code="sponsor.sponsorship.form.label.project" path="project" choices= "${project}"/>
+	<jstl:choose>	 
+		<jstl:when test="${_command == 'show' }">
+			<acme:button code="sponsor.sponsorship.form.button.invoices" action="/sponsor/invoice/list?masterId=${id}"/>			
+		</jstl:when>	
+	</jstl:choose>
 </acme:form>
