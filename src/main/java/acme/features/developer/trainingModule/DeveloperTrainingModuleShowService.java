@@ -27,7 +27,18 @@ public class DeveloperTrainingModuleShowService extends AbstractService<Develope
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+
+		boolean status;
+		int masterId;
+		TrainingModule trainingModule;
+		Developer developer;
+
+		masterId = super.getRequest().getData("id", int.class);
+		trainingModule = this.repository.findOneTrainingModuleById(masterId);
+		developer = trainingModule == null ? null : trainingModule.getDeveloper();
+		status = super.getRequest().getPrincipal().hasRole(developer);
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
