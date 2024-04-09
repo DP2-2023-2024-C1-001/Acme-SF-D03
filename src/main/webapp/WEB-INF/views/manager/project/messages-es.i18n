@@ -12,5 +12,6 @@ manager.project.form.label.projectAbstract = Resumen de proyecto:
 manager.project.label.indication = Indicación (errores críticos)
 manager.project.form.label.cost = Coste:
 manager.project.form.label.link = Enlace:
-manager.project.label.draftMode = Borrador
 manager.project.form.button.user-stories-list = Ver historias de usuario
+
+manager.project.list.button.create = Crear
