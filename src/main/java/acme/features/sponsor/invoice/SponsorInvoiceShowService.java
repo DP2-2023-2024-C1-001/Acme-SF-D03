@@ -8,6 +8,7 @@ import acme.client.data.datatypes.Money;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
 import acme.entities.invoice.Invoice;
+import acme.entities.sponsorship.Sponsorship;
 import acme.roles.Sponsor;
 
 @Service
@@ -23,7 +24,15 @@ public class SponsorInvoiceShowService extends AbstractService<Sponsor, Invoice>
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+		int invoiceId;
+		Sponsorship sponsorship;
+
+		invoiceId = super.getRequest().getData("id", int.class);
+		sponsorship = this.repository.findSponsorshipByInvoiceId(invoiceId);
+		status = sponsorship != null && super.getRequest().getPrincipal().hasRole(sponsorship.getSponsor());
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
