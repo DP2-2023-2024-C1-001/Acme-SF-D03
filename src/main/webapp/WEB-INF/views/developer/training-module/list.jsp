@@ -22,3 +22,5 @@
 	<acme:list-column code="developer.training-module.list.label.details" path="details" width="25%"/>
 	
 </acme:list>
+
+<acme:button code="developer.training-module.list.button.create" action="/developer/training-module/create"/>

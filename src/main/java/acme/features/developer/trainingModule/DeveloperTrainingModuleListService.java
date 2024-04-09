@@ -31,7 +31,7 @@ public class DeveloperTrainingModuleListService extends AbstractService<Develope
 	public void load() {
 		Collection<TrainingModule> objects;
 
-		objects = this.repository.findAllClaims();
+		objects = this.repository.findAllTrainingModules();
 
 		super.getBuffer().addData(objects);
 	}

@@ -17,6 +17,8 @@ developer.training-module.form.label.details = Details:
 developer.training-module.form.label.difficultLevel = Difficult Level:
 developer.training-module.form.label.updateMoment = Update Moment:
 developer.training-module.form.label.link = Link: 
+developer.training-module.form.label.published = Published
+developer.training-module.form.label.project = Project
 
 
 
@@ -25,3 +27,6 @@ developer.training-module.list.label.code = Code
 developer.training-module.list.label.creationMoment = Creation Moment
 developer.training-module.list.label.difficultLevel = Difficult Level
 developer.training-module.list.label.details = Details
+
+
+developer.training-module.list.button.create = Create 

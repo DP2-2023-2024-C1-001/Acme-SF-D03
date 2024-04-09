@@ -15,7 +15,7 @@ import acme.entities.trainingmodule.TrainingModule;
 import acme.roles.Developer;
 
 @Service
-public class DeveloperTrainingModuleShowService extends AbstractService<Developer, TrainingModule> {
+public class DeveloperTrainingModulesCreateService extends AbstractService<Developer, TrainingModule> {
 
 	// Internal state ---------------------------------------------------------
 
@@ -33,33 +33,61 @@ public class DeveloperTrainingModuleShowService extends AbstractService<Develope
 	@Override
 	public void load() {
 		TrainingModule object;
-		int id;
+		Developer developer;
 
-		id = super.getRequest().getData("id", int.class);
-		object = this.repository.findOneTrainingModuleById(id);
+		developer = this.repository.findDeveloperById(super.getRequest().getPrincipal().getActiveRoleId());
+		object = new TrainingModule();
+		object.setDeveloper(developer);
+
+		object.setPublished(false);
 
 		super.getBuffer().addData(object);
+	}
+
+	@Override
+	public void bind(final TrainingModule object) {
+		assert object != null;
+
+		int projectId;
+		Project project;
+
+		projectId = super.getRequest().getData("project", int.class);
+		project = this.repository.findProjectById(projectId);
+
+		super.bind(object, "code", "creationMoment", "details", "difficultLevel", "updateMoment", "link");
+		object.setProject(project);
+	}
+
+	@Override
+	public void validate(final TrainingModule object) {
+		assert object != null;
+	}
+
+	@Override
+	public void perform(final TrainingModule object) {
+		assert object != null;
+
+		this.repository.save(object);
 	}
 
 	@Override
 	public void unbind(final TrainingModule object) {
 		assert object != null;
 
-		SelectChoices choices;
-		SelectChoices projectChoices;
-		Dataset dataset;
-		int id;
 		Collection<Project> projects;
+		Dataset dataset;
+		SelectChoices choices;
+		SelectChoices projectchoices;
 
-		id = super.getRequest().getData("id", int.class);
-		projects = this.repository.findProjectByTrainingModuleId(id);
+		projects = this.repository.findAllProjects();
 		choices = SelectChoices.from(Difficult.class, object.getDifficultLevel());
-		projectChoices = SelectChoices.from(projects, "code", object.getProject());
+		projectchoices = SelectChoices.from(projects, "code", object.getProject());
 
 		dataset = super.unbind(object, "code", "creationMoment", "details", "difficultLevel", "updateMoment", "link", "published");
 
+		dataset.put("project", projectchoices.getSelected().getKey());
+		dataset.put("projects", projectchoices);
 		dataset.put("difficultLevel", choices);
-		dataset.put("projects", projectChoices);
 
 		super.getResponse().addData(dataset);
 	}

@@ -19,10 +19,24 @@
 
 <acme:form>
 	<acme:input-textbox code="developer.training-module.form.label.code" path="code"/>	
-	<acme:input-double code="developer.training-module.form.label.creationMoment" path="creationMoment" />
+	<acme:input-moment code="developer.training-module.form.label.creationMoment" path="creationMoment" />
 	<acme:input-textarea code="developer.training-module.form.label.details" path="details"/>
-	<acme:input-moment code="developer.training-module.form.label.difficultLevel" path="difficultLevel"/>
-	<acme:input-textbox code="developer.training-module.form.label.updateMoment" path="updateMoment"/>	
+	<acme:input-select code="developer.training-module.form.label.difficultLevel" path="difficultLevel" choices="${difficultLevel}" />
+	<acme:input-moment code="developer.training-module.form.label.updateMoment" path="updateMoment"/>	
 	<acme:input-textbox code="developer.training-module.form.label.link" path="link"/>	
+	<acme:input-select code="developer.training-module.form.label.project" path="project" choices="${projects}" />
+	<acme:input-checkbox code="developer.training-module.form.label.published" path="pulished"/>
 	
+	
+	
+	
+	
+	
+	<jstl:choose>
+		<jstl:when test="${_command == 'create'}">
+			<acme:submit code="developer.training-module.list.button.create" action="/developer/training-module/create"/>
+		</jstl:when>		
+	</jstl:choose>	
 </acme:form>
+
+
