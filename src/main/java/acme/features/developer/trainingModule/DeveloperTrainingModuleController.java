@@ -1,5 +1,5 @@
 
-package acme.features.client.contract;
+package acme.features.developer.trainingModule;
 
 import javax.annotation.PostConstruct;
 
@@ -7,28 +7,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import acme.client.controllers.AbstractController;
-import acme.entities.contract.Contract;
-import acme.roles.Client;
+import acme.entities.trainingmodule.TrainingModule;
+import acme.roles.Developer;
 
 @Controller
-public class ClientContractController extends AbstractController<Client, Contract> {
+public class DeveloperTrainingModuleController extends AbstractController<Developer, TrainingModule> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private ClientContractListService	listService;
+	private DeveloperTrainingModuleListService		listService;
 
 	@Autowired
-	private ClientContractShowService	showService;
+	private DeveloperTrainingModuleShowService		showService;
 
 	@Autowired
-	private ClientContractCreateService	createService;
+	private DeveloperTrainingModulesCreateService	createService;
 
 	@Autowired
-	private ClientContractUpdateService	updateService;
-
-	@Autowired
-	private ClientContractDeleteService	deleteService;
+	private DeveloperTrainingModuleDeleteService	deleteService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -38,8 +35,8 @@ public class ClientContractController extends AbstractController<Client, Contrac
 		super.addBasicCommand("list", this.listService);
 		super.addBasicCommand("show", this.showService);
 		super.addBasicCommand("create", this.createService);
-		super.addBasicCommand("update", this.updateService);
 		super.addBasicCommand("delete", this.deleteService);
 
 	}
+
 }

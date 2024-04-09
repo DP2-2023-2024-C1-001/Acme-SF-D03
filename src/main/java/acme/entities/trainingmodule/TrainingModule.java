@@ -60,6 +60,8 @@ public class TrainingModule extends AbstractEntity {
 	@URL
 	private String				link;
 
+	private boolean				published;
+
 	// Derived attributes -----------------------------------------------------
 
 	@Transient

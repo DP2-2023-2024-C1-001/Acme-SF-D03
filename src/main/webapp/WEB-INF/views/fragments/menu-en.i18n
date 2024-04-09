@@ -18,8 +18,7 @@ master.menu.sign-out = Sign out
 # master.menu.authenticated #######################################################
 
 master.menu.authenticated = Authenticated
-master.menu.authenticated.list-all-claims = List all claims
-master.menu.authenticated.projects = List projects
+
 
 # master.menu.anonymous #######################################################
 
@@ -29,8 +28,13 @@ master.menu.anonymous.favourite-link.pedsandom = 46265496F: Santos Dominguez, Pe
 master.menu.anonymous.guille = 45813076C: Gomez Romero, Guillermo
 master.menu.anonymous.manu = 47265720F: Velez Lopez, Manuel
 master.menu.anonymous.josemaria = 29588315B: Baquero Rodriguez, Jose Maria
+master.menu.anonymous.list-all-claims = List all claims
+master.menu.anonymous.projects = List projects
 
+# master.menu.developer ###################################################
 
+master.menu.developer = Developer
+master.menu.developer.training-module = List my Training Modules
 
 
 # master.menu.administrator ###################################################
@@ -41,7 +45,7 @@ master.menu.administrator.user-accounts = User accounts
 master.menu.administrator.populate-initial = Populate DB (initial)
 master.menu.administrator.populate-sample = Populate DB (samples)
 master.menu.administrator.shut-down = Shut down
-master.menu.administrator.banner = Banner
+master.menu.administrator.banner = Listing of Banner
 
 # master.menu.client ###################################################
 
@@ -76,3 +80,5 @@ master.menu.user-account.provider = Provider data
 master.menu.user-account.become-provider = Become a provider
 master.menu.user-account.consumer = Consumer data
 master.menu.user-account.become-consumer = Become a consumer
+master.menu.user-account.become-client = Become a client
+master.menu.user-account.client = Client data
