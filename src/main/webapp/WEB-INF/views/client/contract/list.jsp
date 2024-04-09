@@ -22,3 +22,7 @@
 	<acme:list-column code="client.contract.list.label.customerName" path="customerName" width="25%"/>
 	
 </acme:list>
+
+<jstl:if test="${_command == 'list'}">
+	<acme:button code="client.contract.list.button.create" action="/client/contract/create"/>
+</jstl:if>

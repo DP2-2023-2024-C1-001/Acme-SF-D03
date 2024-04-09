@@ -20,6 +20,9 @@ client.contract.form.label.budget = Budget:
 client.contract.form.label.project = Project:
 client.contract.form.label.published = Published:
 client.contract.form.button.progressLogs = List Progress Logs
+client.contract.form.button.create = Create
+client.contract.form.button.update = Update
+client.contract.form.button.delete = Delete
 
 
 
@@ -27,3 +30,4 @@ client.contract.list.label.code = Code
 client.contract.list.label.instantiationMoment = Instantiation Moment
 client.contract.list.label.providerName = Provider Name
 client.contract.list.label.customerName = Customer Name
+client.contract.list.button.create = Create
