@@ -25,11 +25,14 @@
 			<acme:menu-suboption code="master.menu.anonymous.guille" action="https://en.realbetisbalompie.es/"/>
 			<acme:menu-suboption code="master.menu.anonymous.manu" action="https://github.com/"/>
 			<acme:menu-suboption code="master.menu.anonymous.josemaria" action="https://en.realbetisbalompie.es/"/>
+			<acme:menu-suboption code="master.menu.anonymous.list-all-claims" action="/any/claim/list"/>
+			
 		</acme:menu-option>
 		
-		<acme:menu-option code="master.menu.authenticated" access="isAuthenticated()">
-			<acme:menu-suboption code="master.menu.authenticated.list-all-claims" action="/any/claim/list"/>
+		<acme:menu-option code="master.menu.authenticated" access="isAuthenticated()">                    
+			<acme:menu-suboption code="master.menu.anonymous.list-all-claims" action="/any/claim/list"/>
 		</acme:menu-option>
+
 		
 		<acme:menu-option code="master.menu.developer" access="hasRole('Developer')">
 			<acme:menu-suboption code="master.menu.developer.training-module" action="/developer/training-module/list"/>
@@ -49,6 +52,10 @@
 		
 		<acme:menu-option code="master.menu.client" access="hasRole('Client')">
 			<acme:menu-suboption code="master.menu.client.contracts" action="/client/contract/list"/>
+		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.sponsor" access="hasRole('Sponsor')">
+			<acme:menu-suboption code="master.menu.sponsor.sponsorships" action="/sponsor/sponsorship/list"/>
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.provider" access="hasRole('Provider')">
@@ -70,6 +77,8 @@
 			<acme:menu-suboption code="master.menu.user-account.provider" action="/authenticated/provider/update" access="hasRole('Provider')"/>
 			<acme:menu-suboption code="master.menu.user-account.become-consumer" action="/authenticated/consumer/create" access="!hasRole('Consumer')"/>
 			<acme:menu-suboption code="master.menu.user-account.consumer" action="/authenticated/consumer/update" access="hasRole('Consumer')"/>
+			<acme:menu-suboption code="master.menu.user-account.become-client" action="/authenticated/client/create" access="!hasRole('Client')"/>
+			<acme:menu-suboption code="master.menu.user-account.client" action="/authenticated/client/update" access="hasRole('Client')"/>
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.sign-out" action="/authenticated/system/sign-out" access="isAuthenticated()"/>

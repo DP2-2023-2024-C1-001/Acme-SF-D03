@@ -19,3 +19,4 @@
 	<acme:list-column code="client.progress-log.list.label.code" path="code" width="50%"/>	
 	<acme:list-column code="client.progress-log.list.label.registrationMoment" path="registrationMoment" width="50%"/>	
 </acme:list>
+

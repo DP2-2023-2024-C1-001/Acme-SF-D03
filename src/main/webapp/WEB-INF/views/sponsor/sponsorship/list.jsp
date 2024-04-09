@@ -16,13 +16,9 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:list>
-	<acme:list-column code="client.contract.list.label.code" path="code" width="25%"/>	
-	<acme:list-column code="client.contract.list.label.instantiationMoment" path="instantiationMoment" width="25%"/>
-	<acme:list-column code="client.contract.list.label.providerName" path="providerName" width="25%"/>
-	<acme:list-column code="client.contract.list.label.customerName" path="customerName" width="25%"/>
-	
-</acme:list>
+	<acme:list-column code="sponsor.sponsorship.list.label.code" path="code" width="25%"/>	
+	<acme:list-column code="sponsor.sponsorship.list.label.moment" path="moment" width="25%"/>
+	<acme:list-column code="sponsor.sponsorship.list.label.type" path="type" width="25%"/>
+	<acme:list-column code="sponsor.sponsorship.list.label.duration" path="duration" width="25%"/>
 
-<jstl:if test="${_command == 'list'}">
-	<acme:button code="client.contract.list.button.create" action="/client/contract/create"/>
-</jstl:if>
+</acme:list>
