@@ -15,12 +15,18 @@ auditor.code-audit.form.label.code = Código:
 auditor.code-audit.form.label.execution = Comienzo:
 auditor.code-audit.form.label.type = Tipo de auditoría de código:
 auditor.code-audit.form.label.correctiveActions = Acciones correctivas:
+auditor.code-audit.form.label.link = Link:
 auditor.code-audit.form.label.project = Proyecto:
 auditor.code-audit.form.label.published = Publicado:
 
 
+auditor.code-audit.form.button.create = Crear
+auditor.code-audit.form.button.update = Editar
+auditor.code-audit.form.button.delete = Borrar
 
 auditor.code-audit.list.label.code = Código
 auditor.code-audit.list.label.execution = Comienzo
 auditor.code-audit.list.label.type = Tipo de auditoría de código
 auditor.code-audit.list.label.correctiveActions = Acciones correctivas
+
+auditor.code-audit.list.button.create = Crear

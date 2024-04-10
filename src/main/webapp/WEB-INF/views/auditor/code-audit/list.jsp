@@ -22,3 +22,5 @@
 	<acme:list-column code="auditor.code-audit.list.label.correctiveActions" path="correctiveActions" width="25%"/>
 	
 </acme:list>
+
+<acme:button code="auditor.code-audit.list.button.create" action="/auditor/code-audit/create"/>

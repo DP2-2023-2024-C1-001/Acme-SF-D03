@@ -15,40 +15,56 @@ import acme.entities.project.Project;
 import acme.roles.Auditor;
 
 @Service
-public class AuditorCodeAuditShowService extends AbstractService<Auditor, CodeAudit> {
-
+public class AuditorCodeAuditCreateService extends AbstractService<Auditor, CodeAudit> {
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
 	private AuditorCodeAuditRepository repository;
 
+
 	// AbstractService interface ----------------------------------------------
-
-
 	@Override
 	public void authorise() {
-		boolean status;
-		int masterId;
-		CodeAudit codeAudit;
-		Auditor auditor;
-
-		masterId = super.getRequest().getData("id", int.class);
-		codeAudit = this.repository.findOneCodeAuditById(masterId);
-		auditor = codeAudit == null ? null : codeAudit.getAuditor();
-		status = super.getRequest().getPrincipal().hasRole(auditor);
-
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(true);
 	}
 
 	@Override
 	public void load() {
 		CodeAudit object;
-		int id;
+		Auditor auditor;
 
-		id = super.getRequest().getData("id", int.class);
-		object = this.repository.findOneCodeAuditById(id);
+		auditor = this.repository.findAuditorById(super.getRequest().getPrincipal().getActiveRoleId());
+		object = new CodeAudit();
+		object.setPublished(false);
+		object.setAuditor(auditor);
 
 		super.getBuffer().addData(object);
+	}
+
+	@Override
+	public void bind(final CodeAudit object) {
+		assert object != null;
+		int projectId;
+		Project project;
+
+		projectId = super.getRequest().getData("project", int.class);
+		project = this.repository.findOneProjectById(projectId);
+
+		super.bind(object, "code", "execution", "type", "correctiveActions", "link", "published");
+		object.setProject(project);
+
+	}
+
+	@Override
+	public void validate(final CodeAudit object) {
+		assert object != null;
+	}
+
+	@Override
+	public void perform(final CodeAudit object) {
+		assert object != null;
+
+		this.repository.save(object);
 	}
 
 	@Override
@@ -72,4 +88,5 @@ public class AuditorCodeAuditShowService extends AbstractService<Auditor, CodeAu
 
 		super.getResponse().addData(dataset);
 	}
+
 }

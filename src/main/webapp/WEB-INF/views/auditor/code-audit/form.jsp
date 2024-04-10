@@ -20,10 +20,22 @@
 <acme:form>
 	<acme:input-textbox code="auditor.code-audit.form.label.code" path="code"/>	
 	<acme:input-moment code="auditor.code-audit.form.label.execution" path="execution" />
-	<acme:input-textbox code="auditor.code-audit.form.label.type" path="type"/>
+	<acme:input-select code="auditor.code-audit.form.label.type" path="type" choices= "${types}"/>
 	<acme:input-textarea code="auditor.code-audit.form.label.correctiveActions" path="correctiveActions"/>
 	<acme:input-url code="auditor.code-audit.form.label.link" path="link"/>
-	<acme:input-select code="auditor.code-audit.form.label.project" path="project" choices= "${project}"/>	
-	<acme:input-checkbox code="auditor.code-audit.form.label.published" path="pulished"/>
+	<acme:input-select code="auditor.code-audit.form.label.project" path="project" choices= "${projects}"/>	
+	<acme:input-checkbox code="auditor.code-audit.form.label.published" path="published"/>
+	
+	
+	
+	<jstl:choose>
+		<jstl:when test="${acme:anyOf(_command, 'show|update|delete') && published==false}">
+			<acme:submit code="auditor.code-audit.form.button.update" action="/auditor/code-audit/update"/>
+			<acme:submit code="auditor.code-audit.form.button.delete" action="/auditor/code-audit/delete"/>
+		</jstl:when>
+		<jstl:when test="${_command == 'create'}">
+			<acme:submit code="auditor.code-audit.form.button.create" action="/auditor/code-audit/create"/>
+		</jstl:when>		
+	</jstl:choose>	
 	
 </acme:form>
