@@ -24,6 +24,10 @@ client.contract.form.button.create = Create
 client.contract.form.button.update = Update
 client.contract.form.button.delete = Delete
 
+client.contract.form.error.duplicated = This code is taken
+client.contract.form.error.negativeBudget = The budget cannot be negative
+client.contract.form.error.currency = The system cannot accept that currency
+
 
 
 client.contract.list.label.code = Code

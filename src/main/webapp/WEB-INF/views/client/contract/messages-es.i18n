@@ -26,6 +26,11 @@ client.contract.form.button.delete = Eliminar
 
 
 
+client.contract.form.error.duplicated = Este código ya existe
+client.contract.form.error.negativeBudget = El presupuesto no debe ser negativo
+client.contract.form.error.currency = El sistema no acepta esa moneda
+
+
 
 
 
