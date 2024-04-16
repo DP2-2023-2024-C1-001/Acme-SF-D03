@@ -42,4 +42,7 @@ public interface ClientContractRepository extends AbstractRepository {
 
 	@Query("select sc from SystemConfiguration sc")
 	SystemConfiguration findActualSystemConfiguration();
+
+	@Query("select c from Contract c where c.project.id = :projectId AND c.published = true")
+	Collection<Contract> findAllContractsByProjectId(int projectId);
 }
