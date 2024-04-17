@@ -15,7 +15,7 @@ import acme.entities.trainingmodule.TrainingModule;
 import acme.roles.Developer;
 
 @Service
-public class DeveloperTrainingModulesCreateService extends AbstractService<Developer, TrainingModule> {
+public class DeveloperTrainingModuleUpdateService extends AbstractService<Developer, TrainingModule> {
 
 	// Internal state ---------------------------------------------------------
 
@@ -27,19 +27,26 @@ public class DeveloperTrainingModulesCreateService extends AbstractService<Devel
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+		int masterId;
+		TrainingModule trainingModule;
+		Developer developer;
+
+		masterId = super.getRequest().getData("id", int.class);
+		trainingModule = this.repository.findOneTrainingModuleById(masterId);
+		developer = trainingModule == null ? null : trainingModule.getDeveloper();
+		status = trainingModule != null && !trainingModule.isPublished() && super.getRequest().getPrincipal().hasRole(developer);
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
 		TrainingModule object;
-		Developer developer;
+		int id;
 
-		developer = this.repository.findDeveloperById(super.getRequest().getPrincipal().getActiveRoleId());
-		object = new TrainingModule();
-
-		object.setPublished(false);
-		object.setDeveloper(developer);
+		id = super.getRequest().getData("id", int.class);
+		object = this.repository.findOneTrainingModuleById(id);
 
 		super.getBuffer().addData(object);
 	}
@@ -91,5 +98,4 @@ public class DeveloperTrainingModulesCreateService extends AbstractService<Devel
 
 		super.getResponse().addData(dataset);
 	}
-
 }
