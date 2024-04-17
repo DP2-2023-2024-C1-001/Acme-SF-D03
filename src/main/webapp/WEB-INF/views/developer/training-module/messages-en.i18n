@@ -20,7 +20,8 @@ developer.training-module.form.label.link = Link:
 developer.training-module.form.label.project = Project
 
 
-
+developer.Training-Modules.form.error.invalidUpdateMoment = Update moment must start at any moment after the creation moment 
+developer.Training-Modules.form.error.duplicated = Code cannot be duplicated
 
 
 developer.training-module.list.label.code = Code

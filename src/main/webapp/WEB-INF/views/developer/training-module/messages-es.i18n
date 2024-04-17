@@ -20,7 +20,8 @@ developer.training-module.form.label.link = Link:
 developer.training-module.form.label.project = Proyecto
 
 
-
+developer.Training-Modules.form.error.invalidUpdateMoment =  el instante de actualizacion debe ser posterior al instante de creación
+developer.Training-Modules.form.error.duplicated = el codigo no puede ser duplicado
 
 developer.training-module.list.label.code = Código
 developer.training-module.list.label.creationMoment = Instante de Creación
