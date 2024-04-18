@@ -2,6 +2,7 @@
 package acme.forms;
 
 import acme.client.data.AbstractForm;
+import acme.client.data.datatypes.Money;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,12 +21,13 @@ public class ClientDashboard extends AbstractForm {
 	int							totalNumberOfProgressLogsWithCompletenessRateBetween50And75Percent;
 	int							totalNumberOfProgressLogsWithCompletenessRateAbove75Percent;
 
-	double						averageBudgetOfContracts;
-	double						deviationBudgetOfContracts;
-	double						minimumBudgetOfContracts;
-	double						maximumBudgetOfContracts;
+	Money						averageBudgetOfContracts;
+	Money						deviationBudgetOfContracts;
+	Money						minimumBudgetOfContracts;
+	Money						maximumBudgetOfContracts;
 
 	// Derived attributes -----------------------------------------------------
 
 	// Relationships ----------------------------------------------------------
+
 }

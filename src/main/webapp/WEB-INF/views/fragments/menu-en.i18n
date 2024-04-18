@@ -51,6 +51,7 @@ master.menu.administrator.banner = Listing of Banner
 
 master.menu.client = Client
 master.menu.client.contracts = List my Contracts
+master.menu.client.dashboard = Dashboards with contract data
 
 # master.menu.sponsor ###################################################
 
