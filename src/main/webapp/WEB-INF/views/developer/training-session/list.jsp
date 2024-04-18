@@ -27,4 +27,4 @@
 	
 </acme:list>
 
-<acme:button test="${showCreate}" code="client.progress-log.list.button.create" action="/client/progress-log/create?masterId=${masterId}"/>
+<acme:button test="${showCreate}" code="developer.training-session.list.button.create" action="/developer/training-session/create?masterId=${masterId}"/>

@@ -20,7 +20,7 @@ developer.training-session.form.label.instructor = Instructor
 developer.training-session.form.label.contactEmail = Email
 developer.training-session.form.label.link = link
 
-
+developer.training-session.form.button.create = Create 
 
 
 developer.training-session.list.label.code = Code
@@ -33,3 +33,9 @@ developer.training-session.list.label.instructor = Instructor
 developer.training-session.list.button.create = Create 
 developer.training-session.list.button.delete = Delete
 developer.training-session.list.button.update = Update
+
+
+developer.training-session.form.error.duplicated = Code cannot be duplicated
+developer.training-session.form.error.too-close-to-training-module-creation-moment = at least one week ahead the training module creation moment
+developer.training-session.form.error.too-close-period = at least one week long
+

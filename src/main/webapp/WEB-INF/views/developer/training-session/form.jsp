@@ -29,5 +29,15 @@
 	<acme:input-textbox code="developer.training-session.form.label.instructor" path="instructor"/>	
 	<acme:input-email code="developer.training-session.form.label.contactEmail" path="contactEmail"/>	
 	<acme:input-url code="developer.training-module.form.label.link" path="link"/>	
+	
+	
+	
+		<jstl:choose>
+		
+		<jstl:when test="${_command == 'create'}">
+			<acme:submit code="developer.training-session.form.button.create" action="/developer/training-session/create?masterId=${masterId}"/>
+		</jstl:when>		
+		
+	</jstl:choose>
 
 </acme:form>
