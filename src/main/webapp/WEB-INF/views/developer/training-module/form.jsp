@@ -25,7 +25,7 @@
 	<acme:input-moment code="developer.training-module.form.label.updateMoment" path="updateMoment"/>	
 	<acme:input-textbox code="developer.training-module.form.label.link" path="link"/>	
 	<acme:input-select code="developer.training-module.form.label.project" path="project" choices="${projects}" />
-	<acme:input-checkbox code="developer.training-module.form.label.published" path="pulished"/>
+
 	
 	
 	
@@ -33,8 +33,9 @@
 	
 	
 	<jstl:choose>
-		<jstl:when test="${acme:anyOf(_command, 'show|update|delete')}">
+		<jstl:when test="${acme:anyOf(_command, 'show|update|delete') && published==false}">
 			<acme:submit code="developer.training-module.list.button.delete" action="/developer/training-module/delete"/>
+			<acme:submit code="developer.training-module.list.button.update" action="/developer/training-module/update"/>
 		</jstl:when>
 		<jstl:when test="${_command == 'create'}">
 			<acme:submit code="developer.training-module.list.button.create" action="/developer/training-module/create"/>

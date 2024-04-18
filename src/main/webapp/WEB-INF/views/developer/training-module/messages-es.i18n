@@ -17,11 +17,11 @@ developer.training-module.form.label.details = Detalles:
 developer.training-module.form.label.difficultLevel = Nivel de Dificultad:
 developer.training-module.form.label.updateMoment = Instante de Actualización:
 developer.training-module.form.label.link = Link: 
-developer.training-module.form.label.published = Publicado
 developer.training-module.form.label.project = Proyecto
 
 
-
+developer.Training-Modules.form.error.invalidUpdateMoment =  el instante de actualizacion debe ser posterior al instante de creación
+developer.Training-Modules.form.error.duplicated = el codigo no puede ser duplicado
 
 developer.training-module.list.label.code = Código
 developer.training-module.list.label.creationMoment = Instante de Creación
@@ -31,3 +31,4 @@ developer.training-module.list.label.details = Detalles
 
 developer.training-module.list.button.create = Crear 
 developer.training-module.list.button.delete = Eliminar
+developer.training-module.list.button.update = Modificar
