@@ -25,7 +25,7 @@
 	<acme:input-textbox code="client.progress-log.form.label.responsiblePerson" path="responsiblePerson"/>	
 		
 	<jstl:choose>
-		<jstl:when test="${acme:anyOf(_command, 'show|update|delete') && published==false}">
+		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && published==false}">
 			<acme:submit code="client.progress-log.form.button.update" action="/client/progress-log/update"/>
 			<acme:submit code="client.progress-log.form.button.delete" action="/client/progress-log/delete"/>
 			<acme:submit code="client.progress-log.form.button.publish" action="/client/progress-log/publish"/>
