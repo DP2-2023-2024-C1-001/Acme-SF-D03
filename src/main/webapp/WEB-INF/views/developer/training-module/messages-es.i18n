@@ -30,5 +30,6 @@ developer.training-module.list.label.details = Detalles
 
 
 developer.training-module.list.button.create = Crear 
-developer.training-module.list.button.delete = Eliminar
-developer.training-module.list.button.update = Modificar
+developer.training-module.form.button.delete = Eliminar
+developer.training-module.form.button.update = Modificar
+developer.training-module.form.button.trainingSessions = Mostrar Sesiones de Entrenamiento
