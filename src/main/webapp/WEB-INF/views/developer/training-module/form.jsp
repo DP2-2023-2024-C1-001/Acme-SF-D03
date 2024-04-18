@@ -23,7 +23,7 @@
 	<acme:input-textarea code="developer.training-module.form.label.details" path="details"/>
 	<acme:input-select code="developer.training-module.form.label.difficultLevel" path="difficultLevel" choices="${difficultLevel}" />
 	<acme:input-moment code="developer.training-module.form.label.updateMoment" path="updateMoment"/>	
-	<acme:input-textbox code="developer.training-module.form.label.link" path="link"/>	
+	<acme:input-url code="developer.training-module.form.label.link" path="link"/>	
 	<acme:input-select code="developer.training-module.form.label.project" path="project" choices="${projects}" />
 
 	
