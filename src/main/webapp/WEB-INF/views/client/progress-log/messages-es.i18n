@@ -20,6 +20,8 @@ client.progress-log.form.label.responsiblePerson = Persona Responsable:
 
 client.progress-log.form.button.create = Crear
 client.progress-log.form.button.update = Actualizar
+client.progress-log.form.button.delete = Eliminar
+client.progress-log.form.button.publish = Publicar
 
 
 
