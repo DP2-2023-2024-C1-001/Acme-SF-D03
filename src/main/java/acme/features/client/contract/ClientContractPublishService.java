@@ -88,7 +88,7 @@ public class ClientContractPublishService extends AbstractService<Client, Contra
 			for (Contract c : contractsForProject)
 				sumOfBudgets += c.getBudget().getAmount();
 
-			super.state(object.getProject().getCost().getAmount() > sumOfBudgets, "budget", "client.contract.form.error.budget");
+			super.state(object.getProject().getCost().getAmount() >= sumOfBudgets, "budget", "client.contract.form.error.budget");
 
 		}
 
