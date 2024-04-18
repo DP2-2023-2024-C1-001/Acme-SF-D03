@@ -15,24 +15,25 @@ import acme.entities.systemconfiguration.SystemConfiguration;
 import acme.roles.Client;
 
 @Service
-public class ClientContractUpdateService extends AbstractService<Client, Contract> {
+public class ClientContractPublishService extends AbstractService<Client, Contract> {
+
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
 	private ClientContractRepository repository;
 
-	// AbstractService<Client, Contract> -------------------------------------
+	// AbstractService interface ----------------------------------------------
 
 
 	@Override
 	public void authorise() {
 		boolean status;
-		int masterId;
+		int contractId;
 		Contract contract;
 		Client client;
 
-		masterId = super.getRequest().getData("id", int.class);
-		contract = this.repository.findOneContractById(masterId);
+		contractId = super.getRequest().getData("id", int.class);
+		contract = this.repository.findOneContractById(contractId);
 		client = contract == null ? null : contract.getClient();
 		status = contract != null && !contract.isPublished() && super.getRequest().getPrincipal().hasRole(client);
 
@@ -68,6 +69,29 @@ public class ClientContractUpdateService extends AbstractService<Client, Contrac
 	public void validate(final Contract object) {
 		assert object != null;
 
+		if (!super.getBuffer().getErrors().hasErrors("budget")) {
+
+			Double amount;
+			amount = object.getBudget().getAmount();
+			super.state(amount >= 0, "budget", "client.contract.form.error.negativeBudget");
+
+			final SystemConfiguration systemConfig = this.repository.findActualSystemConfiguration();
+			final String currency = object.getBudget().getCurrency();
+			super.state(systemConfig.getAcceptedCurrencies().contains(currency), "budget", "client.contract.form.error.currency");
+
+			int projectId;
+			double sumOfBudgets = object.getBudget().getAmount();
+			projectId = super.getRequest().getData("project", int.class);
+			Collection<Contract> contractsForProject;
+			contractsForProject = this.repository.findAllContractsByProjectId(projectId);
+
+			for (Contract c : contractsForProject)
+				sumOfBudgets += c.getBudget().getAmount();
+
+			super.state(object.getProject().getCost().getAmount() > sumOfBudgets, "budget", "client.contract.form.error.budget");
+
+		}
+
 		if (!super.getBuffer().getErrors().hasErrors("code")) {
 			Contract existing;
 
@@ -76,22 +100,13 @@ public class ClientContractUpdateService extends AbstractService<Client, Contrac
 
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("budget")) {
-			Double amount;
-			amount = object.getBudget().getAmount();
-			super.state(amount >= 0, "budget", "client.contract.form.error.negativeBudget");
-
-			final SystemConfiguration systemConfig = this.repository.findActualSystemConfiguration();
-			final String currency = object.getBudget().getCurrency();
-			super.state(systemConfig.getAcceptedCurrencies().contains(currency), "budget", "client.contract.form.error.currency");
-		}
-
 	}
 
 	@Override
 	public void perform(final Contract object) {
 		assert object != null;
 
+		object.setPublished(true);
 		this.repository.save(object);
 	}
 
