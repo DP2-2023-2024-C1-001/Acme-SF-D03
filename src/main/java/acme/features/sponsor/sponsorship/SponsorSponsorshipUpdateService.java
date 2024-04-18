@@ -16,8 +16,7 @@ import acme.entities.systemconfiguration.SystemConfiguration;
 import acme.roles.Sponsor;
 
 @Service
-public class SponsorSponsorshipCreateService extends AbstractService<Sponsor, Sponsorship> {
-
+public class SponsorSponsorshipUpdateService extends AbstractService<Sponsor, Sponsorship> {
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
@@ -28,18 +27,27 @@ public class SponsorSponsorshipCreateService extends AbstractService<Sponsor, Sp
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+		int masterId;
+		Sponsorship sponsorship;
+		Sponsor sponsor;
+
+		masterId = super.getRequest().getData("id", int.class);
+		sponsorship = this.repository.findSponsorshipById(masterId);
+		sponsor = sponsorship == null ? null : sponsorship.getSponsor();
+		status = sponsorship != null && !sponsorship.isPublished() && super.getRequest().getPrincipal().hasRole(sponsor);
+
+		super.getResponse().setAuthorised(status);
+
 	}
 
 	@Override
 	public void load() {
 		Sponsorship object;
-		Sponsor sponsor;
+		int id;
 
-		sponsor = this.repository.findSponsorById(super.getRequest().getPrincipal().getActiveRoleId());
-		object = new Sponsorship();
-		object.setPublished(false);
-		object.setSponsor(sponsor);
+		id = super.getRequest().getData("id", int.class);
+		object = this.repository.findSponsorshipById(id);
 
 		super.getBuffer().addData(object);
 	}
@@ -66,7 +74,7 @@ public class SponsorSponsorshipCreateService extends AbstractService<Sponsor, Sp
 			Sponsorship existing;
 
 			existing = this.repository.findOneSponsorshipByCode(object.getCode());
-			super.state(existing == null, "code", "sponsor.sponsorship.form.error.duplicated");
+			super.state(existing == null || existing.getId() == object.getId(), "code", "sponsor.sponsorship.form.error.duplicated");
 
 		}
 
@@ -108,4 +116,5 @@ public class SponsorSponsorshipCreateService extends AbstractService<Sponsor, Sp
 
 		super.getResponse().addData(dataset);
 	}
+
 }

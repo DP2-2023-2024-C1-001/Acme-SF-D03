@@ -9,14 +9,14 @@ import org.springframework.stereotype.Service;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
+import acme.entities.invoice.Invoice;
 import acme.entities.project.Project;
-import acme.entities.sponsorship.SponsorType;
 import acme.entities.sponsorship.Sponsorship;
 import acme.entities.systemconfiguration.SystemConfiguration;
 import acme.roles.Sponsor;
 
 @Service
-public class SponsorSponsorshipCreateService extends AbstractService<Sponsor, Sponsorship> {
+public class SponsorSponsorshipPublishService extends AbstractService<Sponsor, Sponsorship> {
 
 	// Internal state ---------------------------------------------------------
 
@@ -28,18 +28,27 @@ public class SponsorSponsorshipCreateService extends AbstractService<Sponsor, Sp
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+		int masterId;
+		Sponsorship sponsorship;
+		Sponsor sponsor;
+
+		masterId = super.getRequest().getData("id", int.class);
+		sponsorship = this.repository.findSponsorshipById(masterId);
+		sponsor = sponsorship == null ? null : sponsorship.getSponsor();
+		status = sponsorship != null && !sponsorship.isPublished() && super.getRequest().getPrincipal().hasRole(sponsor);
+
+		super.getResponse().setAuthorised(status);
+
 	}
 
 	@Override
 	public void load() {
 		Sponsorship object;
-		Sponsor sponsor;
+		int id;
 
-		sponsor = this.repository.findSponsorById(super.getRequest().getPrincipal().getActiveRoleId());
-		object = new Sponsorship();
-		object.setPublished(false);
-		object.setSponsor(sponsor);
+		id = super.getRequest().getData("id", int.class);
+		object = this.repository.findSponsorshipById(id);
 
 		super.getBuffer().addData(object);
 	}
@@ -62,28 +71,44 @@ public class SponsorSponsorshipCreateService extends AbstractService<Sponsor, Sp
 	public void validate(final Sponsorship object) {
 		assert object != null;
 
-		if (!super.getBuffer().getErrors().hasErrors("code")) {
-			Sponsorship existing;
-
-			existing = this.repository.findOneSponsorshipByCode(object.getCode());
-			super.state(existing == null, "code", "sponsor.sponsorship.form.error.duplicated");
-
-		}
-
 		if (!super.getBuffer().getErrors().hasErrors("amount")) {
+
 			Double amount;
 			amount = object.getAmount().getAmount();
-			super.state(amount >= 0, "amount", "sponsor.sponsorship.form.error.negativeAmount");
+			super.state(amount >= 0, "amount", "sponsor.sponsorship.form.error.negativeBAmount");
 
 			final SystemConfiguration systemConfig = this.repository.findActualSystemConfiguration();
 			final String currency = object.getAmount().getCurrency();
 			super.state(systemConfig.getAcceptedCurrencies().contains(currency), "amount", "sponsor.sponsorship.form.error.currency");
+
+			int sponsorshipId;
+			double sumOfInvoicesTotalAmount = 0.00;
+			sponsorshipId = object.getId();
+			Collection<Invoice> invoicesForSponsorship;
+			invoicesForSponsorship = this.repository.findAllPublisedInvoicesBySponsorShipsId(sponsorshipId);
+
+			for (Invoice i : invoicesForSponsorship)
+				sumOfInvoicesTotalAmount += i.totalAmount().getAmount();
+
+			super.state(object.getAmount().getAmount() == sumOfInvoicesTotalAmount, "amount", "sponsor.sponsorship.form.error.amount");
+
 		}
+
+		if (!super.getBuffer().getErrors().hasErrors("code")) {
+			Sponsorship existing;
+
+			existing = this.repository.findOneSponsorshipByCode(object.getCode());
+			super.state(existing == null || existing.getId() == object.getId(), "code", "sponsor.sponsorship.form.error.duplicated");
+
+		}
+
 	}
 
 	@Override
 	public void perform(final Sponsorship object) {
 		assert object != null;
+
+		object.setPublished(true);
 
 		this.repository.save(object);
 	}
@@ -94,18 +119,16 @@ public class SponsorSponsorshipCreateService extends AbstractService<Sponsor, Sp
 
 		Collection<Project> projects;
 		SelectChoices choices;
-		SelectChoices typesChoices;
 		Dataset dataset;
 
 		projects = this.repository.findAllProjects();
 		choices = SelectChoices.from(projects, "code", object.getProject());
-		typesChoices = SelectChoices.from(SponsorType.class, object.getType());
 
-		dataset = super.unbind(object, "code", "moment", "initialDate", "finalDate", "amount", "email", "link", "published");
+		dataset = super.unbind(object, "code", "moment", "initialDate", "finalDate", "amount", "type", "email", "link", "published");
 		dataset.put("project", choices.getSelected().getKey());
 		dataset.put("projects", choices);
-		dataset.put("types", typesChoices);
 
 		super.getResponse().addData(dataset);
 	}
+
 }
