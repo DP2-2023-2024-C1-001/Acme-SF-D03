@@ -1,5 +1,5 @@
 
-package acme.features.client.contract;
+package acme.features.sponsor.sponsorship;
 
 import java.util.Collection;
 
@@ -9,63 +9,61 @@ import org.springframework.stereotype.Service;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
-import acme.entities.contract.Contract;
 import acme.entities.project.Project;
-import acme.roles.Client;
+import acme.entities.sponsorship.Sponsorship;
+import acme.roles.Sponsor;
 
 @Service
-public class ClientContractShowService extends AbstractService<Client, Contract> {
+public class SponsorSponsorshipShowService extends AbstractService<Sponsor, Sponsorship> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	private ClientContractRepository repository;
+	private SponsorSponsorshipRepository repository;
 
 	// AbstractService interface ----------------------------------------------
 
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int masterId;
-		Contract contract;
-		Client client;
-
-		masterId = super.getRequest().getData("id", int.class);
-		contract = this.repository.findOneContractById(masterId);
-		client = contract == null ? null : contract.getClient();
-		status = super.getRequest().getPrincipal().hasRole(client);
-
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(true);
 	}
 
 	@Override
 	public void load() {
-		Contract object;
+		Sponsorship object;
 		int id;
 
 		id = super.getRequest().getData("id", int.class);
-		object = this.repository.findOneContractById(id);
+
+		object = this.repository.findSponsorshipById(id);
 
 		super.getBuffer().addData(object);
 	}
 
 	@Override
-	public void unbind(final Contract object) {
+	public void unbind(final Sponsorship object) {
 		assert object != null;
 
 		Dataset dataset;
+		long duration;
 
 		Collection<Project> projects;
 		SelectChoices choices;
 		int id;
 		id = super.getRequest().getData("id", int.class);
-		projects = this.repository.findAllProjects();
+		projects = this.repository.findProjectBySponsorshipId(id);
 		choices = SelectChoices.from(projects, "code", object.getProject());
 
-		dataset = super.unbind(object, "code", "instantiationMoment", "providerName", "customerName", "goals", "budget", "published");
-		dataset.put("projects", choices);
+		//propiedad derivada duracion del sponsorship
+		long res = object.getFinalDate().getTime() - object.getInitialDate().getTime();
+		duration = res / (1000 * 60 * 60 * 24); // duracion en numero de dias
+
+		dataset = super.unbind(object, "code", "moment", "amount", "type", "email", "link");
+		dataset.put("project", choices);
+		dataset.put("duration", duration);
 
 		super.getResponse().addData(dataset);
 	}
+
 }

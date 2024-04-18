@@ -16,9 +16,11 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:list>
-	<acme:list-column code="client.progress-log.list.label.code" path="code" width="50%"/>	
-	<acme:list-column code="client.progress-log.list.label.registrationMoment" path="registrationMoment" width="50%"/>	
+	<acme:list-column code="developer.training-module.list.label.code" path="code" width="25%"/>	
+	<acme:list-column code="developer.training-module.list.label.creationMoment" path="creationMoment" width="25%"/>
+	<acme:list-column code="developer.training-module.list.label.difficultLevel" path="difficultLevel" width="25%"/>
+	<acme:list-column code="developer.training-module.list.label.details" path="details" width="25%"/>
+	
 </acme:list>
 
-<acme:button test="${showCreate}" code="client.progress-log.list.button.create" action="/client/progress-log/create?masterId=${masterId}"/>
-
+<acme:button code="developer.training-module.list.button.create" action="/developer/training-module/create"/>

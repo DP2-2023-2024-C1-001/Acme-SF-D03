@@ -16,9 +16,9 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:list>
-	<acme:list-column code="client.progress-log.list.label.code" path="code" width="50%"/>	
-	<acme:list-column code="client.progress-log.list.label.registrationMoment" path="registrationMoment" width="50%"/>	
+	<acme:list-column code="sponsor.sponsorship.list.label.code" path="code" width="25%"/>	
+	<acme:list-column code="sponsor.sponsorship.list.label.moment" path="moment" width="25%"/>
+	<acme:list-column code="sponsor.sponsorship.list.label.type" path="type" width="25%"/>
+	<acme:list-column code="sponsor.sponsorship.list.label.duration" path="duration" width="25%"/>
+
 </acme:list>
-
-<acme:button test="${showCreate}" code="client.progress-log.list.button.create" action="/client/progress-log/create?masterId=${masterId}"/>
-

@@ -25,11 +25,17 @@
 			<acme:menu-suboption code="master.menu.anonymous.guille" action="https://en.realbetisbalompie.es/"/>
 			<acme:menu-suboption code="master.menu.anonymous.manu" action="https://github.com/"/>
 			<acme:menu-suboption code="master.menu.anonymous.josemaria" action="https://en.realbetisbalompie.es/"/>
+			<acme:menu-suboption code="master.menu.anonymous.list-all-claims" action="/any/claim/list"/>
+			
 		</acme:menu-option>
 		
-		<acme:menu-option code="master.menu.authenticated" access="isAuthenticated()">
-			<acme:menu-suboption code="master.menu.authenticated.list-all-claims" action="/any/claim/list"/>
+		<acme:menu-option code="master.menu.authenticated" access="isAuthenticated()">                    
+			<acme:menu-suboption code="master.menu.anonymous.list-all-claims" action="/any/claim/list"/>
+		</acme:menu-option>
+
 		
+		<acme:menu-option code="master.menu.developer" access="hasRole('Developer')">
+			<acme:menu-suboption code="master.menu.developer.training-module" action="/developer/training-module/list"/>
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.administrator" access="hasRole('Administrator')">
@@ -46,6 +52,10 @@
 		
 		<acme:menu-option code="master.menu.client" access="hasRole('Client')">
 			<acme:menu-suboption code="master.menu.client.contracts" action="/client/contract/list"/>
+		</acme:menu-option>
+		
+		<acme:menu-option code="master.menu.sponsor" access="hasRole('Sponsor')">
+			<acme:menu-suboption code="master.menu.sponsor.sponsorships" action="/sponsor/sponsorship/list"/>
 		</acme:menu-option>
 
 		<acme:menu-option code="master.menu.provider" access="hasRole('Provider')">
