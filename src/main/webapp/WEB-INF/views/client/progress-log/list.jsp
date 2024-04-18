@@ -20,3 +20,5 @@
 	<acme:list-column code="client.progress-log.list.label.registrationMoment" path="registrationMoment" width="50%"/>	
 </acme:list>
 
+<acme:button test="${showCreate}" code="client.progress-log.list.button.create" action="/client/progress-log/create?masterId=${masterId}"/>
+

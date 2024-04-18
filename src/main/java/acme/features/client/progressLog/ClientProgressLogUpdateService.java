@@ -11,7 +11,7 @@ import acme.entities.progresslog.ProgressLog;
 import acme.roles.Client;
 
 @Service
-public class ClientProgressLogShowService extends AbstractService<Client, ProgressLog> {
+public class ClientProgressLogUpdateService extends AbstractService<Client, ProgressLog> {
 
 	// Internal state ---------------------------------------------------------
 
@@ -26,10 +26,12 @@ public class ClientProgressLogShowService extends AbstractService<Client, Progre
 		boolean status;
 		int progressLogId;
 		Contract contract;
+		ProgressLog progressLog;
 
 		progressLogId = super.getRequest().getData("id", int.class);
 		contract = this.repository.findOneContractByProgressLogId(progressLogId);
-		status = contract != null && super.getRequest().getPrincipal().hasRole(contract.getClient());
+		progressLog = this.repository.findOneProgressLogById(progressLogId);
+		status = contract != null && progressLog != null && !progressLog.isPublished() && super.getRequest().getPrincipal().hasRole(contract.getClient());
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -40,10 +42,37 @@ public class ClientProgressLogShowService extends AbstractService<Client, Progre
 		int id;
 
 		id = super.getRequest().getData("id", int.class);
-
 		object = this.repository.findOneProgressLogById(id);
 
 		super.getBuffer().addData(object);
+	}
+
+	@Override
+	public void bind(final ProgressLog object) {
+		assert object != null;
+
+		super.bind(object, "code", "completeness", "comment", "registrationMoment", "responsiblePerson");
+
+	}
+
+	@Override
+	public void validate(final ProgressLog object) {
+		assert object != null;
+
+		if (!super.getBuffer().getErrors().hasErrors("code")) {
+			ProgressLog existing;
+
+			existing = this.repository.findOneProgressLogByCode(object.getCode());
+			super.state(existing == null || existing.getId() == object.getId(), "code", "client.progress-log.form.error.duplicated");
+
+		}
+	}
+
+	@Override
+	public void perform(final ProgressLog object) {
+		assert object != null;
+
+		this.repository.save(object);
 	}
 
 	@Override
@@ -52,7 +81,7 @@ public class ClientProgressLogShowService extends AbstractService<Client, Progre
 
 		Dataset dataset;
 
-		dataset = super.unbind(object, "code", "registrationMoment", "completeness", "comment", "responsiblePerson", "published");
+		dataset = super.unbind(object, "code", "completeness", "comment", "registrationMoment", "responsiblePerson", "published");
 		dataset.put("masterId", object.getContract().getId());
 
 		super.getResponse().addData(dataset);
