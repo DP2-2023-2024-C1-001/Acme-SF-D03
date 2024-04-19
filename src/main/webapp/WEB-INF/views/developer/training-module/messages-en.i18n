@@ -28,6 +28,7 @@ developer.training-module.list.label.code = Code
 developer.training-module.list.label.creationMoment = Creation Moment
 developer.training-module.list.label.difficultLevel = Difficult Level
 developer.training-module.list.label.details = Details
+developer.training-module.list.label.totalTime = NºHours
 
 
 developer.training-module.list.button.create = Create 
