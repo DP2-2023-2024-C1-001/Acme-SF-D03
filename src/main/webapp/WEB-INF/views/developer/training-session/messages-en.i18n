@@ -31,8 +31,8 @@ developer.training-session.list.label.instructor = Instructor
 
 
 developer.training-session.list.button.create = Create 
-developer.training-session.list.button.delete = Delete
-developer.training-session.list.button.update = Update
+developer.training-session.form.button.delete = Delete
+developer.training-session.form.button.update = Update
 
 
 developer.training-session.form.error.duplicated = Code cannot be duplicated

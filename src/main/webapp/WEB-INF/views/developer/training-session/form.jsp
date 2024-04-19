@@ -34,6 +34,14 @@
 	
 		<jstl:choose>
 		
+		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && published==false}">
+			<acme:submit code="developer.training-session.form.button.update" action="/developer/training-session/update"/>
+
+			
+		</jstl:when>
+		
+		
+		
 		<jstl:when test="${_command == 'create'}">
 			<acme:submit code="developer.training-session.form.button.create" action="/developer/training-session/create?masterId=${masterId}"/>
 		</jstl:when>		
