@@ -20,6 +20,7 @@ developer.training-session.form.label.instructor = Instructor
 developer.training-session.form.label.contactEmail = Correo
 developer.training-session.form.label.link = link
 
+developer.training-session.list.button.create = Crear 
 
 
 
@@ -30,7 +31,7 @@ developer.training-session.list.label.location = Ubicación
 developer.training-session.list.label.instructor = Instructor
 
 
-developer.training-session.list.button.create = Crear 
+developer.training-session.form.button.create = Crear 
 developer.training-session.form.button.delete = Eliminar
 developer.training-session.form.button.update = Modificar
 
