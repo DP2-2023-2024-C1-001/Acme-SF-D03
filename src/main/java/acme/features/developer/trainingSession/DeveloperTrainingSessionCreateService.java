@@ -48,7 +48,7 @@ public class DeveloperTrainingSessionCreateService extends AbstractService<Devel
 
 		object = new TrainingSession();
 		object.setTrainingModule(tm);
-		//object.setPublished(false);
+		object.setPublished(false);
 
 		super.getBuffer().addData(object);
 	}
@@ -106,7 +106,7 @@ public class DeveloperTrainingSessionCreateService extends AbstractService<Devel
 
 		Dataset dataset;
 
-		dataset = super.unbind(object, "code", "initialPeriod", "finalPeriod", "location", "instructor", "contactEmail", "link");
+		dataset = super.unbind(object, "code", "initialPeriod", "finalPeriod", "location", "instructor", "contactEmail", "link", "published");
 		dataset.put("masterId", super.getRequest().getData("masterId", int.class));
 
 		super.getResponse().addData(dataset);
