@@ -35,6 +35,8 @@ developer.training-session.form.button.delete = Delete
 developer.training-session.form.button.update = Update
 
 
+developer.training-session.form.button.publish = Publish
+
 developer.training-session.form.error.duplicated = Code cannot be duplicated
 developer.training-session.form.error.too-close-to-training-module-creation-moment = at least one week ahead the training module creation moment
 developer.training-session.form.error.too-close-period = at least one week long
