@@ -43,6 +43,7 @@ master.menu.anonymous.list-published-contracts = Lista de contratos publicados
 
 master.menu.developer = Desarrollador
 master.menu.developer.training-module = Lista de Módulos de Entrenamiento
+master.menu.developer.dashboard = Dashboard con datos de módulos de entrenamiento
 
 
 
