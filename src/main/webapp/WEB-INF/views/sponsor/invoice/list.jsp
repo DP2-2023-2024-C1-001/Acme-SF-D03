@@ -16,15 +16,10 @@
 <%@taglib prefix="acme" uri="http://acme-framework.org/"%>
 
 <acme:list>
-	<acme:list-column code="sponsor.sponsorship.list.label.code" path="code" width="25%"/>	
-	<acme:list-column code="sponsor.sponsorship.list.label.moment" path="moment" width="25%"/>
-	<acme:list-column code="sponsor.sponsorship.list.label.type" path="type" width="25%"/>
-	<acme:list-column code="sponsor.sponsorship.list.label.duration" path="duration" width="25%"/>
-	
-	
-
+	<acme:list-column code="sponsor.invoice.list.label.code" path="code" width="25%"/>	
+	<acme:list-column code="sponsor.invoice.list.label.registrationTime" path="registrationTime" width="25%"/>
+	<acme:list-column code="sponsor.invoice.list.label.dueDate" path="dueDate" width="25%"/>
+	<acme:list-column code="sponsor.invoice.list.label.totalAmount" path="totalAmount" width="25%"/>
 </acme:list>
 
-<jstl:if test="${_command == 'list'}">
-	<acme:button code="sponsor.sponsorship.list.button.create" action="/sponsor/sponsorship/create"/>
-</jstl:if>
+<acme:button test="${showCreate}" code="sponsor.invoice.list.button.create" action="/sponsor/invoice/create?masterId=${masterId}"/>
