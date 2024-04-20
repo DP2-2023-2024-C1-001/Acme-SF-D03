@@ -89,7 +89,7 @@ public class DeveloperTrainingModuleDeleteService extends AbstractService<Develo
 		choices = SelectChoices.from(Difficult.class, object.getDifficultLevel());
 		projectchoices = SelectChoices.from(projects, "code", object.getProject());
 
-		dataset = super.unbind(object, "code", "creationMoment", "details", "difficultLevel", "updateMoment", "link", "published");
+		dataset = super.unbind(object, "code", "creationMoment", "details", "difficultLevel", "updateMoment", "link", "totalTime", "published");
 		dataset.put("project", projectchoices.getSelected().getKey());
 		dataset.put("projects", projectchoices);
 		dataset.put("difficultLevel", choices);

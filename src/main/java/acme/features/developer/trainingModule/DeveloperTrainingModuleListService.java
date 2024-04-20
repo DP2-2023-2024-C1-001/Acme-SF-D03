@@ -58,7 +58,7 @@ public class DeveloperTrainingModuleListService extends AbstractService<Develope
 			totalHours = totalHours + horasDiferencia;
 		}
 
-		dataset = super.unbind(object, "code", "creationMoment", "difficultLevel", "details");
+		dataset = super.unbind(object, "code", "creationMoment", "difficultLevel", "totalTime", "details");
 		dataset.put("totalTime", totalHours);
 
 		super.getResponse().addData(dataset);
