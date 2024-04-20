@@ -33,4 +33,7 @@ public interface ClientDashboardRepository extends AbstractRepository {
 	@Query("select max(c.budget.amount) from Contract c where c.client.id = :clientId")
 	Double maxBudgetOfContracts(int clientId);
 
+	@Query("select sc.systemCurrency from SystemConfiguration sc")
+	String getActualSystemConfiguration();
+
 }

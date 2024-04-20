@@ -10,6 +10,7 @@
 
 sponsor.sponsorship.form.title = Sponsorship form
 sponsor.sponsorship.list.title = Listing of sponsorships
+sponsor.sponsorship.form.button.invoices = List of invoices
 
 
 sponsor.sponsorship.form.label.code = Code:
@@ -20,9 +21,23 @@ sponsor.sponsorship.form.label.email = Email:
 sponsor.sponsorship.form.label.link = Link:
 sponsor.sponsorship.form.label.duration = Duration:
 sponsor.sponsorship.form.label.project = Project:
+sponsor.sponsorship.form.label.initialDate= Initial Date:
+sponsor.sponsorship.form.label.finalDate = FinalDate:
+sponsor.sponsorship.form.label.published = Published:
 
+sponsor.sponsorship.form.button.create = Create
+sponsor.sponsorship.form.button.update = Update
+sponsor.sponsorship.form.button.delete = Delete
+sponsor.sponsorship.form.button.publish = Publish
+
+sponsor.sponsorship.form.error.duplicated = This code is taken
+sponsor.sponsorship.form.error.too-close-date = After the moment, at least one month long
+sponsor.sponsorship.form.error.negativeAmount = The amount cannot be negative
+sponsor.sponsorship.form.error.currency = The system cannot accept that currency
+sponsor.sponsorship.form.error.amount = the sum of the total amount of all their invoices must be equal to the amount of the sponsorship
 
 sponsor.sponsorship.list.label.code = Code
 sponsor.sponsorship.list.label.moment = Moment
 sponsor.sponsorship.list.label.type = Type
 sponsor.sponsorship.list.label.duration = Duration
+sponsor.sponsorship.list.button.create = Create
