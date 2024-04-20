@@ -19,7 +19,10 @@ master.menu.sign-out = Salir
 # master.menu.authenticated #######################################################
 
 master.menu.authenticated = Autenticado
+
+master.menu.authenticated.list-all-risks = Listado de riesgos
 master.menu.authenticated.list-all-objectives = Lista de objectivos
+
 
 
 # master.menu.anonymous #######################################################
