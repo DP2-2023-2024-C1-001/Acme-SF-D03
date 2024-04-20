@@ -19,6 +19,8 @@ any.claim.form.label.department = Departamento:
 any.claim.form.label.emailAddress = Dirección email: (Opcional)
 any.claim.form.label.link = Link: (Opcional)
 
+any.claim.form.label.confirmation = Confirmar
+any.claim.form.button.create = Crear
 
 any.claim.list.label.code = Código
 any.claim.list.label.instantiationMoment = Momento de instanciación
