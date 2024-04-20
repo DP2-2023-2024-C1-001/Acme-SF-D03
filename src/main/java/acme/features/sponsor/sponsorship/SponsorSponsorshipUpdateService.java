@@ -1,12 +1,15 @@
 
 package acme.features.sponsor.sponsorship;
 
+import java.time.temporal.ChronoUnit;
 import java.util.Collection;
+import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
 import acme.entities.project.Project;
@@ -78,6 +81,13 @@ public class SponsorSponsorshipUpdateService extends AbstractService<Sponsor, Sp
 
 		}
 
+		if (!super.getBuffer().getErrors().hasErrors("finalDate")) {
+			Date minimumPeriod;
+
+			minimumPeriod = MomentHelper.deltaFromMoment(object.getMoment(), 1, ChronoUnit.MONTHS);
+			super.state(MomentHelper.isAfterOrEqual(object.getFinalDate(), minimumPeriod), "finalDate", "sponsor.sponsorship.form.error.too-close-date");
+		}
+
 		if (!super.getBuffer().getErrors().hasErrors("amount")) {
 			Double amount;
 			amount = object.getAmount().getAmount();
@@ -85,7 +95,7 @@ public class SponsorSponsorshipUpdateService extends AbstractService<Sponsor, Sp
 
 			final SystemConfiguration systemConfig = this.repository.findActualSystemConfiguration();
 			final String currency = object.getAmount().getCurrency();
-			super.state(systemConfig.getAcceptedCurrencies().contains(currency), "amount", "sponsor.sponsorship.form.error.currency");
+			super.state(systemConfig.getAcceptedCurrencies().contains(" " + currency + " "), "amount", "sponsor.sponsorship.form.error.currency");
 		}
 	}
 

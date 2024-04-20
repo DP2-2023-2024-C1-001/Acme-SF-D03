@@ -88,7 +88,7 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 
 			final SystemConfiguration systemConfig = this.repository.findActualSystemConfiguration();
 			final String currency = object.getQuantity().getCurrency();
-			super.state(systemConfig.getAcceptedCurrencies().contains(currency), "quantity", "sponsor.invoice.form.error.currency");
+			super.state(systemConfig.getAcceptedCurrencies().contains(" " + currency + " "), "quantity", "sponsor.invoice.form.error.currency");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("tax")) {
