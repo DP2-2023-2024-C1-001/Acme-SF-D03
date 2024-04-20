@@ -25,6 +25,11 @@
 	<acme:input-textbox code="any.claim.form.label.department" path="department"/>
 	<acme:input-textbox code="any.claim.form.label.emailAddress" path="emailAddress"/>
 	<acme:input-url code="any.claim.form.label.link" path="link"/>
+	
+	<jstl:if test="${_command == 'create'}">
+		<acme:input-checkbox code="any.claim.form.label.confirmation" path="confirmation"/>
+		<acme:submit code="any.claim.form.button.create" action="/any/claim/create"/>
+	</jstl:if>	
 </acme:form>
 
 

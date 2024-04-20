@@ -19,5 +19,14 @@ administrator.banner.form.label.picture = Foto:
 administrator.banner.form.label.link = Link: 
 
 
+administrator.banner.form.button.create = Crear
+administrator.banner.form.button.update = Actualizar
+administrator.banner.form.button.delete = Borrar
+administrator.banner.form.error.invalidPeriodInitial = El inicio de periodo de visualización debe comenzar en cualquier momento posterior al Momento de Instanciación/Actualización
+administrator.banner.form.error.too-close = El periodo de visualización debe durar al menos una semana
+ 
+ 
 administrator.banner.list.label.slogan = Eslogan
 administrator.banner.list.label.instantiationUpdateMoment = Momento de Instanciación/Actualización
+
+administrator.banner.list.button.create = Crear

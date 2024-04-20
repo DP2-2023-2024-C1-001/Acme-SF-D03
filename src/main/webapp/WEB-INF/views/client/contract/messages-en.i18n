@@ -18,7 +18,17 @@ client.contract.form.label.customerName = Customer Name:
 client.contract.form.label.goals = Goals:
 client.contract.form.label.budget = Budget:
 client.contract.form.label.project = Project:
+client.contract.form.label.published = Published:
 client.contract.form.button.progressLogs = List Progress Logs
+client.contract.form.button.create = Create
+client.contract.form.button.update = Update
+client.contract.form.button.delete = Delete
+client.contract.form.button.publish = Publish
+
+client.contract.form.error.duplicated = This code is taken
+client.contract.form.error.negativeBudget = The budget cannot be negative
+client.contract.form.error.currency = The system cannot accept that currency
+client.contract.form.error.budget = The sum of all budgets cannot exceed the total cost of the corresponding project 
 
 
 
@@ -26,3 +36,4 @@ client.contract.list.label.code = Code
 client.contract.list.label.instantiationMoment = Instantiation Moment
 client.contract.list.label.providerName = Provider Name
 client.contract.list.label.customerName = Customer Name
+client.contract.list.button.create = Create
