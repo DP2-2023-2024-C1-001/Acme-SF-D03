@@ -8,17 +8,18 @@ import acme.client.data.accounts.Administrator;
 import acme.client.data.accounts.Principal;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
+import acme.entities.systemconfiguration.Currency;
 import acme.entities.systemconfiguration.SystemConfiguration;
 
 @Service
-public class AdministratorSystemConfigurationShowService extends AbstractService<Administrator, SystemConfiguration> {
+public class AdministratorSystemConfigurationUpdateService extends AbstractService<Administrator, SystemConfiguration> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
 	private AdministratorSystemConfigurationRepository repository;
 
-	// AbstractService interface ----------------------------------------------
+	// AbstractService interface -------------------------------------
 
 
 	@Override
@@ -35,10 +36,38 @@ public class AdministratorSystemConfigurationShowService extends AbstractService
 	@Override
 	public void load() {
 		SystemConfiguration object;
+		int id;
 
-		object = this.repository.findActualSystemConfiguration();
+		id = super.getRequest().getData("id", int.class);
+		object = this.repository.findOneSystemConfigurationById(id);
 
 		super.getBuffer().addData(object);
+	}
+
+	@Override
+	public void bind(final SystemConfiguration object) {
+		assert object != null;
+
+		super.bind(object, "acceptedCurrencies", "systemCurrency");
+	}
+
+	@Override
+	public void validate(final SystemConfiguration object) {
+		assert object != null;
+
+		if (!super.getBuffer().getErrors().hasErrors("systemCurrency")) {
+			final String acceptedCurrencies = object.getAcceptedCurrencies();
+			final Currency systemCurrency = object.getSystemCurrency();
+			super.state(acceptedCurrencies.contains(systemCurrency.name()), "systemCurrency", "administrator.config.form.error.systemCurrency");
+		}
+
+	}
+
+	@Override
+	public void perform(final SystemConfiguration object) {
+		assert object != null;
+
+		this.repository.save(object);
 	}
 
 	@Override

@@ -18,3 +18,6 @@ administrator.system-configuration.form.label.systemCurrency = Moneda actual:
 
 
 administrator.system-configuration.form.button.update = Modificar
+
+
+administrator.config.form.error.systemCurrency = esta moneda no está permitida

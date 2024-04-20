@@ -23,6 +23,6 @@
 
 	
 
-	<acme:submit code="administrator.system-configuration.form.button.update" action="/administrator/banner/update"/>
+	<acme:submit code="administrator.system-configuration.form.button.update" action="/administrator/system-configuration/update"/>
 
 </acme:form>

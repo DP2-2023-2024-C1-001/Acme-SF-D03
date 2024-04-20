@@ -19,3 +19,7 @@ administrator.system-configuration.form.label.systemCurrency = Actual currency:
 
 
 administrator.system-configuration.form.button.update = Update
+
+
+
+administrator.config.form.error.systemCurrency = this currency is not allowed
