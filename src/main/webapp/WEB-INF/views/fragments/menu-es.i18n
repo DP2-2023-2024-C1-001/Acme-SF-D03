@@ -22,6 +22,8 @@ master.menu.authenticated = Autenticado
 
 master.menu.authenticated.list-all-risks = Listado de riesgos
 master.menu.authenticated.list-all-objectives = Lista de objectivos
+master.menu.authenticated.list-recent-notices = Lista las noticias recientes
+
 
 
 
