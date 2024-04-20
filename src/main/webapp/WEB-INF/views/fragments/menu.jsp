@@ -34,7 +34,7 @@
 		<acme:menu-option code="master.menu.authenticated" access="isAuthenticated()">                    
 			<acme:menu-suboption code="master.menu.anonymous.list-all-claims" action="/any/claim/list"/>
 			<acme:menu-suboption code="master.menu.anonymous.list-published-contracts" action="/any/contract/list"/>
-			<acme:menu-suboption code="master.menu.anonymous.list-all-objectives" action="/authenticated/objective/list"/>
+			<acme:menu-suboption code="master.menu.authenticated.list-all-objectives" action="/authenticated/objective/list"/>
 			
 			
 		</acme:menu-option>
