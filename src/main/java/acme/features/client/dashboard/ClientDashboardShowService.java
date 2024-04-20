@@ -50,19 +50,19 @@ public class ClientDashboardShowService extends AbstractService<Client, ClientDa
 
 		averageBudgetOfContracts = new Money();
 		averageBudgetOfContracts.setAmount(this.repository.avgBudgetOfContracts(super.getRequest().getPrincipal().getActiveRoleId()));
-		averageBudgetOfContracts.setCurrency("EUR");
+		averageBudgetOfContracts.setCurrency(this.repository.getActualSystemConfiguration());
 
 		deviationBudgetOfContracts = new Money();
 		deviationBudgetOfContracts.setAmount(this.repository.stddevBudgetOfContracts(super.getRequest().getPrincipal().getActiveRoleId()));
-		deviationBudgetOfContracts.setCurrency("EUR");
+		deviationBudgetOfContracts.setCurrency(this.repository.getActualSystemConfiguration());
 
 		minimumBudgetOfContracts = new Money();
 		minimumBudgetOfContracts.setAmount(this.repository.minBudgetOfContracts(super.getRequest().getPrincipal().getActiveRoleId()));
-		minimumBudgetOfContracts.setCurrency("EUR");
+		minimumBudgetOfContracts.setCurrency(this.repository.getActualSystemConfiguration());
 
 		maximumBudgetOfContracts = new Money();
 		maximumBudgetOfContracts.setAmount(this.repository.maxBudgetOfContracts(super.getRequest().getPrincipal().getActiveRoleId()));
-		maximumBudgetOfContracts.setCurrency("EUR");
+		maximumBudgetOfContracts.setCurrency(this.repository.getActualSystemConfiguration());
 
 		dashboard = new ClientDashboard();
 		dashboard.setTotalNumberOfProgressLogsWithCompletenessRateBelow25Percent(countOfProgressLogsWithCompletenessRateBelow25Percent);
