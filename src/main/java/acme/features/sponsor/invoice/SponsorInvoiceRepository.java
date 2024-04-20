@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import acme.client.repositories.AbstractRepository;
 import acme.entities.invoice.Invoice;
 import acme.entities.sponsorship.Sponsorship;
+import acme.entities.systemconfiguration.SystemConfiguration;
 
 @Repository
 public interface SponsorInvoiceRepository extends AbstractRepository {
@@ -24,5 +25,11 @@ public interface SponsorInvoiceRepository extends AbstractRepository {
 
 	@Query("select i.sponsorship from Invoice i where i.id= :id")
 	Sponsorship findSponsorshipByInvoiceId(int id);
+
+	@Query("select i from Invoice i where i.code = :code")
+	Invoice findInvoiceByCode(String code);
+
+	@Query("select sc from SystemConfiguration sc")
+	SystemConfiguration findActualSystemConfiguration();
 
 }

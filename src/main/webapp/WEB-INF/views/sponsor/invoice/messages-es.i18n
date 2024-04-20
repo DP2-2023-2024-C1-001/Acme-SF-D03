@@ -20,8 +20,20 @@ sponsor.invoice.form.label.tax = Impuesto:
 sponsor.invoice.form.label.totalAmount = Cantidad total:
 sponsor.invoice.form.label.link = Link:
 
+sponsor.invoice.form.button.create = Crear
+sponsor.invoice.form.button.update = Actualizar
+sponsor.invoice.form.button.delete = Eliminar
+sponsor.invoice.form.button.publish = Publicar
+
+sponsor.invoice.form.error.duplicated = Este código ya está en uso
+sponsor.invoice.form.error.too-close = Must be at least one month ahead the registration time
+sponsor.invoice.form.error.invalid-tax = El impuesto debe estar entre 0 y 100
+sponsor.invoice.form.error.currency = El sistema no puede aceptar esa moneda
+sponsor.invoice.form.error.negativeQuantity = La cantidad no puede ser negativa
+
 
 sponsor.invoice.list.label.code = Code
 sponsor.invoice.list.label.registrationTime = Fecha de registro
 sponsor.invoice.list.label.dueDate = Fecha de vencimiento
 sponsor.invoice.list.label.totalAmount = Cantidad total
+sponsor.invoice.list.button.create = Crear

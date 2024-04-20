@@ -62,4 +62,20 @@ public class SponsorInvoiceListService extends AbstractService<Sponsor, Invoice>
 		super.getResponse().addData(dataset);
 	}
 
+	@Override
+	public void unbind(final Collection<Invoice> objects) {
+		assert objects != null;
+
+		int masterId;
+		Sponsorship sponsorship;
+		final boolean showCreate;
+
+		masterId = super.getRequest().getData("masterId", int.class);
+		sponsorship = this.repository.findSponsorshipById(masterId);
+		showCreate = super.getRequest().getPrincipal().hasRole(sponsorship.getSponsor());
+
+		super.getResponse().addGlobal("masterId", masterId);
+		super.getResponse().addGlobal("showCreate", showCreate);
+	}
+
 }

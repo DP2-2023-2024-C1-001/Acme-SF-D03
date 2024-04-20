@@ -21,3 +21,5 @@
 	<acme:list-column code="sponsor.invoice.list.label.dueDate" path="dueDate" width="25%"/>
 	<acme:list-column code="sponsor.invoice.list.label.totalAmount" path="totalAmount" width="25%"/>
 </acme:list>
+
+<acme:button test="${showCreate}" code="sponsor.invoice.list.button.create" action="/sponsor/invoice/create?masterId=${masterId}"/>
