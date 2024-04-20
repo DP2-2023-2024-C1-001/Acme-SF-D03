@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
 import acme.entities.project.Project;
@@ -16,7 +17,7 @@ import acme.entities.trainingsession.TrainingSession;
 import acme.roles.Developer;
 
 @Service
-public class DeveloperTrainingModuleDeleteService extends AbstractService<Developer, TrainingModule> {
+public class DeveloperTrainingModulePublishService extends AbstractService<Developer, TrainingModule> {
 
 	// Internal state ---------------------------------------------------------
 
@@ -30,13 +31,13 @@ public class DeveloperTrainingModuleDeleteService extends AbstractService<Develo
 	public void authorise() {
 		boolean status;
 		int masterId;
-		TrainingModule tm;
+		TrainingModule trainingModule;
 		Developer developer;
 
 		masterId = super.getRequest().getData("id", int.class);
-		tm = this.repository.findOneTrainingModuleById(masterId);
-		developer = tm == null ? null : tm.getDeveloper();
-		status = tm != null && !tm.isPublished() && super.getRequest().getPrincipal().hasRole(developer);
+		trainingModule = this.repository.findOneTrainingModuleById(masterId);
+		developer = trainingModule == null ? null : trainingModule.getDeveloper();
+		status = trainingModule != null && !trainingModule.isPublished() && super.getRequest().getPrincipal().hasRole(developer);
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -56,12 +57,38 @@ public class DeveloperTrainingModuleDeleteService extends AbstractService<Develo
 	public void bind(final TrainingModule object) {
 		assert object != null;
 
+		int projectId;
+		Project project;
+
+		projectId = super.getRequest().getData("project", int.class);
+		project = this.repository.findProjectById(projectId);
+
 		super.bind(object, "code", "creationMoment", "details", "difficultLevel", "updateMoment", "link");
+		object.setProject(project);
 	}
 
 	@Override
 	public void validate(final TrainingModule object) {
 		assert object != null;
+
+		if (!super.getBuffer().getErrors().hasErrors("updateMoment") && object.getUpdateMoment() != null)
+			super.state(MomentHelper.isAfter(object.getUpdateMoment(), object.getCreationMoment()), "updateMoment", "developer.Training-Modules.form.error.invalidUpdateMoment");
+
+		if (!super.getBuffer().getErrors().hasErrors("code")) {
+			TrainingModule existing;
+
+			existing = this.repository.findOneTrainingModuleByCode(object.getCode());
+			super.state(existing == null || existing.equals(object), "code", "developer.Training-Modules.form.error.duplicated");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("project")) {
+
+			Collection<TrainingSession> ts;
+			ts = this.repository.findTrainingSessionsByTrainingModuleId(object.getId());
+
+			super.state(!ts.isEmpty(), "project", "developer.Training-Modules.form.error.no-training-session");
+
+		}
 
 	}
 
@@ -69,11 +96,8 @@ public class DeveloperTrainingModuleDeleteService extends AbstractService<Develo
 	public void perform(final TrainingModule object) {
 		assert object != null;
 
-		Collection<TrainingSession> trainingSession;
-
-		trainingSession = this.repository.findTrainingSessionsByTrainingModuleId(object.getId());
-		this.repository.deleteAll(trainingSession);
-		this.repository.delete(object);
+		object.setPublished(true);
+		this.repository.save(object);
 	}
 
 	@Override
@@ -90,6 +114,7 @@ public class DeveloperTrainingModuleDeleteService extends AbstractService<Develo
 		projectchoices = SelectChoices.from(projects, "code", object.getProject());
 
 		dataset = super.unbind(object, "code", "creationMoment", "details", "difficultLevel", "updateMoment", "link", "published");
+
 		dataset.put("project", projectchoices.getSelected().getKey());
 		dataset.put("projects", projectchoices);
 		dataset.put("difficultLevel", choices);
