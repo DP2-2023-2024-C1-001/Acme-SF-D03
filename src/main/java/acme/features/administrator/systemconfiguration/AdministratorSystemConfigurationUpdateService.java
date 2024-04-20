@@ -8,7 +8,6 @@ import acme.client.data.accounts.Administrator;
 import acme.client.data.accounts.Principal;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
-import acme.entities.systemconfiguration.Currency;
 import acme.entities.systemconfiguration.SystemConfiguration;
 
 @Service
@@ -57,8 +56,8 @@ public class AdministratorSystemConfigurationUpdateService extends AbstractServi
 
 		if (!super.getBuffer().getErrors().hasErrors("systemCurrency")) {
 			final String acceptedCurrencies = object.getAcceptedCurrencies();
-			final Currency systemCurrency = object.getSystemCurrency();
-			super.state(acceptedCurrencies.contains(systemCurrency.name()), "systemCurrency", "administrator.config.form.error.systemCurrency");
+			final String systemCurrency = object.getSystemCurrency();
+			super.state(acceptedCurrencies.contains(systemCurrency), "systemCurrency", "administrator.config.form.error.systemCurrency");
 		}
 
 	}
@@ -67,6 +66,13 @@ public class AdministratorSystemConfigurationUpdateService extends AbstractServi
 	public void perform(final SystemConfiguration object) {
 		assert object != null;
 
+		String palabras = object.getAcceptedCurrencies();
+
+		String resultado = "";
+		for (String p : palabras.split(","))
+			resultado = resultado + " " + p + " ";
+
+		object.setAcceptedCurrencies(resultado);
 		this.repository.save(object);
 	}
 
