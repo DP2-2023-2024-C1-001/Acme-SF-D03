@@ -19,6 +19,7 @@ master.menu.sign-out = Salir
 # master.menu.authenticated #######################################################
 
 master.menu.authenticated = Autenticado
+master.menu.authenticated.list-all-objectives = Lista de objectivos
 
 
 # master.menu.anonymous #######################################################
@@ -31,6 +32,7 @@ master.menu.anonymous.guille = 45813076C: Gomez Romero, Guillermo
 master.menu.anonymous.josemaria = 29588315B: Baquero Rodriguez, Jose Maria
 master.menu.anonymous.list-all-claims = Lista de reclamaciones
 master.menu.anonymous.list-published-contracts = Lista de contratos publicados
+
 
 # master.menu.developer ###################################################
 
