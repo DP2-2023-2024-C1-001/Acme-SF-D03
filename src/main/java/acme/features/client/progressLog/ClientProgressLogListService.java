@@ -57,4 +57,20 @@ public class ClientProgressLogListService extends AbstractService<Client, Progre
 
 		super.getResponse().addData(dataset);
 	}
+
+	@Override
+	public void unbind(final Collection<ProgressLog> objects) {
+		assert objects != null;
+
+		int masterId;
+		Contract contract;
+		final boolean showCreate;
+
+		masterId = super.getRequest().getData("masterId", int.class);
+		contract = this.repository.findOneContractById(masterId);
+		showCreate = super.getRequest().getPrincipal().hasRole(contract.getClient());
+
+		super.getResponse().addGlobal("masterId", masterId);
+		super.getResponse().addGlobal("showCreate", showCreate);
+	}
 }

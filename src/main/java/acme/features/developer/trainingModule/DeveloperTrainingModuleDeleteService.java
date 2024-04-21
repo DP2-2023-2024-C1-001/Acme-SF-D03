@@ -28,7 +28,17 @@ public class DeveloperTrainingModuleDeleteService extends AbstractService<Develo
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		boolean status;
+		int masterId;
+		TrainingModule tm;
+		Developer developer;
+
+		masterId = super.getRequest().getData("id", int.class);
+		tm = this.repository.findOneTrainingModuleById(masterId);
+		developer = tm == null ? null : tm.getDeveloper();
+		status = tm != null && !tm.isPublished() && super.getRequest().getPrincipal().hasRole(developer);
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -38,6 +48,18 @@ public class DeveloperTrainingModuleDeleteService extends AbstractService<Develo
 
 		id = super.getRequest().getData("id", int.class);
 		object = this.repository.findOneTrainingModuleById(id);
+
+		int totalHours = 0;
+		Collection<TrainingSession> trainingSessions;
+
+		trainingSessions = this.repository.findTrainingSessionsByTrainingModuleId(object.getId());
+
+		long diferenciaMili = trainingSessions.stream().mapToLong(x -> x.getFinalPeriod().getTime() - x.getInitialPeriod().getTime()).sum();
+
+		int horasDiferencia = (int) Math.round(diferenciaMili / (1000.0 * 60 * 60));
+
+		totalHours = totalHours + horasDiferencia;
+		object.setTotalTime(totalHours);
 
 		super.getBuffer().addData(object);
 	}
@@ -79,7 +101,7 @@ public class DeveloperTrainingModuleDeleteService extends AbstractService<Develo
 		choices = SelectChoices.from(Difficult.class, object.getDifficultLevel());
 		projectchoices = SelectChoices.from(projects, "code", object.getProject());
 
-		dataset = super.unbind(object, "code", "creationMoment", "details", "difficultLevel", "updateMoment", "link", "published");
+		dataset = super.unbind(object, "code", "creationMoment", "details", "difficultLevel", "updateMoment", "link", "totalTime", "published");
 		dataset.put("project", projectchoices.getSelected().getKey());
 		dataset.put("projects", projectchoices);
 		dataset.put("difficultLevel", choices);

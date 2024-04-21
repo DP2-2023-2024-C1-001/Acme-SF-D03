@@ -26,7 +26,9 @@ public class AdministratorBannerCreateService extends AbstractService<Administra
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		Boolean status;
+		status = super.getRequest().getPrincipal().hasRole(Administrator.class);
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -49,10 +51,10 @@ public class AdministratorBannerCreateService extends AbstractService<Administra
 	public void validate(final Banner object) {
 		assert object != null;
 
-		if (!super.getBuffer().getErrors().hasErrors("displayPeriodInitial"))
+		if (!super.getBuffer().getErrors().hasErrors("displayPeriodInitial") && object.getInstantiationUpdateMoment() != null)
 			super.state(MomentHelper.isAfter(object.getDisplayPeriodInitial(), object.getInstantiationUpdateMoment()), "displayPeriodInitial", "administrator.banner.form.error.invalidPeriodInitial");
 
-		if (!super.getBuffer().getErrors().hasErrors("displayPeriodFinal")) {
+		if (!super.getBuffer().getErrors().hasErrors("displayPeriodFinal") && object.getDisplayPeriodInitial() != null) {
 			Date minimumDisplayPeriodFinal;
 
 			minimumDisplayPeriodFinal = MomentHelper.deltaFromMoment(object.getDisplayPeriodInitial(), 7, ChronoUnit.DAYS);

@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+<<<<<<< HEAD
                                                                                                                                                                                                                                                                     
     
     
+=======
+                                                                                                                                                                                                                                                            
+>>>>>>> refs/heads/main
     
     
     
@@ -64,9 +68,13 @@
     
     
     <wb-module deploy-name="Acme-SF-D03">
+<<<<<<< HEAD
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
         
         
+=======
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+>>>>>>> refs/heads/main
         
         
         
@@ -128,9 +136,13 @@
         
         
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
+<<<<<<< HEAD
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 
         
         
+=======
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+>>>>>>> refs/heads/main
         
         
         
@@ -192,6 +204,7 @@
         
         
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
+<<<<<<< HEAD
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
         
         
@@ -349,6 +362,154 @@
         
         
         
+=======
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+>>>>>>> refs/heads/main
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/webapp"/>
+                                                                                                                                                                                                                                                                                                                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
+                                                                                                                                                
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/acme-framework"/>
+                                                                                                                
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-sources/annotations"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/target/generated-test-sources/test-annotations"/>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                
+        
         
         
         
@@ -409,14 +570,22 @@
         
         
         <property name="java-output-path" value="/Hello-World-22.0/target/classes"/>
+<<<<<<< HEAD
                                         
         
         
+=======
+                        
+>>>>>>> refs/heads/main
         
         <property name="context-root" value="Acme-SF"/>
+<<<<<<< HEAD
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
     
     
+=======
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+>>>>>>> refs/heads/main
     
     
     
@@ -479,9 +648,13 @@
     
     
     </wb-module>
+<<<<<<< HEAD
                                                                                                                                                                                                                                                                 
 
 
+=======
+                                                                                                                                                                                                                                                        
+>>>>>>> refs/heads/main
 
 
 

@@ -20,3 +20,5 @@
 	<acme:list-column code="any.claim.list.label.instantiationMoment" path="instantiationMoment" width="20%"/>
 	<acme:list-column code="any.claim.list.label.heading" path="heading" width="60%"/>
 </acme:list>
+
+<acme:button code="any.claim.form.button.create" action="/any/claim/create"/>

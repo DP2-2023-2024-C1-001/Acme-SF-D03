@@ -10,6 +10,7 @@ import acme.client.repositories.AbstractRepository;
 import acme.entities.contract.Contract;
 import acme.entities.progresslog.ProgressLog;
 import acme.entities.project.Project;
+import acme.entities.systemconfiguration.SystemConfiguration;
 import acme.roles.Client;
 
 @Repository
@@ -35,4 +36,13 @@ public interface ClientContractRepository extends AbstractRepository {
 
 	@Query("select pl from ProgressLog pl where pl.contract.id = :id")
 	Collection<ProgressLog> findManyProgressLogsByContractId(int id);
+
+	@Query("select c from Contract c where c.code= :code")
+	Contract findOneContractByCode(String code);
+
+	@Query("select sc from SystemConfiguration sc")
+	SystemConfiguration findActualSystemConfiguration();
+
+	@Query("select c from Contract c where c.project.id = :projectId AND c.published = true")
+	Collection<Contract> findAllContractsByProjectId(int projectId);
 }

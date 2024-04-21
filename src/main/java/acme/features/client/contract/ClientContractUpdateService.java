@@ -11,6 +11,7 @@ import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
 import acme.entities.contract.Contract;
 import acme.entities.project.Project;
+import acme.entities.systemconfiguration.SystemConfiguration;
 import acme.roles.Client;
 
 @Service
@@ -66,6 +67,24 @@ public class ClientContractUpdateService extends AbstractService<Client, Contrac
 	@Override
 	public void validate(final Contract object) {
 		assert object != null;
+
+		if (!super.getBuffer().getErrors().hasErrors("code")) {
+			Contract existing;
+
+			existing = this.repository.findOneContractByCode(object.getCode());
+			super.state(existing == null || existing.getId() == object.getId(), "code", "client.contract.form.error.duplicated");
+
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("budget")) {
+			Double amount;
+			amount = object.getBudget().getAmount();
+			super.state(amount >= 0, "budget", "client.contract.form.error.negativeBudget");
+
+			final SystemConfiguration systemConfig = this.repository.findActualSystemConfiguration();
+			final String currency = object.getBudget().getCurrency();
+			super.state(systemConfig.getAcceptedCurrencies().contains(" " + currency + " "), "budget", "client.contract.form.error.currency");
+		}
 
 	}
 
