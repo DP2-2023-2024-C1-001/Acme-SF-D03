@@ -95,7 +95,7 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 			Double tax;
 
 			tax = object.getTax();
-			super.state(100 >= tax && tax >= 0, "code", "sponsor.invoice.form.error.invalid-tax");
+			super.state(100 >= tax && tax >= 0, "tax", "sponsor.invoice.form.error.invalid-tax");
 
 		}
 	}
