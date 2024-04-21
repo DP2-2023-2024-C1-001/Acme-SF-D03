@@ -20,5 +20,11 @@
 	<acme:list-column code="sponsor.sponsorship.list.label.moment" path="moment" width="25%"/>
 	<acme:list-column code="sponsor.sponsorship.list.label.type" path="type" width="25%"/>
 	<acme:list-column code="sponsor.sponsorship.list.label.duration" path="duration" width="25%"/>
+	
+	
 
 </acme:list>
+
+<jstl:if test="${_command == 'list'}">
+	<acme:button code="sponsor.sponsorship.list.button.create" action="/sponsor/sponsorship/create"/>
+</jstl:if>

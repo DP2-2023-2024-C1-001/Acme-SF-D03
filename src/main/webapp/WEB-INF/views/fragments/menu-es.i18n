@@ -20,6 +20,8 @@ master.menu.sign-out = Salir
 
 master.menu.authenticated = Autenticado
 master.menu.authenticated.list-all-objectives = Lista de objetivos
+master.menu.authenticated.list-all-risks = Listado de riesgos
+master.menu.authenticated.list-recent-notices = Lista las noticias recientes
 
 
 # master.menu.anonymous #######################################################
@@ -51,7 +53,7 @@ master.menu.administrator.populate-sample = Poblar BD (ejemplos)
 master.menu.administrator.shut-down = Parar el sistema
 master.menu.administrator.banner = Listado de Banners
 master.menu.administrator.objective = Listado de Objetivos
-
+master.menu.administrator.system-configuration = Mostrar Configuración del sistema
 
 # master.menu.client ###################################################
 
@@ -92,3 +94,5 @@ master.menu.user-account.become-consumer = Hazte consumidor
 master.menu.user-account.become-client = Hazte cliente
 master.menu.user-account.client = Datos de cliente
 
+master.menu.user-account.become-sponsor = Hazte patrocinador
+master.menu.user-account.sponsor = Datos de patrocinador
