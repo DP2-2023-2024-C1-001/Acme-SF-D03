@@ -55,6 +55,7 @@
 			<acme:menu-separator/>
 			<acme:menu-suboption code="master.menu.administrator.banner" action="/administrator/banner/list"/>
 			<acme:menu-suboption code="master.menu.administrator.system-configuration" action="/administrator/system-configuration/show"/>
+			<acme:menu-suboption code="master.menu.administrator.risk" action="/administrator/risk/list"/>
 			
 		</acme:menu-option>
 		
