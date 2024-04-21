@@ -17,8 +17,8 @@ auditor.code-audit.form.label.type = Code Audit Type:
 auditor.code-audit.form.label.correctiveActions = Corrective Actions:
 auditor.code-audit.form.label.link = Link:
 auditor.code-audit.form.label.project = Project:
-auditor.code-audit.form.label.published = Published:
 
+auditor.code-audit.form.button.auditRecords = List Audit Records
 
 
 auditor.code-audit.form.button.create = Create
