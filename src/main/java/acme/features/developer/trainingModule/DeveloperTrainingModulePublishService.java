@@ -51,6 +51,18 @@ public class DeveloperTrainingModulePublishService extends AbstractService<Devel
 		id = super.getRequest().getData("id", int.class);
 		object = this.repository.findOneTrainingModuleById(id);
 
+		int totalHours = 0;
+		Collection<TrainingSession> trainingSessions;
+
+		trainingSessions = this.repository.findTrainingSessionsByTrainingModuleId(object.getId());
+
+		long diferenciaMili = trainingSessions.stream().mapToLong(x -> x.getFinalPeriod().getTime() - x.getInitialPeriod().getTime()).sum();
+
+		int horasDiferencia = (int) Math.round(diferenciaMili / (1000.0 * 60 * 60));
+
+		totalHours = totalHours + horasDiferencia;
+		object.setTotalTime(totalHours);
+
 		super.getBuffer().addData(object);
 	}
 

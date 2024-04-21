@@ -2,7 +2,6 @@
 package acme.features.developer.trainingModule;
 
 import java.util.Collection;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,12 +31,24 @@ public class DeveloperTrainingModuleListService extends AbstractService<Develope
 	@Override
 	public void load() {
 		Collection<TrainingModule> objects;
-
 		int id;
-
 		id = super.getRequest().getPrincipal().getActiveRoleId();
-
 		objects = this.repository.findAllTrainingModuleByDeveloperId(id);
+
+		for (final TrainingModule tm : objects) {
+			int totalHours = 0;
+			Collection<TrainingSession> trainingSessions;
+
+			trainingSessions = this.repository.findTrainingSessionsByTrainingModuleId(tm.getId());
+
+			long diferenciaMili = trainingSessions.stream().mapToLong(x -> x.getFinalPeriod().getTime() - x.getInitialPeriod().getTime()).sum();
+
+			int horasDiferencia = (int) Math.round(diferenciaMili / (1000.0 * 60 * 60));
+
+			totalHours = totalHours + horasDiferencia;
+			tm.setTotalTime(totalHours);
+
+		}
 
 		super.getBuffer().addData(objects);
 	}
@@ -48,18 +59,7 @@ public class DeveloperTrainingModuleListService extends AbstractService<Develope
 
 		Dataset dataset;
 
-		Collection<TrainingSession> ts = this.repository.findTrainingSessionsByTrainingModuleId(object.getId());
-		int totalHours = 0;
-		for (TrainingSession t : ts) {
-			Date inicio = t.getInitialPeriod();
-			Date fin = t.getFinalPeriod();
-			long diferenciaMilisegundos = fin.getTime() - inicio.getTime();
-			int horasDiferencia = (int) Math.round(diferenciaMilisegundos / (1000.0 * 60 * 60));
-			totalHours = totalHours + horasDiferencia;
-		}
-
 		dataset = super.unbind(object, "code", "creationMoment", "difficultLevel", "totalTime", "details");
-		dataset.put("totalTime", totalHours);
 
 		super.getResponse().addData(dataset);
 	}

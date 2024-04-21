@@ -2,7 +2,6 @@
 package acme.features.developer.trainingModule;
 
 import java.util.Collection;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +13,6 @@ import acme.client.views.SelectChoices;
 import acme.entities.project.Project;
 import acme.entities.trainingmodule.Difficult;
 import acme.entities.trainingmodule.TrainingModule;
-import acme.entities.trainingsession.TrainingSession;
 import acme.roles.Developer;
 
 @Service
@@ -79,18 +77,6 @@ public class DeveloperTrainingModulesCreateService extends AbstractService<Devel
 	@Override
 	public void perform(final TrainingModule object) {
 		assert object != null;
-
-		Collection<TrainingSession> ts = this.repository.findTrainingSessionsByTrainingModuleId(object.getId());
-		int totalHours = 0;
-		for (TrainingSession t : ts) {
-			Date inicio = t.getInitialPeriod();
-			Date fin = t.getFinalPeriod();
-			long diferenciaMilisegundos = fin.getTime() - inicio.getTime();
-			int horasDiferencia = (int) Math.round(diferenciaMilisegundos / (1000.0 * 60 * 60));
-			totalHours = totalHours + horasDiferencia;
-		}
-
-		object.setTotalTime(totalHours);
 
 		this.repository.save(object);
 	}

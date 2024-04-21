@@ -2,7 +2,6 @@
 package acme.features.developer.trainingModule;
 
 import java.util.Collection;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -51,6 +50,18 @@ public class DeveloperTrainingModuleUpdateService extends AbstractService<Develo
 		id = super.getRequest().getData("id", int.class);
 		object = this.repository.findOneTrainingModuleById(id);
 
+		int totalHours = 0;
+		Collection<TrainingSession> trainingSessions;
+
+		trainingSessions = this.repository.findTrainingSessionsByTrainingModuleId(object.getId());
+
+		long diferenciaMili = trainingSessions.stream().mapToLong(x -> x.getFinalPeriod().getTime() - x.getInitialPeriod().getTime()).sum();
+
+		int horasDiferencia = (int) Math.round(diferenciaMili / (1000.0 * 60 * 60));
+
+		totalHours = totalHours + horasDiferencia;
+		object.setTotalTime(totalHours);
+
 		super.getBuffer().addData(object);
 	}
 
@@ -87,18 +98,6 @@ public class DeveloperTrainingModuleUpdateService extends AbstractService<Develo
 	public void perform(final TrainingModule object) {
 		assert object != null;
 
-		Collection<TrainingSession> ts = this.repository.findTrainingSessionsByTrainingModuleId(object.getId());
-		int totalHours = 0;
-		for (TrainingSession t : ts) {
-			Date inicio = t.getInitialPeriod();
-			Date fin = t.getFinalPeriod();
-			long diferenciaMilisegundos = fin.getTime() - inicio.getTime();
-			int horasDiferencia = (int) Math.round(diferenciaMilisegundos / (1000.0 * 60 * 60));
-			totalHours = totalHours + horasDiferencia;
-		}
-
-		object.setTotalTime(totalHours);
-
 		this.repository.save(object);
 	}
 
@@ -115,7 +114,7 @@ public class DeveloperTrainingModuleUpdateService extends AbstractService<Develo
 		choices = SelectChoices.from(Difficult.class, object.getDifficultLevel());
 		projectchoices = SelectChoices.from(projects, "code", object.getProject());
 
-		dataset = super.unbind(object, "code", "creationMoment", "details", "difficultLevel", "updateMoment", "link", "published");
+		dataset = super.unbind(object, "code", "creationMoment", "details", "difficultLevel", "updateMoment", "link", "totalTime", "published");
 
 		dataset.put("project", projectchoices.getSelected().getKey());
 		dataset.put("projects", projectchoices);
