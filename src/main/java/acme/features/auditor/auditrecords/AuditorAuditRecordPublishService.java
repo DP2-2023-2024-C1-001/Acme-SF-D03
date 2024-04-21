@@ -17,7 +17,7 @@ import acme.entities.codeaudit.CodeAudit;
 import acme.roles.Auditor;
 
 @Service
-public class AuditorAuditRecordUpdateService extends AbstractService<Auditor, AuditRecord> {
+public class AuditorAuditRecordPublishService extends AbstractService<Auditor, AuditRecord> {
 
 	// Internal state ---------------------------------------------------------
 
@@ -58,7 +58,6 @@ public class AuditorAuditRecordUpdateService extends AbstractService<Auditor, Au
 		assert object != null;
 
 		super.bind(object, "code", "periodStart", "periodEnd", "mark", "link");
-
 	}
 
 	@Override
@@ -90,13 +89,13 @@ public class AuditorAuditRecordUpdateService extends AbstractService<Auditor, Au
 			super.state(marks.contains(object.getMark()), "mark", "auditor.audit-record.form.error.mark");
 
 		}
-
 	}
 
 	@Override
 	public void perform(final AuditRecord object) {
 		assert object != null;
 
+		object.setPublished(true);
 		this.repository.save(object);
 	}
 
@@ -111,4 +110,5 @@ public class AuditorAuditRecordUpdateService extends AbstractService<Auditor, Au
 
 		super.getResponse().addData(dataset);
 	}
+
 }

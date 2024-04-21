@@ -21,9 +21,8 @@
 	<acme:input-textbox code="auditor.audit-record.form.label.code" path="code"/>	
 	<acme:input-moment code="auditor.audit-record.form.label.periodStart" path="periodStart" />
 	<acme:input-moment code="auditor.audit-record.form.label.periodEnd" path="periodEnd" />
-	<acme:input-textarea code="auditor.audit-record.form.label.mark" path="mark"/>
+	<acme:input-textbox code="auditor.audit-record.form.label.mark" path="mark"/>
 	<acme:input-url code="auditor.audit-record.form.label.link" path="link"/>
-	<acme:input-checkbox code="auditor.audit-record.form.label.published" path="published"/>
 	
 	
 	
@@ -31,6 +30,8 @@
 		<jstl:when test="${acme:anyOf(_command, 'show|update|delete') && published==false}">
 			<acme:submit code="auditor.audit-record.form.button.update" action="/auditor/audit-record/update"/>
 			<acme:submit code="auditor.audit-record.form.button.delete" action="/auditor/audit-record/delete"/>
+			<acme:submit code="auditor.audit-record.form.button.publish" action="/auditor/audit-record/publish"/>
+			
 		</jstl:when>
 		<jstl:when test="${_command == 'create'}">
 			<acme:submit code="auditor.audit-record.form.button.create" action="/auditor/audit-record/create?masterId=${masterId}"/>

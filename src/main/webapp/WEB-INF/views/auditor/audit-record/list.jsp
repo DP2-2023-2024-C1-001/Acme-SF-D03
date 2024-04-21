@@ -20,4 +20,4 @@
 	<acme:list-column code="auditor.audit-record.list.label.mark" path="mark" width="25%"/>	
 </acme:list>
 
-<acme:button test="${showCreate}" code="auditor.code-audit.list.button.create" action="/auditor/code-audit/create?masterId=${masterId}"/>
+<acme:button test="${showCreate}" code="auditor.audit-record.form.button.create" action="/auditor/audit-record/create?masterId=${masterId}"/>

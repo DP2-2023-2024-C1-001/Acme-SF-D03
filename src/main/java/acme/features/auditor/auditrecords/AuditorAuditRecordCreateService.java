@@ -1,10 +1,16 @@
 
 package acme.features.auditor.auditrecords;
 
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
 import acme.entities.auditrecord.AuditRecord;
 import acme.entities.codeaudit.CodeAudit;
@@ -65,7 +71,24 @@ public class AuditorAuditRecordCreateService extends AbstractService<Auditor, Au
 			AuditRecord existing;
 
 			existing = this.repository.findOneAuditRecordByCode(object.getCode());
-			super.state(existing == null, "code", "client.progress-log.form.error.duplicated");
+			super.state(existing == null, "code", "auditor.audit-record.form.error.duplicated");
+
+		}
+		if (!super.getBuffer().getErrors().hasErrors("periodEnd") && object.getPeriodStart() != null) {
+			Date minimumPeriodEnd;
+
+			minimumPeriodEnd = MomentHelper.deltaFromMoment(object.getPeriodStart(), 1, ChronoUnit.HOURS);
+			super.state(MomentHelper.isAfterOrEqual(object.getPeriodEnd(), minimumPeriodEnd), "periodEnd", "auditor.audit-record.form.error.invalidFinalPeriod");
+		}
+		if (!super.getBuffer().getErrors().hasErrors("mark") && object.getMark() != null) {
+			Collection<String> marks = new ArrayList<>();
+			marks.add("A+");
+			marks.add("A");
+			marks.add("B");
+			marks.add("C");
+			marks.add("F");
+			marks.add("F-");
+			super.state(marks.contains(object.getMark()), "mark", "auditor.audit-record.form.error.mark");
 
 		}
 	}
