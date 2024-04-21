@@ -56,6 +56,7 @@ master.menu.administrator.shut-down = Shut down
 master.menu.administrator.banner = Listing of Banner
 
 master.menu.administrator.system-configuration = Show System Configuration
+master.menu.administrator.dashboard = Dashboard with admin data
 
 # master.menu.client ###################################################
 

@@ -56,6 +56,8 @@ master.menu.administrator.populate-sample = Poblar BD (ejemplos)
 master.menu.administrator.shut-down = Parar el sistema
 master.menu.administrator.banner = Listado de Banners
 master.menu.administrator.system-configuration = Mostrar Configuración del sistema
+master.menu.administrator.dashboard = Dashboard con datos de administradores
+
 
 # master.menu.client ###################################################
 
