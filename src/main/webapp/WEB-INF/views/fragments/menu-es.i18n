@@ -68,6 +68,7 @@ master.menu.client.dashboard = Dashboards con datos de contratos
 
 master.menu.sponsor = Patrocinador
 master.menu.sponsor.sponsorships = Lista de mis patrocinios
+master.menu.sponsor.dashboard = Dashboard con datos de patrocinios
 
 # master.menu.auditor ###################################################
 

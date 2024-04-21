@@ -67,6 +67,7 @@ master.menu.client.dashboard = Dashboards with contract data
 
 master.menu.sponsor = Sponsor
 master.menu.sponsor.sponsorships = List my Sponsorships
+master.menu.sponsor.dashboard = Dashboard with sponsorship data
 
 # master.menu.auditor ###################################################
 
