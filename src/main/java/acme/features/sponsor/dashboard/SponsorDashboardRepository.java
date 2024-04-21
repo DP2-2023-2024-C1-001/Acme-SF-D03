@@ -12,7 +12,7 @@ public interface SponsorDashboardRepository extends AbstractRepository {
 	@Query("select count(i) from Invoice i where i.sponsorship.sponsor.id = :sponsorId AND i.tax <= 21.00")
 	Integer totalNumberOfInvoicesWithTaxLessOrEquals21Percent(int sponsorId);
 
-	@Query("select count(s) from Sponsorship s where s.sponsor.id = :sponsorId AND s.link != null")
+	@Query("select count(s) from Sponsorship s where s.sponsor.id = :sponsorId AND s.link is not null and s.link not like ''")
 	Integer totalNumberOfSponsorshipWithLink(int sponsorId);
 
 	@Query("select avg(s.amount.amount) from Sponsorship s where s.sponsor.id = :sponsorId")
