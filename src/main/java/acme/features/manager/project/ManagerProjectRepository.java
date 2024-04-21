@@ -36,4 +36,7 @@ public interface ManagerProjectRepository extends AbstractRepository {
 
 	@Query("select p from Project p")
 	Collection<Project> findAllProjects();
+
+	@Query("select us from UserStory us")
+	Collection<UserStory> findAllUserStories();
 }
