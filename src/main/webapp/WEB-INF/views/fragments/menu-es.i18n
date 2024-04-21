@@ -19,7 +19,7 @@ master.menu.sign-out = Salir
 # master.menu.authenticated #######################################################
 
 master.menu.authenticated = Autenticado
-master.menu.authenticated.list-all-objectives = Lista de objectivos
+master.menu.authenticated.list-all-objectives = Lista de objetivos
 
 
 # master.menu.anonymous #######################################################
@@ -50,6 +50,7 @@ master.menu.administrator.populate-initial = Poblar BD (inicial)
 master.menu.administrator.populate-sample = Poblar BD (ejemplos)
 master.menu.administrator.shut-down = Parar el sistema
 master.menu.administrator.banner = Listado de Banners
+master.menu.administrator.objective = Listado de Objetivos
 
 
 # master.menu.client ###################################################

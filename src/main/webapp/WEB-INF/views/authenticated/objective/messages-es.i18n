@@ -9,13 +9,13 @@
 # they accept any liabilities with respect to them.
 
 authenticated.objective.form.title = Formulario de objetivo
-authenticated.objective.list.title = Listado de objectivos
+authenticated.objective.list.title = Listado de objetivos
 
 authenticated.objective.form.label.instantiationMoment = Momento de instanciación:
 authenticated.objective.form.label.title = Título:
 authenticated.objective.form.label.description = Descripción:
 authenticated.objective.form.label.priority = Prioridad:
-authenticated.objective.form.label.status = Estado:
+authenticated.objective.form.label.status = Estado
 authenticated.objective.form.label.initialPeriod = Comienzo del periodo: 
 authenticated.objective.form.label.finalPeriod = Final del periodo:
 
