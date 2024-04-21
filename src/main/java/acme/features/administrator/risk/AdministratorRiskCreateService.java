@@ -49,7 +49,7 @@ public class AdministratorRiskCreateService extends AbstractService<Administrato
 			Risk existing;
 
 			existing = this.repository.findOneRiskByReference(object.getReference());
-			super.state(existing == null, "code", "administrator.risk.form.error.duplicated");
+			super.state(existing == null, "reference", "administrator.risk.form.error.duplicated");
 
 		}
 

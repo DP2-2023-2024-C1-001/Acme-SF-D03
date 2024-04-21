@@ -60,16 +60,21 @@ public class AnyClaimCreateService extends AbstractService<Any, Claim> {
 
 		confirmation = super.getRequest().getData("confirmation", boolean.class);
 		super.state(confirmation, "confirmation", "javax.validation.constraints.AssertTrue.message");
+
+		if (!super.getBuffer().getErrors().hasErrors("code")) {
+			Claim existing;
+
+			existing = this.repository.findOneClaimByCode(object.getCode());
+			super.state(existing == null, "code", "administrator.claim.form.error.duplicated");
+
+		}
+
 	}
 
 	@Override
 	public void perform(final Claim object) {
 		assert object != null;
 
-		Date moment;
-
-		moment = MomentHelper.getCurrentMoment();
-		object.setInstantiationMoment(moment);
 		this.repository.save(object);
 	}
 

@@ -1,7 +1,5 @@
 
-package acme.features.risk;
-
-import java.util.Collection;
+package acme.features.authenticated.risk;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,26 +10,31 @@ import acme.client.services.AbstractService;
 import acme.entities.risk.Risk;
 
 @Service
-public class AuthenticatedRiskListService extends AbstractService<Authenticated, Risk> {
+public class AuthenticatedRiskShowService extends AbstractService<Authenticated, Risk> {
 
 	// Internal state ---------------------------------------------------------
 	@Autowired
 	private AuthenticatedRiskRepository repository;
+
 	// AbstractService interface ----------------------------------------------
 
 
 	@Override
 	public void authorise() {
 		super.getResponse().setAuthorised(true);
+
 	}
 
 	@Override
 	public void load() {
-		Collection<Risk> objects;
+		Risk object;
+		int id;
 
-		objects = this.repository.findAllRisk();
+		id = super.getRequest().getData("id", int.class);
 
-		super.getBuffer().addData(objects);
+		object = this.repository.findRiskById(id);
+
+		super.getBuffer().addData(object);
 	}
 
 	@Override
@@ -40,8 +43,9 @@ public class AuthenticatedRiskListService extends AbstractService<Authenticated,
 
 		Dataset dataset;
 
-		dataset = super.unbind(object, "reference", "identificationDate", "description", "impact");
+		dataset = super.unbind(object, "reference", "identificationDate", "impact", "probability", "description", "link");
 
 		super.getResponse().addData(dataset);
 	}
+
 }

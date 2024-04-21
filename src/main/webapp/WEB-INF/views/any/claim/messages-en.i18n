@@ -25,3 +25,6 @@ any.claim.form.button.create = Create
 any.claim.list.label.code = Code
 any.claim.list.label.instantiationMoment = Instantiation Moment
 any.claim.list.label.heading = Heading
+
+
+administrator.claim.form.error.duplicated = The code is taken

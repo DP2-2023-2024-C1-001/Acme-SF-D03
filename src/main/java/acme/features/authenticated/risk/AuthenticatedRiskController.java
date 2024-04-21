@@ -1,5 +1,5 @@
 
-package acme.features.risk;
+package acme.features.authenticated.risk;
 
 import javax.annotation.PostConstruct;
 
