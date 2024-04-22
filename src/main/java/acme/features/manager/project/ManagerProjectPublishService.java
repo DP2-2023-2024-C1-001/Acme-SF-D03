@@ -30,9 +30,9 @@ public class ManagerProjectPublishService extends AbstractService<Manager, Proje
 		projectId = super.getRequest().getData("id", int.class);
 		project = this.repository.findOneProjectById(projectId);
 		manager = project == null ? null : project.getManager();
-		status = super.getRequest().getPrincipal().hasRole(manager);
 
-		super.getResponse().setAuthorised(status && !project.isDraftMode());
+		status = project != null && project.isDraftMode() && super.getRequest().getPrincipal().hasRole(manager);
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -49,7 +49,7 @@ public class ManagerProjectPublishService extends AbstractService<Manager, Proje
 	@Override
 	public void bind(final Project object) {
 		assert object != null;
-		super.bind(object, "code", "title", "projectAbstract", "indicator", "cost", "link", "draftMode");
+		super.bind(object, "code", "title", "projectAbstract", "link", "cost", "indicator");
 
 	}
 
@@ -85,7 +85,7 @@ public class ManagerProjectPublishService extends AbstractService<Manager, Proje
 
 		Dataset dataset;
 
-		dataset = super.unbind(object, "code", "title", "projectAbstract", "indicator", "cost", "link", "draftMode");
+		dataset = super.unbind(object, "code", "title", "projectAbstract", "link", "cost", "indicator", "draftMode");
 
 		super.getResponse().addData(dataset);
 

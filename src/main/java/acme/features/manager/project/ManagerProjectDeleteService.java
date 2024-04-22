@@ -30,11 +30,10 @@ public class ManagerProjectDeleteService extends AbstractService<Manager, Projec
 		projectId = super.getRequest().getData("id", int.class);
 		project = this.repository.findOneProjectById(projectId);
 		manager = project == null ? null : project.getManager();
-		status = super.getRequest().getPrincipal().hasRole(manager);
 
-		super.getResponse().setAuthorised(status && !project.isDraftMode());
+		status = project != null && project.isDraftMode() && super.getRequest().getPrincipal().hasRole(manager);
+		super.getResponse().setAuthorised(status);
 	}
-
 	@Override
 	public void load() {
 		int id = super.getRequest().getData("id", int.class);
@@ -67,7 +66,7 @@ public class ManagerProjectDeleteService extends AbstractService<Manager, Projec
 	public void unbind(final Project object) {
 		assert object != null;
 
-		Dataset dataset = super.unbind(object, "code", "title", "projectAbstract", "link", "cost", "draftMode", "indicator");
+		Dataset dataset = super.unbind(object, "code", "title", "projectAbstract", "link", "cost", "indicator", "draftMode");
 
 		super.getResponse().addData(dataset);
 	}
