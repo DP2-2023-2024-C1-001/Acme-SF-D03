@@ -1,22 +1,22 @@
 
 package acme.features.manager.project;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
 import acme.entities.project.Project;
+import acme.entities.userStory.UserStory;
 import acme.roles.Manager;
 
 @Service
-public class ManagerProjectDeleteService extends AbstractService<Manager, Project> {
-	// Internal state ---------------------------------------------------------
+public class ManagerProjectPublishService extends AbstractService<Manager, Project> {
 
 	@Autowired
 	private ManagerProjectRepository repository;
-
-	// AbstractService interface ----------------------------------------------
 
 
 	@Override
@@ -37,9 +37,11 @@ public class ManagerProjectDeleteService extends AbstractService<Manager, Projec
 
 	@Override
 	public void load() {
-		int id = super.getRequest().getData("id", int.class);
+		Project object;
+		int id;
 
-		Project object = this.repository.findOneProjectById(id);
+		id = super.getRequest().getData("id", int.class);
+		object = this.repository.findOneProjectById(id);
 
 		super.getBuffer().addData(object);
 	}
@@ -47,29 +49,45 @@ public class ManagerProjectDeleteService extends AbstractService<Manager, Projec
 	@Override
 	public void bind(final Project object) {
 		assert object != null;
+		super.bind(object, "code", "title", "projectAbstract", "indicator", "cost", "link", "draftMode");
 
-		super.bind(object, "code", "title", "projectAbstract", "link", "cost", "indicator");
 	}
 
 	@Override
 	public void validate(final Project object) {
 		assert object != null;
+
+		if (!super.getBuffer().getErrors().hasErrors("indicator"))
+			super.state(object.isIndicator() == false, "indicator", "manager.project.form.error.hasFatalError");
+
+		Collection<UserStory> userStories;
+		int totalUserStories;
+
+		userStories = this.repository.findAllUserStoriesByProjectId(object.getId());
+		boolean allUserStoriesPublished = userStories.stream().allMatch(us -> !us.isDraftMode());
+		totalUserStories = userStories.size();
+
+		super.state(totalUserStories >= 1, "*", "manager.project.form.error.not-enough-user-stories");
+		super.state(allUserStoriesPublished, "*", "manager.project.form.error.not-all-user-stories-published");
+
 	}
 
 	@Override
 	public void perform(final Project object) {
 		assert object != null;
-
-		this.repository.delete(object);
+		object.setDraftMode(false);
+		this.repository.save(object);
 	}
 
 	@Override
 	public void unbind(final Project object) {
 		assert object != null;
 
-		Dataset dataset = super.unbind(object, "code", "title", "projectAbstract", "link", "cost", "draftMode", "indicator");
+		Dataset dataset;
+
+		dataset = super.unbind(object, "code", "title", "projectAbstract", "indicator", "cost", "link", "draftMode");
 
 		super.getResponse().addData(dataset);
-	}
 
+	}
 }

@@ -33,7 +33,7 @@ public class ManagerProjectUpdateService extends AbstractService<Manager, Projec
 		manager = project == null ? null : project.getManager();
 		status = super.getRequest().getPrincipal().hasRole(manager);
 
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(status && !project.isDraftMode());
 	}
 
 	@Override
