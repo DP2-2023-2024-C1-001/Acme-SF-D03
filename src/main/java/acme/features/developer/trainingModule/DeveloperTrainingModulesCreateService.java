@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
+import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
 import acme.entities.project.Project;
@@ -37,9 +38,9 @@ public class DeveloperTrainingModulesCreateService extends AbstractService<Devel
 
 		developer = this.repository.findDeveloperById(super.getRequest().getPrincipal().getActiveRoleId());
 		object = new TrainingModule();
-		object.setDeveloper(developer);
 
 		object.setPublished(false);
+		object.setDeveloper(developer);
 
 		super.getBuffer().addData(object);
 	}
@@ -61,6 +62,16 @@ public class DeveloperTrainingModulesCreateService extends AbstractService<Devel
 	@Override
 	public void validate(final TrainingModule object) {
 		assert object != null;
+
+		if (!super.getBuffer().getErrors().hasErrors("updateMoment") && object.getUpdateMoment() != null)
+			super.state(MomentHelper.isAfter(object.getUpdateMoment(), object.getCreationMoment()), "updateMoment", "developer.Training-Modules.form.error.invalidUpdateMoment");
+
+		if (!super.getBuffer().getErrors().hasErrors("code")) {
+			TrainingModule existing;
+
+			existing = this.repository.findOneTrainingModuleByCode(object.getCode());
+			super.state(existing == null, "code", "developer.Training-Modules.form.error.duplicated");
+		}
 	}
 
 	@Override
@@ -83,7 +94,7 @@ public class DeveloperTrainingModulesCreateService extends AbstractService<Devel
 		choices = SelectChoices.from(Difficult.class, object.getDifficultLevel());
 		projectchoices = SelectChoices.from(projects, "code", object.getProject());
 
-		dataset = super.unbind(object, "code", "creationMoment", "details", "difficultLevel", "updateMoment", "link", "published");
+		dataset = super.unbind(object, "code", "creationMoment", "details", "difficultLevel", "updateMoment", "link", "totalTime", "published");
 
 		dataset.put("project", projectchoices.getSelected().getKey());
 		dataset.put("projects", projectchoices);

@@ -76,7 +76,7 @@ public class ClientContractCreateService extends AbstractService<Client, Contrac
 
 			final SystemConfiguration systemConfig = this.repository.findActualSystemConfiguration();
 			final String currency = object.getBudget().getCurrency();
-			super.state(systemConfig.getAcceptedCurrencies().contains(currency), "budget", "client.contract.form.error.currency");
+			super.state(systemConfig.getAcceptedCurrencies().contains(" " + currency + " "), "budget", "client.contract.form.error.currency");
 		}
 	}
 

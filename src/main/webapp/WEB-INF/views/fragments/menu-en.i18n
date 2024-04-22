@@ -19,6 +19,11 @@ master.menu.sign-out = Sign out
 
 master.menu.authenticated = Authenticated
 
+master.menu.authenticated.list-all-risks = List all risks
+master.menu.authenticated.list-all-objectives = List all objectives
+master.menu.authenticated.list-recent-notices = List recent notices
+
+
 
 # master.menu.anonymous #######################################################
 
@@ -29,12 +34,17 @@ master.menu.anonymous.guille = 45813076C: Gomez Romero, Guillermo
 master.menu.anonymous.manu = 47265720F: Velez Lopez, Manuel
 master.menu.anonymous.josemaria = 29588315B: Baquero Rodriguez, Jose Maria
 master.menu.anonymous.list-all-claims = List all claims
+master.menu.anonymous.list-published-contracts = List published contracts
+master.menu.anonymous.list-published-training-modules = List published training modules
+
+
 
 
 # master.menu.developer ###################################################
 
 master.menu.developer = Developer
 master.menu.developer.training-module = List my Training Modules
+master.menu.developer.dashboard = Dashboard with training module data
 
 
 # master.menu.administrator ###################################################
@@ -47,6 +57,14 @@ master.menu.administrator.populate-sample = Populate DB (samples)
 master.menu.administrator.shut-down = Shut down
 master.menu.administrator.banner = Listing of Banner
 
+master.menu.administrator.objective = Listing of Objectives
+
+
+master.menu.administrator.risk = Listing of Risk
+
+
+master.menu.administrator.system-configuration = Show System Configuration
+
 # master.menu.client ###################################################
 
 master.menu.client = Client
@@ -57,6 +75,12 @@ master.menu.client.dashboard = Dashboards with contract data
 
 master.menu.sponsor = Sponsor
 master.menu.sponsor.sponsorships = List my Sponsorships
+master.menu.sponsor.dashboard = Dashboard with sponsorship data
+
+# master.menu.auditor ###################################################
+
+master.menu.auditor = Auditor
+master.menu.auditor.codeaudits = List my Code audits
 
 # master.menu.provider ########################################################
 
@@ -76,5 +100,12 @@ master.menu.user-account.provider = Provider data
 master.menu.user-account.become-provider = Become a provider
 master.menu.user-account.consumer = Consumer data
 master.menu.user-account.become-consumer = Become a consumer
+
+master.menu.user-account.become-sponsor = Become a sponsor
+master.menu.user-account.sponsor = Sponsor data
+
 master.menu.user-account.become-client = Become a client
 master.menu.user-account.client = Client data
+master.menu.user-account.become-developer = Become a developer
+master.menu.user-account.developer = Developer data
+

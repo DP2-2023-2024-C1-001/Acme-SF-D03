@@ -24,7 +24,9 @@ public class AdministratorBannerListService extends AbstractService<Administrato
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
+		Boolean status;
+		status = super.getRequest().getPrincipal().hasRole(Administrator.class);
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
