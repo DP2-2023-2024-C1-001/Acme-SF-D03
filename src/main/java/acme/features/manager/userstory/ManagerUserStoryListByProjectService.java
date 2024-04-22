@@ -14,12 +14,12 @@ import acme.entities.userStory.UserStory;
 import acme.roles.Manager;
 
 @Service
-public class ManagerUserStoryListService extends AbstractService<Manager, UserStory> {
+public class ManagerUserStoryListByProjectService extends AbstractService<Manager, UserStory> {
 
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
-	protected ManagerUserStoryRepository repository;
+	private ManagerUserStoryRepository repository;
 
 	// AbstractService interface ----------------------------------------------
 
@@ -35,10 +35,13 @@ public class ManagerUserStoryListService extends AbstractService<Manager, UserSt
 
 	@Override
 	public void load() {
-		final int managerId = super.getRequest().getPrincipal().getAccountId();
-		Collection<UserStory> userStories = this.repository.findUserStoriesByManagerId(managerId);
+		Collection<UserStory> objects;
+		int projectId;
 
-		super.getBuffer().addData(userStories);
+		projectId = super.getRequest().getData("projectId", int.class);
+		objects = this.repository.findUserStoriesByProjectId(projectId);
+
+		super.getBuffer().addData(objects);
 	}
 
 	@Override
