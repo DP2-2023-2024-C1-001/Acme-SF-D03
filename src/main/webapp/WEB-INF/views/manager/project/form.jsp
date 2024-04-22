@@ -7,16 +7,23 @@
 	<acme:input-textbox code="manager.project.form.label.code" path="code"/>
 	<acme:input-textbox code="manager.project.form.label.title" path="title"/>
 	<acme:input-textarea code="manager.project.form.label.projectAbstract" path="projectAbstract"/>
-	<acme:input-checkbox code="manager.project.label.indication" path="indication"/>
+	<acme:input-checkbox code="manager.project.label.indicator" path="indicator"/>
 	<acme:input-money code="manager.project.form.label.cost" path="cost"/>
 	<acme:input-url code="manager.project.form.label.link" path="link"/>
 
-	<acme:button code="manager.project.form.button.user-stories-list" action="/manager/user-story/list?projectId=${id}"/>
 	
-	<jstl:choose>	 
+	<jstl:choose>
+		<jstl:when test="${acme:anyOf(_command, 'show|update|delete')}">
+			<acme:button code="manager.project.form.button.user-stories-list" action="/manager/user-story/list?projectId=${id}"/>
+			<acme:submit code="manager.project.form.button.delete" action="/manager/project/delete"/>
+			<acme:submit code="manager.project.form.button.update" action="/manager/project/update"/>
+		</jstl:when>	
 		<jstl:when test="${_command == 'create'}">
 			<acme:submit code="manager.project.list.button.create" action="/manager/project/create"/>
 		</jstl:when>
+		<jstl:otherwise>
+			<acme:button code="manager.project.form.button.user-stories-list" action="/manager/user-story/list?projectId=${id}"/>
+		</jstl:otherwise>
 	</jstl:choose>	
 	
 </acme:form>

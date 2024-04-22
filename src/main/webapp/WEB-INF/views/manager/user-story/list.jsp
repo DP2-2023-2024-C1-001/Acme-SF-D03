@@ -5,6 +5,7 @@
 
 <acme:list>
 	<acme:list-column code="manager.user-story.list.label.title" path="title" width="40%"/>
-	<acme:list-column code="manager.user-story.list.label.estimatedCost" path="estimatedCost" width="30%"/>
-	<acme:list-column code="manager.user-story.list.label.priority" path="priority" width="30%"/>
+	<acme:list-column code="manager.user-story.list.label.estimatedCost" path="estimatedCost" width="20%"/>
+	<acme:list-column code="manager.user-story.list.label.priority" path="priority" width="20%"/>
+	<acme:list-column code="manager.user-story.list.label.draftMode" path="draftMode" width="20%"/>
 </acme:list>

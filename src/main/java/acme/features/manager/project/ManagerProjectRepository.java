@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import acme.client.repositories.AbstractRepository;
 import acme.entities.project.Project;
 import acme.entities.project.UserStoryProject;
+import acme.entities.systemconfiguration.SystemConfiguration;
 import acme.entities.userStory.UserStory;
 import acme.roles.Manager;
 
@@ -39,4 +40,11 @@ public interface ManagerProjectRepository extends AbstractRepository {
 
 	@Query("select us from UserStory us")
 	Collection<UserStory> findAllUserStories();
+
+	@Query("select sc from SystemConfiguration sc")
+	SystemConfiguration findActualSystemConfiguration();
+
+	@Query("select us from UserStory us where us.manager.id =: managerId ")
+	Collection<UserStory> findAllUserStoriesByManagerId(int managerId);
+
 }

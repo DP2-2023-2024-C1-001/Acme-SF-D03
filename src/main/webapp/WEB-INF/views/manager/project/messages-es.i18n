@@ -9,9 +9,11 @@ manager.project.list.label.draftMode = Borrador
 manager.project.form.label.code = Código:
 manager.project.form.label.title = Título:
 manager.project.form.label.projectAbstract = Resumen de proyecto:
-manager.project.label.indication = Indicación (errores críticos)
+manager.project.label.indicator = Indicación (errores críticos)
 manager.project.form.label.cost = Coste:
 manager.project.form.label.link = Enlace:
 manager.project.form.button.user-stories-list = Ver historias de usuario
 
 manager.project.list.button.create = Crear
+manager.project.form.button.delete = Eliminar
+manager.project.form.button.update = Actualizar

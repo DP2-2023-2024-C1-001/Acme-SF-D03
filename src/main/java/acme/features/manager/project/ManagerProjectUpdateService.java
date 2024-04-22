@@ -1,8 +1,6 @@
 
 package acme.features.manager.project;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,31 +11,36 @@ import acme.entities.systemconfiguration.SystemConfiguration;
 import acme.roles.Manager;
 
 @Service
-public class ManagerProjectCreateService extends AbstractService<Manager, Project> {
-
+public class ManagerProjectUpdateService extends AbstractService<Manager, Project> {
 	// Internal state ---------------------------------------------------------
 
 	@Autowired
 	private ManagerProjectRepository repository;
 
-	// AbstractService interface ----------------------------------------------
+	// AbstractService<Authenticated, Project> ---------------------------
 
 
 	@Override
 	public void authorise() {
-		super.getResponse().setAuthorised(true);
 
+		boolean status;
+		int projectId;
+		Project project;
+		Manager manager;
+
+		projectId = super.getRequest().getData("id", int.class);
+		project = this.repository.findOneProjectById(projectId);
+		manager = project == null ? null : project.getManager();
+		status = super.getRequest().getPrincipal().hasRole(manager);
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
 	public void load() {
-		Project object;
-		Manager manager;
+		int id = super.getRequest().getData("id", int.class);
 
-		manager = this.repository.findOneManagerById(super.getRequest().getPrincipal().getActiveRoleId());
-		object = new Project();
-		object.setDraftMode(true);
-		object.setManager(manager);
+		Project object = this.repository.findOneProjectById(id);
 
 		super.getBuffer().addData(object);
 	}
@@ -46,7 +49,7 @@ public class ManagerProjectCreateService extends AbstractService<Manager, Projec
 	public void bind(final Project object) {
 		assert object != null;
 
-		super.bind(object, "code", "title", "projectAbstract", "indicator", "cost", "link");
+		super.bind(object, "code", "title", "projectAbstract", "link", "cost", "indicator");
 	}
 
 	@Override
@@ -54,12 +57,10 @@ public class ManagerProjectCreateService extends AbstractService<Manager, Projec
 		assert object != null;
 
 		if (!super.getBuffer().getErrors().hasErrors("code")) {
-			Optional<Project> existing;
+			final int proyectId = super.getRequest().getData("id", int.class);
+			final boolean duplicatedCode = this.repository.findAllProjects().stream().filter(e -> e.getId() != proyectId).anyMatch(e -> e.getCode().equals(object.getCode()));
 
-			existing = this.repository.findOneProjectByCode(object.getCode());
-			if (existing.isPresent())
-				super.state(existing == null, "code", "manager.project.form.error.duplicated");
-
+			super.state(!duplicatedCode, "code", "manager.project.form.error.duplicated-code");
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("cost")) {
@@ -85,10 +86,9 @@ public class ManagerProjectCreateService extends AbstractService<Manager, Projec
 	public void unbind(final Project object) {
 		assert object != null;
 
-		Dataset dataset;
-
-		dataset = super.unbind(object, "code", "title", "projectAbstract", "indicator", "cost", "link", "draftMode");
+		Dataset dataset = super.unbind(object, "code", "title", "projectAbstract", "link", "cost", "draftMode", "indicator");
 
 		super.getResponse().addData(dataset);
 	}
+
 }
