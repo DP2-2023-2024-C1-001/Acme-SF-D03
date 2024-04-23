@@ -8,6 +8,17 @@
 	<acme:input-textarea code="manager.user-story.form.label.description" path="description"/>
 	<acme:input-integer code="manager.user-story.form.label.estimatedCost" path="estimatedCost"/>
 	<acme:input-textarea code="manager.user-story.form.label.acceptanceCriteria" path="acceptanceCriteria"/>
-	<acme:input-select code="manager.user-story.form.label.priority" path="priority" choices="${priorities}"/>
+	<acme:input-select code="manager.user-story.form.label.priority" path="priority" choices="${priorityChoices}"/>
 	<acme:input-url code="manager.user-story.form.label.link" path="link"/>
+	
+	<jstl:choose>
+		<jstl:when test="${acme:anyOf(_command, 'show|update') && draftMode==true}">
+			<acme:submit code="manager.user-story.form.button.update" action="/manager/user-story/update"/>
+		</jstl:when>	
+		<jstl:when test="${_command == 'create'}">
+			<acme:submit code="manager.user-story.list.button.create" action="/manager/user-story/create"/>
+		</jstl:when>
+	
+	</jstl:choose>	
+	
 </acme:form>

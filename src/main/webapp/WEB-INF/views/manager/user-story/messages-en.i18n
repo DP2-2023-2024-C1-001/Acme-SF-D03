@@ -12,3 +12,8 @@ manager.user-story.form.label.estimatedCost = Estimated cost:
 manager.user-story.form.label.acceptanceCriteria = Acceptance criteria:
 manager.user-story.form.label.priority = Priority:
 manager.user-story.form.label.link = Link:
+
+manager.user-story.list.button.create = Create
+manager.user-story.form.button.update = Update
+
+manager.user-story.form.error.negativeTime = The cost must be greater than 0
