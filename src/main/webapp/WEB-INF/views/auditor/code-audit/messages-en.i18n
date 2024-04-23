@@ -24,6 +24,7 @@ auditor.code-audit.form.button.auditRecords = List Audit Records
 auditor.code-audit.form.button.create = Create
 auditor.code-audit.form.button.update = Update
 auditor.code-audit.form.button.delete = Delete
+auditor.code-audit.form.button.publish = Publish
 
 auditor.code-audit.list.label.code = Code
 auditor.code-audit.list.label.execution = Execution
@@ -31,3 +32,7 @@ auditor.code-audit.list.label.type = Code Audit Type
 auditor.code-audit.list.label.correctiveActions = Corrective Actions
 
 auditor.code-audit.list.button.create = Create
+
+
+auditor.code-audit.form.error.duplicated = The code is taken
+auditor.code-audit.form.error.auditRecordsNotPublished = The audit records must be published

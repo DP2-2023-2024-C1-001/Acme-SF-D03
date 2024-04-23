@@ -27,8 +27,6 @@
 	
 	<artifactId>Acme-SF</artifactId>
 	
-	<groupId>Acme</groupId>
-	
 	<version>D03</version>
 	
 	<packaging>war</packaging>
