@@ -16,4 +16,5 @@ public interface AuthenticatedSponsorRepository extends AbstractRepository {
 
 	@Query("select s from Sponsor s where s.userAccount.id = :id")
 	Sponsor findOneSponsorByUserAccountId(int id);
+
 }

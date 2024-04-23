@@ -1,8 +1,9 @@
 
 package acme.forms;
 
+import java.util.Map;
+
 import acme.client.data.AbstractForm;
-import acme.client.data.datatypes.Money;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,14 +19,14 @@ public class SponsorDashboard extends AbstractForm {
 	int							totalNumberOfInvoicesWithTaxLessOrEquals21Percent;
 	int							totalNumberOfSponsorshipWithLink;
 
-	Money						averageAmountOfSponsorship;
-	Money						deviationAmountOfSponsorship;
-	Money						minimumAmountOfSponsorship;
-	Money						maximumAmountOfSponsorship;
+	Map<String, Double>			averageAmountOfSponsorship;
+	Map<String, Double>			deviationAmountOfSponsorship;
+	Map<String, Double>			minimumAmountOfSponsorship;
+	Map<String, Double>			maximumAmountOfSponsorship;
 
-	Money						averageQuantityOfInvoice;
-	Money						deviationQuantityOfInvoice;
-	Money						minimumQuantityOfInvoice;
-	Money						maximumQuantityOfInvoice;
+	Map<String, Double>			averageQuantityOfInvoice;
+	Map<String, Double>			deviationQuantityOfInvoice;
+	Map<String, Double>			minimumQuantityOfInvoice;
+	Map<String, Double>			maximumQuantityOfInvoice;
 
 }
