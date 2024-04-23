@@ -1,8 +1,9 @@
 
 package acme.forms;
 
+import java.util.Map;
+
 import acme.client.data.AbstractForm;
-import acme.client.data.datatypes.Money;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -21,10 +22,10 @@ public class ClientDashboard extends AbstractForm {
 	int							totalNumberOfProgressLogsWithCompletenessRateBetween50And75Percent;
 	int							totalNumberOfProgressLogsWithCompletenessRateAbove75Percent;
 
-	Money						averageBudgetOfContracts;
-	Money						deviationBudgetOfContracts;
-	Money						minimumBudgetOfContracts;
-	Money						maximumBudgetOfContracts;
+	Map<String, Double>			averageBudgetOfContracts;
+	Map<String, Double>			deviationBudgetOfContracts;
+	Map<String, Double>			minimumBudgetOfContracts;
+	Map<String, Double>			maximumBudgetOfContracts;
 
 	// Derived attributes -----------------------------------------------------
 

@@ -60,37 +60,52 @@
 
 <table class="table table-sm">
 	<tr>
-		<th scope="row">
-			<acme:message code="client.client-dashboard.form.label.average-budget"/>
-		</th>
-		<td>
-			<acme:print value="${averageBudgetOfContracts}"/>
-		</td>
-	</tr>
-	<tr>
-		<th scope="row">
+	<th scope="row">
 			<acme:message code="client.client-dashboard.form.label.deviation-budget"/>
 		</th>
-		<td>
-			<acme:print value="${deviationBudgetOfContracts}"/>
-		</td>
-	</tr>
-	<tr>
-		<th scope="row">
+	    <jstl:forEach var="entry" items="${deviationBudgetOfContracts}">
+        <tr>
+            <th scope="row">${entry.key}</th>
+            <td><acme:print value="${entry.value}"/></td>
+        </tr>
+    </jstl:forEach>
+    <tr>
+    
+    <tr>
+    <th scope="row">
+			<acme:message code="client.client-dashboard.form.label.average-budget"/>
+		</th>
+    <jstl:forEach var="entry" items="${averageBudgetOfContracts}">
+        <tr>
+            <th scope="row">${entry.key}</th>
+            <td><acme:print value="${entry.value}"/></td>
+        </tr>
+    </jstl:forEach>
+    </tr>
+    
+    <tr>
+    <th scope="row">
 			<acme:message code="client.client-dashboard.form.label.minimum-budget"/>
 		</th>
-		<td>
-			<acme:print value="${minimumBudgetOfContracts}"/>
-		</td>
-	</tr>
-	<tr>
-		<th scope="row">
+    <jstl:forEach var="entry" items="${minimumBudgetOfContracts}">
+        <tr>
+            <th scope="row">${entry.key}</th>
+            <td><acme:print value="${entry.value}"/></td>
+        </tr>
+    </jstl:forEach>
+    </tr>
+    
+    <tr>
+    <th scope="row">
 			<acme:message code="client.client-dashboard.form.label.maximum-budget"/>
 		</th>
-		<td>
-			<acme:print value="${maximumBudgetOfContracts}"/>
-		</td>
-	</tr>
+    <jstl:forEach var="entry" items="${maximumBudgetOfContracts}">
+        <tr>
+            <th scope="row">${entry.key}</th>
+            <td><acme:print value="${entry.value}"/></td>
+        </tr>
+    </jstl:forEach>
+    </tr>
 	
 </table>
 

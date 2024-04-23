@@ -26,6 +26,8 @@ client.progress-log.form.button.publish = Publicar
 
 
 client.progress-log.form.error.duplicated = El código ya existe
+client.progress-log.form.error.completeness = La completitud total del contrato debe ser inferior o igual a 100
+
 
 
 client.progress-log.list.label.code = Código

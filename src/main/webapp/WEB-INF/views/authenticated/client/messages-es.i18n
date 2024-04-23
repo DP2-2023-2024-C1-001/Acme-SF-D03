@@ -16,6 +16,7 @@ authenticated.client.form.label.email= Email
 authenticated.client.form.label.companyName = Nombre de la compañía
 authenticated.client.form.label.identification = Identificación
 
+authenticated.client.form.error.duplicated = El código esta tomado
 
 
 authenticated.client.form.button.create = Registrar

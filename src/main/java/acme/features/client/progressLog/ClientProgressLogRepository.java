@@ -27,4 +27,7 @@ public interface ClientProgressLogRepository extends AbstractRepository {
 
 	@Query("select p from ProgressLog p where p.code = :code")
 	ProgressLog findOneProgressLogByCode(String code);
+
+	@Query("select sum(p.completeness) from ProgressLog p where p.contract.id = :contractId")
+	Double findActualCompletenessForAContract(int contractId);
 }
