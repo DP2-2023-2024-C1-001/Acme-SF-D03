@@ -49,8 +49,30 @@ public class ManagerUserStoryProjectCreateService extends AbstractService<Manage
 
 	@Override
 	public void validate(final UserStoryProject object) {
-		//  TODO
 		assert object != null;
+		Project project;
+		UserStory userStory;
+
+		project = object.getProject();
+		userStory = object.getUserStory();
+
+		if (!super.getBuffer().getErrors().hasErrors("project")) {
+			UserStoryProject existing;
+
+			existing = this.repository.findOneAssignationByProjectIdAndUserStoryId(project.getId(), userStory.getId());
+			super.state(existing == null, "project", "manager.assignation.form.error.existing-project-assignation");
+
+			super.state(project.isDraftMode() || !userStory.isDraftMode(), "project", "manager.assignation.form.error.published-project");
+		}
+
+		if (!super.getBuffer().getErrors().hasErrors("userStory")) {
+			UserStoryProject existing;
+
+			existing = this.repository.findOneAssignationByProjectIdAndUserStoryId(project.getId(), userStory.getId());
+			super.state(existing == null, "userStory", "manager.assignation.form.error.existing-project-assignation");
+
+			super.state(project.isDraftMode() || !userStory.isDraftMode(), "userStory", "manager.assignation.form.error.published-project");
+		}
 
 	}
 

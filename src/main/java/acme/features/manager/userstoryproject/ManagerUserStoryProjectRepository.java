@@ -38,4 +38,7 @@ public interface ManagerUserStoryProjectRepository extends AbstractRepository {
 
 	@Query(" select us from UserStory us where us.draftMode = false")
 	Collection<UserStory> findAllPublishedUserStories();
+
+	@Query(" select up from UserStoryProject up where up.project.id = :pid and up.userStory.id = :usid")
+	UserStoryProject findOneAssignationByProjectIdAndUserStoryId(int pid, int usid);
 }

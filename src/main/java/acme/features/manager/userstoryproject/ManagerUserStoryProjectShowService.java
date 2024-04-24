@@ -52,7 +52,6 @@ public class ManagerUserStoryProjectShowService extends AbstractService<Manager,
 
 	@Override
 	public void unbind(final UserStoryProject object) {
-		//TO DO
 		assert object != null;
 
 		int managerId;
