@@ -101,5 +101,9 @@ master.menu.user-account.become-consumer = Hazte consumidor
 master.menu.user-account.become-client = Hazte cliente
 master.menu.user-account.client = Datos de cliente
 
+master.menu.user-account.become-developer = Hazte desarrollador
+master.menu.user-account.developer = Datos de desarrollador 
+
+
 master.menu.user-account.become-sponsor = Hazte patrocinador
 master.menu.user-account.sponsor = Datos de patrocinador
