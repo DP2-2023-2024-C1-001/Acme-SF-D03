@@ -6,3 +6,8 @@ manager.user-story-project.list.label.user-story-title = User story title
 
 manager.user-story-project.form.label.project-title = Project title
 manager.user-story-project.form.label.user-story-title = User story title 
+
+manager.user-story-project.list.button.create = Create
+
+anager.user-story-project.form.button.delete = Delete
+

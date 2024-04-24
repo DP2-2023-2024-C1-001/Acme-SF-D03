@@ -15,10 +15,10 @@ import acme.roles.Manager;
 @Repository
 public interface ManagerUserStoryProjectRepository extends AbstractRepository {
 
-	@Query("select pus from UserStoryProject pus where pus.id = :id")
+	@Query("select up from UserStoryProject up where up.id = :id")
 	UserStoryProject findOneProjectUserStoryById(int id);
 
-	@Query("select pus from UserStoryProject pus where pus.project.manager.id = :id and pus.userStory.manager.id = :id")
+	@Query("select up from UserStoryProject up where up.project.manager.id = :id and up.userStory.manager.id = :id")
 	Collection<UserStoryProject> findProjectUserStoryByManagerId(int id);
 
 	@Query("select m from Manager m where m.id = :id")
@@ -35,4 +35,7 @@ public interface ManagerUserStoryProjectRepository extends AbstractRepository {
 
 	@Query("select us from UserStory us where us.manager.id = :id")
 	Collection<UserStory> findUserStoriesByManagerId(int id);
+
+	@Query(" select us from UserStory us where us.draftMode = false")
+	Collection<UserStory> findAllPublishedUserStories();
 }

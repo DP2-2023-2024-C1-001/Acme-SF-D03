@@ -20,14 +20,11 @@ public class ManagerUserStoryProjectController extends AbstractController<Manage
 	@Autowired
 	private ManagerUserStoryProjectShowService		showService;
 
-	//	@Autowired
-	//	private ManagerUserStoryProjectCreateService	createService;
-	//
-	//	@Autowired
-	//	protected ManagerUserStoryProjectUpdateService	updateService;
-	//
-	//	@Autowired
-	//	protected ManagerUserStoryProjectDeleteService	deleteService;
+	@Autowired
+	private ManagerUserStoryProjectCreateService	createService;
+
+	@Autowired
+	protected ManagerUserStoryProjectDeleteService	deleteService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -35,9 +32,8 @@ public class ManagerUserStoryProjectController extends AbstractController<Manage
 	protected void initialise() {
 		super.addBasicCommand("list", this.listService);
 		super.addBasicCommand("show", this.showService);
-		//		super.addBasicCommand("create", this.createService);
-		//		super.addBasicCommand("delete", this.deleteService);
-		//		super.addBasicCommand("update", this.updateService);
+		super.addBasicCommand("create", this.createService);
+		super.addBasicCommand("delete", this.deleteService);
 
 	}
 }
