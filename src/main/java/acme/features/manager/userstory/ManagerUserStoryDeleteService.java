@@ -1,11 +1,14 @@
 
 package acme.features.manager.userstory;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
+import acme.entities.project.UserStoryProject;
 import acme.entities.userStory.UserStory;
 import acme.roles.Manager;
 
@@ -58,6 +61,9 @@ public class ManagerUserStoryDeleteService extends AbstractService<Manager, User
 	public void perform(final UserStory object) {
 		assert object != null;
 
+		Collection<UserStoryProject> pus = this.repository.findUserStoryProjectByUserStoryId(object.getId());
+
+		this.repository.deleteAll(pus);
 		this.repository.delete(object);
 	}
 

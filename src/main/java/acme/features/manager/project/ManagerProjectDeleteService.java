@@ -1,12 +1,26 @@
 
 package acme.features.manager.project;
 
+import java.util.Collection;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.client.data.AbstractEntity;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
+import acme.entities.auditrecord.AuditRecord;
+import acme.entities.codeaudit.CodeAudit;
+import acme.entities.contract.Contract;
+import acme.entities.invoice.Invoice;
+import acme.entities.progresslog.ProgressLog;
 import acme.entities.project.Project;
+import acme.entities.project.UserStoryProject;
+import acme.entities.sponsorship.Sponsorship;
+import acme.entities.trainingmodule.TrainingModule;
+import acme.entities.trainingsession.TrainingSession;
 import acme.roles.Manager;
 
 @Service
@@ -59,7 +73,62 @@ public class ManagerProjectDeleteService extends AbstractService<Manager, Projec
 	public void perform(final Project object) {
 		assert object != null;
 
+		Collection<Contract> contracts;
+		Collection<ProgressLog> progressLogs;
+
+		Collection<Sponsorship> sponsorShips;
+		Collection<Invoice> invoices;
+
+		Collection<CodeAudit> codeAudits;
+		Collection<AuditRecord> auditRecords;
+
+		Collection<TrainingModule> trainingModule;
+		Collection<TrainingSession> trainingSession;
+
+		Collection<UserStoryProject> userStoriesProject;
+		int id = object.getId();
+
+		// SponsorShip e invoices
+		sponsorShips = this.repository.findManySponsorshipsByProjectId(id);
+		if (sponsorShips != null) {
+			Set<Integer> sponsorShipIds = sponsorShips.stream().map(AbstractEntity::getId).collect(Collectors.toSet());
+			invoices = this.repository.findManyInvoicesBySponsorshipIds(sponsorShipIds);
+			this.repository.deleteAll(invoices);
+			this.repository.deleteAll(sponsorShips);
+		}
+
+		// Contracts y progressLogs
+		contracts = this.repository.findManyContractsByProjectId(id);
+		if (contracts != null) {
+			Set<Integer> contractIds = contracts.stream().map(AbstractEntity::getId).collect(Collectors.toSet());
+			progressLogs = this.repository.findManyProgressLogsByContractIds(contractIds);
+			this.repository.deleteAll(progressLogs);
+			this.repository.deleteAll(contracts);
+		}
+
+		//CodeAudtis y auditRecords
+		codeAudits = this.repository.findManyCodeAuditsByProjectId(id);
+		if (codeAudits != null) {
+			Set<Integer> codeAuditsIds = codeAudits.stream().map(AbstractEntity::getId).collect(Collectors.toSet());
+			auditRecords = this.repository.findManyAuditsRecordsByCodeAuditsId(codeAuditsIds);
+			this.repository.deleteAll(auditRecords);
+			this.repository.deleteAll(codeAudits);
+		}
+
+		//TrainingModule y TrainingSession 
+		trainingModule = this.repository.findManyTrainingModuleByProjectId(id);
+		if (trainingModule != null) {
+			Set<Integer> trainingModuleIds = trainingModule.stream().map(AbstractEntity::getId).collect(Collectors.toSet());
+			trainingSession = this.repository.findManyTrainingSessionByTrainingModuleId(trainingModuleIds);
+			this.repository.deleteAll(trainingSession);
+			this.repository.deleteAll(trainingModule);
+		}
+
+		//ProjectUserStories
+		userStoriesProject = this.repository.findUserStoryProjectsByProjectId(id);
+		this.repository.deleteAll(userStoriesProject);
 		this.repository.delete(object);
+
 	}
 
 	@Override
