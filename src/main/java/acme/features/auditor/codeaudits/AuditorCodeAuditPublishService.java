@@ -1,6 +1,7 @@
 
 package acme.features.auditor.codeaudits;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
 import acme.entities.auditrecord.AuditRecord;
 import acme.entities.codeaudit.CodeAudit;
+import acme.entities.codeaudit.CodeAuditType;
 import acme.entities.project.Project;
 import acme.roles.Auditor;
 
@@ -47,6 +49,9 @@ public class AuditorCodeAuditPublishService extends AbstractService<Auditor, Cod
 
 		id = super.getRequest().getData("id", int.class);
 		object = this.repository.findOneCodeAuditById(id);
+		Collection<String> countMarks = this.repository.getCountsMark(object.getId());
+		String mode = countMarks.isEmpty() ? null : countMarks.iterator().next();
+		object.setMark(mode);
 
 		super.getBuffer().addData(object);
 	}
@@ -73,6 +78,13 @@ public class AuditorCodeAuditPublishService extends AbstractService<Auditor, Cod
 		boolean publish = auditRecords.stream().allMatch(x -> x.isPublished() == true);
 		super.state(publish, "*", "auditor.code-audit.form.error.auditRecordsNotPublished");
 
+		Collection<String> marks = new ArrayList<>();
+		marks.add("A+");
+		marks.add("A");
+		marks.add("B");
+		marks.add("C");
+		super.state(marks.contains(object.getMark()), "*", "auditor.code-audit.form.error.mark");
+
 		if (!super.getBuffer().getErrors().hasErrors("code")) {
 			CodeAudit existing;
 
@@ -98,13 +110,17 @@ public class AuditorCodeAuditPublishService extends AbstractService<Auditor, Cod
 		Collection<Project> projects;
 		SelectChoices choices;
 		Dataset dataset;
+		SelectChoices choicesType;
+
+		choicesType = SelectChoices.from(CodeAuditType.class, object.getType());
 
 		projects = this.repository.findAllProjects();
 		choices = SelectChoices.from(projects, "code", object.getProject());
 
-		dataset = super.unbind(object, "code", "instantiationMoment", "providerName", "customerName", "goals", "budget", "published");
+		dataset = super.unbind(object, "code", "execution", "type", "correctiveActions", "link", "published");
 		dataset.put("project", choices.getSelected().getKey());
 		dataset.put("projects", choices);
+		dataset.put("types", choicesType);
 
 		super.getResponse().addData(dataset);
 	}
