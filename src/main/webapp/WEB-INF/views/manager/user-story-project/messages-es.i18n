@@ -1,0 +1,8 @@
+manager.user-story-project.list.title = Listado de relaciones Historias de Usuario - Proyecto
+manager.user-story-project.form.title = Detalles de relación Historias de Usuario - Proyecto
+
+manager.user-story-project.list.label.project-title = Título de proyecto
+manager.user-story-project.list.label.user-story-title = Título de historias de usuario
+
+manager.user-story-project.form.label.project-title = Título de proyecto
+manager.user-story-project.form.label.user-story-title = Título de historias de usuario

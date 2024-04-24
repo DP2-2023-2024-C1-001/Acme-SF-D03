@@ -14,9 +14,12 @@ import acme.roles.Manager;
 
 @Service
 public class ManagerProjectPublishService extends AbstractService<Manager, Project> {
+	// Internal state ---------------------------------------------------------
 
 	@Autowired
 	private ManagerProjectRepository repository;
+
+	// AbstractService interface ----------------------------------------------
 
 
 	@Override

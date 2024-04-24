@@ -73,6 +73,7 @@ master.menu.client.dashboard = Dashboards con datos de contratos
 master.menu.manager = Manager
 master.menu.manager.projects = Listado de proyectos
 master.menu.list.user-story = Listado de historias de usuario
+master.menu.list.user-story-project = Listado de asignaciones
 
 # master.menu.sponsor ###################################################
 

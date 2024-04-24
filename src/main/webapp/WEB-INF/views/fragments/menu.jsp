@@ -89,6 +89,7 @@
 		<acme:menu-option code="master.menu.manager" access="hasRole('Manager')">
 			<acme:menu-suboption code="master.menu.manager.projects" action="/manager/project/list"/>
 			<acme:menu-suboption code="master.menu.list.user-story" action="/manager/user-story/list"/>
+			<acme:menu-suboption code="master.menu.list.user-story-project" action="/manager/user-story-project/list"/>
 		</acme:menu-option>
 	</acme:menu-left>
 

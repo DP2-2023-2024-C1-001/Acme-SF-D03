@@ -1,0 +1,8 @@
+manager.user-story-project.list.title = User Story - Project relation list
+manager.user-story-project.form.title = User Story - Project relation form
+
+manager.user-story-project.list.label.project-title = Project title
+manager.user-story-project.list.label.user-story-title = User story title
+
+manager.user-story-project.form.label.project-title = Project title
+manager.user-story-project.form.label.user-story-title = User story title 
