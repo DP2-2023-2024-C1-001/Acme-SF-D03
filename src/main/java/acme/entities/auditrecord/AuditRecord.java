@@ -52,6 +52,8 @@ public class AuditRecord extends AbstractEntity {
 
 	// Derived attributes -----------------------------------------------------
 
+	private int					totalTime;
+
 	// Relationships ----------------------------------------------------------
 
 	@ManyToOne(optional = false)

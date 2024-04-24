@@ -20,13 +20,13 @@ public class AuditorDashboard extends AbstractForm {
 
 	double						averageNumberOfAuditRecords;
 	double						deviationNumberOfAuditRecords;
-	double						minimumNumberOfAuditRecords;
-	double						maximumNumberOfAuditRecords;
+	int							minimumNumberOfAuditRecords;
+	int							maximumNumberOfAuditRecords;
 
 	double						averageTimeOfPeriodLegthOfAuditRecord;
 	double						deviationTimeOfPeriodLegthOfAuditRecord;
-	double						minimumTimeOfPeriodLegthOfAuditRecord;
-	double						maximumTimeOfPeriodLegthOfAuditRecord;
+	int							minimumTimeOfPeriodLegthOfAuditRecord;
+	int							maximumTimeOfPeriodLegthOfAuditRecord;
 
 	// Derived attributes -----------------------------------------------------
 
