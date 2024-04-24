@@ -1,10 +1,13 @@
 
 package acme.features.client.dashboard;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import acme.client.data.datatypes.Money;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
 import acme.forms.ClientDashboard;
@@ -38,41 +41,45 @@ public class ClientDashboardShowService extends AbstractService<Client, ClientDa
 		Integer countOfProgressLogsWithCompletenessRateBetween50And75Percent;
 		Integer countOfProgressLogsWithCompletenessRateAbove75Percent;
 
-		Money averageBudgetOfContracts;
-		Money deviationBudgetOfContracts;
-		Money minimumBudgetOfContracts;
-		Money maximumBudgetOfContracts;
+		Collection<Object[]> averageBudgetOfContracts;
+		Collection<Object[]> deviationBudgetOfContracts;
+		Collection<Object[]> minimumBudgetOfContracts;
+		Collection<Object[]> maximumBudgetOfContracts;
+
+		Map<String, Double> mapAverageBudgetOfContracts;
+		Map<String, Double> mapDeviationBudgetOfContracts;
+		Map<String, Double> mapMinimumBudgetOfContracts;
+		Map<String, Double> mapMaximumBudgetOfContracts;
 
 		countOfProgressLogsWithCompletenessRateBelow25Percent = this.repository.countOfProgressLogsWithCompletenessRateBelow25Percent(super.getRequest().getPrincipal().getActiveRoleId());
 		countOfProgressLogsWithCompletenessRateBetween25And50Percent = this.repository.countOfProgressLogsWithCompletenessRateBetween25And50Percent(super.getRequest().getPrincipal().getActiveRoleId());
 		countOfProgressLogsWithCompletenessRateBetween50And75Percent = this.repository.countOfProgressLogsWithCompletenessRateBetween50And75Percent(super.getRequest().getPrincipal().getActiveRoleId());
 		countOfProgressLogsWithCompletenessRateAbove75Percent = this.repository.countOfProgressLogsWithCompletenessRateAbove75Percent(super.getRequest().getPrincipal().getActiveRoleId());
 
-		averageBudgetOfContracts = new Money();
-		averageBudgetOfContracts.setAmount(this.repository.avgBudgetOfContracts(super.getRequest().getPrincipal().getActiveRoleId()));
-		averageBudgetOfContracts.setCurrency(this.repository.getActualSystemConfiguration());
+		averageBudgetOfContracts = this.repository.avgBudgetOfContracts(super.getRequest().getPrincipal().getActiveRoleId());
+		deviationBudgetOfContracts = this.repository.stddevBudgetOfContracts(super.getRequest().getPrincipal().getActiveRoleId());
+		minimumBudgetOfContracts = this.repository.minBudgetOfContracts(super.getRequest().getPrincipal().getActiveRoleId());
+		maximumBudgetOfContracts = this.repository.maxBudgetOfContracts(super.getRequest().getPrincipal().getActiveRoleId());
 
-		deviationBudgetOfContracts = new Money();
-		deviationBudgetOfContracts.setAmount(this.repository.stddevBudgetOfContracts(super.getRequest().getPrincipal().getActiveRoleId()));
-		deviationBudgetOfContracts.setCurrency(this.repository.getActualSystemConfiguration());
+		mapAverageBudgetOfContracts = new HashMap<>();
+		mapDeviationBudgetOfContracts = new HashMap<>();
+		mapMinimumBudgetOfContracts = new HashMap<>();
+		mapMaximumBudgetOfContracts = new HashMap<>();
 
-		minimumBudgetOfContracts = new Money();
-		minimumBudgetOfContracts.setAmount(this.repository.minBudgetOfContracts(super.getRequest().getPrincipal().getActiveRoleId()));
-		minimumBudgetOfContracts.setCurrency(this.repository.getActualSystemConfiguration());
-
-		maximumBudgetOfContracts = new Money();
-		maximumBudgetOfContracts.setAmount(this.repository.maxBudgetOfContracts(super.getRequest().getPrincipal().getActiveRoleId()));
-		maximumBudgetOfContracts.setCurrency(this.repository.getActualSystemConfiguration());
+		mapAverageBudgetOfContracts = this.repository.convertToMap(averageBudgetOfContracts);
+		mapDeviationBudgetOfContracts = this.repository.convertToMap(deviationBudgetOfContracts);
+		mapMinimumBudgetOfContracts = this.repository.convertToMap(minimumBudgetOfContracts);
+		mapMaximumBudgetOfContracts = this.repository.convertToMap(maximumBudgetOfContracts);
 
 		dashboard = new ClientDashboard();
 		dashboard.setTotalNumberOfProgressLogsWithCompletenessRateBelow25Percent(countOfProgressLogsWithCompletenessRateBelow25Percent);
 		dashboard.setTotalNumberOfProgressLogsWithCompletenessRateBetween25And50Percent(countOfProgressLogsWithCompletenessRateBetween25And50Percent);
 		dashboard.setTotalNumberOfProgressLogsWithCompletenessRateBetween50And75Percent(countOfProgressLogsWithCompletenessRateBetween50And75Percent);
 		dashboard.setTotalNumberOfProgressLogsWithCompletenessRateAbove75Percent(countOfProgressLogsWithCompletenessRateAbove75Percent);
-		dashboard.setAverageBudgetOfContracts(averageBudgetOfContracts);
-		dashboard.setDeviationBudgetOfContracts(deviationBudgetOfContracts);
-		dashboard.setMinimumBudgetOfContracts(minimumBudgetOfContracts);
-		dashboard.setMaximumBudgetOfContracts(maximumBudgetOfContracts);
+		dashboard.setDeviationBudgetOfContracts(mapDeviationBudgetOfContracts);
+		dashboard.setAverageBudgetOfContracts(mapAverageBudgetOfContracts);
+		dashboard.setMinimumBudgetOfContracts(mapMinimumBudgetOfContracts);
+		dashboard.setMaximumBudgetOfContracts(mapMaximumBudgetOfContracts);
 
 		super.getBuffer().addData(dashboard);
 	}
