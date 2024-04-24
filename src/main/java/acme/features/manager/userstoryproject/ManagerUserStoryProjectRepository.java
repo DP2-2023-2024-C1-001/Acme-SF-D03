@@ -16,10 +16,10 @@ import acme.roles.Manager;
 public interface ManagerUserStoryProjectRepository extends AbstractRepository {
 
 	@Query("select up from UserStoryProject up where up.id = :id")
-	UserStoryProject findOneProjectUserStoryById(int id);
+	UserStoryProject findOneUserStoryProjectById(int id);
 
 	@Query("select up from UserStoryProject up where up.project.manager.id = :id and up.userStory.manager.id = :id")
-	Collection<UserStoryProject> findProjectUserStoryByManagerId(int id);
+	Collection<UserStoryProject> findUserStoryProjectByManagerId(int id);
 
 	@Query("select m from Manager m where m.id = :id")
 	Manager findOneManagerById(int id);

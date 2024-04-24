@@ -27,8 +27,16 @@ public class ManagerUserStoryProjectShowService extends AbstractService<Manager,
 
 	@Override
 	public void authorise() {
+		boolean status;
+		UserStoryProject usp;
+		Manager manager;
 
-		super.getResponse().setAuthorised(true);
+		usp = this.repository.findOneUserStoryProjectById(super.getRequest().getData("id", int.class));
+		manager = this.repository.findOneManagerById(super.getRequest().getPrincipal().getActiveRoleId());
+
+		status = super.getRequest().getPrincipal().getActiveRole() == Manager.class && usp.getProject().getManager().equals(manager) && usp.getUserStory().getManager().equals(manager);
+
+		super.getResponse().setAuthorised(status);
 	}
 
 	@Override
@@ -37,13 +45,14 @@ public class ManagerUserStoryProjectShowService extends AbstractService<Manager,
 		int id;
 
 		id = super.getRequest().getData("id", int.class);
-		object = this.repository.findOneProjectUserStoryById(id);
+		object = this.repository.findOneUserStoryProjectById(id);
 
 		super.getBuffer().addData(object);
 	}
 
 	@Override
 	public void unbind(final UserStoryProject object) {
+		//TO DO
 		assert object != null;
 
 		int managerId;

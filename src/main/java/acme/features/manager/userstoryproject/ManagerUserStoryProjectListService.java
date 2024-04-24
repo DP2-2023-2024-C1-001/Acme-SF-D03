@@ -34,7 +34,7 @@ public class ManagerUserStoryProjectListService extends AbstractService<Manager,
 
 		managerId = super.getRequest().getPrincipal().getActiveRoleId();
 
-		objects = this.repository.findProjectUserStoryByManagerId(managerId);
+		objects = this.repository.findUserStoryProjectByManagerId(managerId);
 
 		super.getBuffer().addData(objects);
 	}

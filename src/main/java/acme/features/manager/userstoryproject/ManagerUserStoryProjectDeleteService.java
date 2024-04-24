@@ -26,7 +26,7 @@ public class ManagerUserStoryProjectDeleteService extends AbstractService<Manage
 		UserStoryProject usp;
 		Manager manager;
 
-		usp = this.repository.findOneProjectUserStoryById(super.getRequest().getData("id", int.class));
+		usp = this.repository.findOneUserStoryProjectById(super.getRequest().getData("id", int.class));
 		manager = this.repository.findOneManagerById(super.getRequest().getPrincipal().getActiveRoleId());
 
 		status = super.getRequest().getPrincipal().getActiveRole() == Manager.class && usp.getProject().getManager().equals(manager) && usp.getUserStory().getManager().equals(manager);
@@ -40,7 +40,7 @@ public class ManagerUserStoryProjectDeleteService extends AbstractService<Manage
 		int id;
 
 		id = super.getRequest().getData("id", int.class);
-		object = this.repository.findOneProjectUserStoryById(id);
+		object = this.repository.findOneUserStoryProjectById(id);
 
 		super.getBuffer().addData(object);
 	}

@@ -2,8 +2,6 @@
 package acme.features.manager.userstoryproject;
 
 import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,24 +44,12 @@ public class ManagerUserStoryProjectCreateService extends AbstractService<Manage
 	public void bind(final UserStoryProject object) {
 		assert object != null;
 
-		int projectId;
-		Project project;
-
-		projectId = super.getRequest().getData("project", int.class);
-		project = this.repository.findOneProjectById(projectId);
-
-		int userStoryId;
-		UserStory userStory;
-
-		userStoryId = super.getRequest().getData("userStory", int.class);
-		userStory = this.repository.findOneUserStoryById(userStoryId);
-
-		object.setProject(project);
-		object.setUserStory(userStory);
+		super.bind(object, "userStory", "project");
 	}
 
 	@Override
 	public void validate(final UserStoryProject object) {
+		//  TODO
 		assert object != null;
 
 	}
@@ -79,30 +65,20 @@ public class ManagerUserStoryProjectCreateService extends AbstractService<Manage
 	public void unbind(final UserStoryProject object) {
 		assert object != null;
 
-		final SelectChoices projectChoices;
-		final SelectChoices userStoryChoices;
-		final Dataset dataset;
+		int managerId = super.getRequest().getPrincipal().getActiveRoleId();
 
-		final Collection<Project> projects;
-		final Collection<UserStory> userStoriesPublished;
-		final Collection<UserStory> userStories;
+		Collection<Project> projects = this.repository.findProjectsByManagerId(managerId);
+		SelectChoices projectChoices = SelectChoices.from(projects, "title", object.getProject());
 
-		int managerId;
-		managerId = super.getRequest().getPrincipal().getActiveRoleId();
+		Collection<UserStory> userStories = this.repository.findUserStoriesByManagerId(managerId);
+		SelectChoices userStoryChoices = SelectChoices.from(userStories, "title", object.getUserStory());
 
-		projects = this.repository.findProjectsByManagerId(managerId);
-		userStoriesPublished = this.repository.findAllPublishedUserStories();
-		userStories = this.repository.findUserStoriesByManagerId(managerId);
+		Dataset dataset = super.unbind(object, "project", "userStory");
 
-		Set<UserStory> userStoriesAll = new HashSet<>(userStories);
-		userStoriesAll.addAll(userStoriesPublished);
-
-		projectChoices = SelectChoices.from(projects, "title", object.getProject());
-		userStoryChoices = SelectChoices.from(userStories, "title", object.getUserStory());
-
-		dataset = super.unbind(object, "project", "userStory");
-		dataset.put("projectChoices", projectChoices);
-		dataset.put("userStoryChoices", userStoryChoices);
+		dataset.put("project", projectChoices.getSelected().getKey());
+		dataset.put("projects", projectChoices);
+		dataset.put("userStory", userStoryChoices.getSelected().getKey());
+		dataset.put("userStories", userStoryChoices);
 
 		super.getResponse().addData(dataset);
 	}
