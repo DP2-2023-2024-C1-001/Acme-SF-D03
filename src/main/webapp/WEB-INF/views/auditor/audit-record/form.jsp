@@ -27,7 +27,7 @@
 	
 	
 	<jstl:choose>
-		<jstl:when test="${acme:anyOf(_command, 'show|update|delete') && published==false}">
+		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && published==false}">
 			<acme:submit code="auditor.audit-record.form.button.update" action="/auditor/audit-record/update"/>
 			<acme:submit code="auditor.audit-record.form.button.delete" action="/auditor/audit-record/delete"/>
 			<acme:submit code="auditor.audit-record.form.button.publish" action="/auditor/audit-record/publish"/>
