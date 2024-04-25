@@ -28,6 +28,8 @@
 			<acme:menu-suboption code="master.menu.anonymous.list-all-claims" action="/any/claim/list"/>
 			<acme:menu-suboption code="master.menu.anonymous.list-published-contracts" action="/any/contract/list"/>
 			<acme:menu-suboption code="master.menu.anonymous.list-published-training-modules" action="/any/training-module/list"/>
+			<acme:menu-suboption code="master.menu.anonymous.list-published-code-audits" action="/any/code-audit/list"/>
+			
 			
 			
 		</acme:menu-option>

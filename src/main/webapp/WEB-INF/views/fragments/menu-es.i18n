@@ -35,6 +35,8 @@ master.menu.anonymous.josemaria = 29588315B: Baquero Rodriguez, Jose Maria
 master.menu.anonymous.list-all-claims = Lista de reclamaciones
 master.menu.anonymous.list-published-contracts = Lista de contratos publicados
 master.menu.anonymous.list-published-training-modules = Lista de módulos de entrenamiento
+master.menu.anonymous.list-published-code-audits = Lista de auditorías de código publicadas
+
 
 
 # master.menu.developer ###################################################
