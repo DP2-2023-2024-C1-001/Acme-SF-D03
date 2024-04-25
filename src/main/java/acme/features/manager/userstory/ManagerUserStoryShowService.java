@@ -4,6 +4,7 @@ package acme.features.manager.userstory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import acme.client.data.accounts.Principal;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
@@ -24,17 +25,11 @@ public class ManagerUserStoryShowService extends AbstractService<Manager, UserSt
 
 	@Override
 	public void authorise() {
-		boolean status;
-		int managerId;
-		int userStoryId;
-		UserStory userStory;
+		final Principal principal = super.getRequest().getPrincipal();
 
-		managerId = super.getRequest().getPrincipal().getAccountId();
-		userStoryId = super.getRequest().getData("id", int.class);
-		userStory = this.repository.findOneUserStoryById(userStoryId);
+		final boolean authorise = principal.hasRole(Manager.class);
 
-		status = userStory != null && userStory.getManager().getUserAccount().getId() == managerId;
-		super.getResponse().setAuthorised(status);
+		super.getResponse().setAuthorised(authorise);
 	}
 
 	@Override
@@ -54,11 +49,20 @@ public class ManagerUserStoryShowService extends AbstractService<Manager, UserSt
 
 		SelectChoices choices;
 		Dataset dataset;
+		boolean isMine;
+		UserStory userStory;
+		Manager manager;
+
+		userStory = this.repository.findOneUserStoryById(super.getRequest().getData("id", int.class));
+		manager = this.repository.findOneManagerById(super.getRequest().getPrincipal().getActiveRoleId());
+
+		isMine = userStory.getManager().equals(manager);
 
 		choices = SelectChoices.from(Priority.class, object.getPriority());
 
 		dataset = super.unbind(object, "title", "description", "estimatedCost", "acceptanceCriteria", "priority", "link", "draftMode");
 		dataset.put("priorityChoices", choices);
+		dataset.put("isMine", isMine);
 
 		super.getResponse().addData(dataset);
 	}
