@@ -48,8 +48,16 @@ public class ManagerProjectListService extends AbstractService<Manager, Project>
 		assert object != null;
 
 		Dataset dataset;
+		String payload;
 
 		dataset = super.unbind(object, "code", "title", "cost");
+
+		payload = String.format(//
+			"%s; %s; %s", //
+			object.getProjectAbstract(), //
+			object.getManager().getIdentity().getFullName(), //
+			object.getLink()); //
+		dataset.put("payload", payload);
 
 		if (object.isDraftMode()) {
 			final Locale local = super.getRequest().getLocale();
