@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
+import acme.entities.project.Project;
 import acme.entities.project.UserStoryProject;
 import acme.roles.Manager;
 
@@ -29,8 +30,7 @@ public class ManagerUserStoryProjectDeleteService extends AbstractService<Manage
 		usp = this.repository.findOneUserStoryProjectById(super.getRequest().getData("id", int.class));
 		manager = this.repository.findOneManagerById(super.getRequest().getPrincipal().getActiveRoleId());
 
-		status = super.getRequest().getPrincipal().getActiveRole() == Manager.class && usp.getProject().getManager().equals(manager) && usp.getUserStory().getManager().equals(manager);
-
+		status = super.getRequest().getPrincipal().getActiveRole() == Manager.class && usp.getProject().getManager().equals(manager);
 		super.getResponse().setAuthorised(status);
 	}
 
@@ -55,6 +55,12 @@ public class ManagerUserStoryProjectDeleteService extends AbstractService<Manage
 	@Override
 	public void validate(final UserStoryProject object) {
 		assert object != null;
+		Project project;
+
+		project = object.getProject();
+
+		if (!super.getBuffer().getErrors().hasErrors("project"))
+			super.state(project.isDraftMode(), "project", "manager.user-story-project.form.error.delete-assignment-published-project");
 	}
 
 	@Override

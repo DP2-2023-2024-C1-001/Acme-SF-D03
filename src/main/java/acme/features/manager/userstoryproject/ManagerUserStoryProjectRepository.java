@@ -18,7 +18,7 @@ public interface ManagerUserStoryProjectRepository extends AbstractRepository {
 	@Query("select up from UserStoryProject up where up.id = :id")
 	UserStoryProject findOneUserStoryProjectById(int id);
 
-	@Query("select up from UserStoryProject up where up.project.manager.id = :id and up.userStory.manager.id = :id")
+	@Query("select up from UserStoryProject up where up.project.manager.id = :id")
 	Collection<UserStoryProject> findUserStoryProjectByManagerId(int id);
 
 	@Query("select m from Manager m where m.id = :id")
@@ -41,4 +41,8 @@ public interface ManagerUserStoryProjectRepository extends AbstractRepository {
 
 	@Query(" select up from UserStoryProject up where up.project.id = :pid and up.userStory.id = :usid")
 	UserStoryProject findOneAssignationByProjectIdAndUserStoryId(int pid, int usid);
+
+	@Query("select p from Project p where p.manager.id = :managerId and p.draftMode = true")
+	Collection<Project> findDraftModeProjectsByManagerId(int managerId);
+
 }

@@ -2,6 +2,8 @@
 package acme.features.manager.userstoryproject;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -60,9 +62,9 @@ public class ManagerUserStoryProjectCreateService extends AbstractService<Manage
 			UserStoryProject existing;
 
 			existing = this.repository.findOneAssignationByProjectIdAndUserStoryId(project.getId(), userStory.getId());
-			super.state(existing == null, "project", "manager.assignation.form.error.existing-project-assignation");
+			super.state(existing == null, "project", "manager.user-story-project.form.error.existing-user-story-project");
 
-			super.state(project.isDraftMode(), "project", "manager.assignation.form.error.published-project");
+			super.state(project.isDraftMode(), "project", "manager.user-story-project.form.error.published-project");
 		}
 
 	}
@@ -80,11 +82,15 @@ public class ManagerUserStoryProjectCreateService extends AbstractService<Manage
 
 		int managerId = super.getRequest().getPrincipal().getActiveRoleId();
 
-		Collection<Project> projects = this.repository.findProjectsByManagerId(managerId);
+		//		Collection<Project> projects = this.repository.findProjectsByManagerId(managerId);
+		Collection<Project> projects = this.repository.findDraftModeProjectsByManagerId(managerId);
 		SelectChoices projectChoices = SelectChoices.from(projects, "title", object.getProject());
 
 		Collection<UserStory> userStories = this.repository.findUserStoriesByManagerId(managerId);
-		SelectChoices userStoryChoices = SelectChoices.from(userStories, "title", object.getUserStory());
+		Collection<UserStory> publishedUserStories = this.repository.findAllPublishedUserStories();
+		Set<UserStory> userStoriesBuenas = new HashSet<>(userStories);
+		userStoriesBuenas.addAll(publishedUserStories);
+		SelectChoices userStoryChoices = SelectChoices.from(userStoriesBuenas, "title", object.getUserStory());
 
 		Dataset dataset = super.unbind(object, "project", "userStory");
 

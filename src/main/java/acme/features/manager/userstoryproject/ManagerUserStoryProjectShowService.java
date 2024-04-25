@@ -2,6 +2,8 @@
 package acme.features.manager.userstoryproject;
 
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +36,7 @@ public class ManagerUserStoryProjectShowService extends AbstractService<Manager,
 		usp = this.repository.findOneUserStoryProjectById(super.getRequest().getData("id", int.class));
 		manager = this.repository.findOneManagerById(super.getRequest().getPrincipal().getActiveRoleId());
 
-		status = super.getRequest().getPrincipal().getActiveRole() == Manager.class && usp.getProject().getManager().equals(manager) && usp.getUserStory().getManager().equals(manager);
+		status = super.getRequest().getPrincipal().getActiveRole() == Manager.class && usp.getProject().getManager().equals(manager);
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -57,6 +59,7 @@ public class ManagerUserStoryProjectShowService extends AbstractService<Manager,
 		int managerId;
 		Collection<Project> projects;
 		Collection<UserStory> userStories;
+		Collection<UserStory> publishedUserStories;
 		SelectChoices projectChoices;
 		SelectChoices userStoryChoices;
 		Dataset dataset;
@@ -65,9 +68,12 @@ public class ManagerUserStoryProjectShowService extends AbstractService<Manager,
 
 		projects = this.repository.findProjectsByManagerId(managerId);
 		userStories = this.repository.findUserStoriesByManagerId(managerId);
+		publishedUserStories = this.repository.findAllPublishedUserStories();
+		Set<UserStory> userStoriesBuenas = new HashSet<>(userStories);
+		userStoriesBuenas.addAll(publishedUserStories);
 
 		projectChoices = SelectChoices.from(projects, "title", object.getProject());
-		userStoryChoices = SelectChoices.from(userStories, "title", object.getUserStory());
+		userStoryChoices = SelectChoices.from(userStoriesBuenas, "title", object.getUserStory());
 
 		dataset = super.unbind(object, "project", "userStory");
 		dataset.put("projectChoices", projectChoices);
