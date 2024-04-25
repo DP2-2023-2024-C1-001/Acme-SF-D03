@@ -100,10 +100,10 @@ master.menu.user-account.provider = Provider data
 master.menu.user-account.become-provider = Become a provider
 master.menu.user-account.consumer = Consumer data
 master.menu.user-account.become-consumer = Become a consumer
-
+master.menu.user-account.become-manager = Become a manager
+master.menu.user-account.manager = Manager data
 master.menu.user-account.become-sponsor = Become a sponsor
 master.menu.user-account.sponsor = Sponsor data
-
 master.menu.user-account.become-client = Become a client
 master.menu.user-account.client = Client data
 master.menu.user-account.become-developer = Become a developer
