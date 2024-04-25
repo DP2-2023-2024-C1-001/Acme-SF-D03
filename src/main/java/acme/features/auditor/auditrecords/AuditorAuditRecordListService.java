@@ -43,12 +43,6 @@ public class AuditorAuditRecordListService extends AbstractService<Auditor, Audi
 		id = super.getRequest().getData("masterId", int.class);
 
 		objects = this.repository.findAllAuditRecordByCodeAuditId(id);
-		for (AuditRecord au : objects) {
-			long startPeriod = au.getPeriodStart().getTime();
-			long finalPeriod = au.getPeriodEnd().getTime();
-			long diferencia = finalPeriod - startPeriod;
-			au.setTotalTime((int) Math.round(diferencia / (1000.0 * 60 * 60)));
-		}
 
 		super.getBuffer().addData(objects);
 	}

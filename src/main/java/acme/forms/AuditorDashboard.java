@@ -18,15 +18,15 @@ public class AuditorDashboard extends AbstractForm {
 	int							totalNumberOfCodeAuditsWithTypeStatic;
 	int							totalNumberOfCodeAuditsWithTypeDynamic;
 
-	double						averageNumberOfAuditRecords;
-	double						deviationNumberOfAuditRecords;
+	Double						averageNumberOfAuditRecords;
+	Double						deviationNumberOfAuditRecords;
 	int							minimumNumberOfAuditRecords;
 	int							maximumNumberOfAuditRecords;
 
-	double						averageTimeOfPeriodLegthOfAuditRecord;
-	double						deviationTimeOfPeriodLegthOfAuditRecord;
-	int							minimumTimeOfPeriodLegthOfAuditRecord;
-	int							maximumTimeOfPeriodLegthOfAuditRecord;
+	Double						averageTimeOfPeriodLegthOfAuditRecord;
+	Double						deviationTimeOfPeriodLegthOfAuditRecord;
+	double						minimumTimeOfPeriodLegthOfAuditRecord;
+	double						maximumTimeOfPeriodLegthOfAuditRecord;
 
 	// Derived attributes -----------------------------------------------------
 

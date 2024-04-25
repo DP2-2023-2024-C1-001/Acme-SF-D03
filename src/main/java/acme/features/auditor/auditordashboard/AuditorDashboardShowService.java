@@ -1,6 +1,8 @@
 
 package acme.features.auditor.auditordashboard;
 
+import java.util.Collection;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,27 +35,26 @@ public class AuditorDashboardShowService extends AbstractService<Auditor, Audito
 	public void load() {
 		AuditorDashboard dashboard;
 
-		int totalNumberOfCodeAuditsWithTypeStatic;
-		int totalNumberOfCodeAuditsWithTypeDynamic;
+		Integer totalNumberOfCodeAuditsWithTypeStatic;
+		Integer totalNumberOfCodeAuditsWithTypeDynamic;
 
-		double averageNumberOfAuditRecords;
-		double deviationNumberOfAuditRecords;
-		int minimumNumberOfAuditRecords;
-		int maximumNumberOfAuditRecords;
+		Double averageNumberOfAuditRecords;
+		Double deviationNumberOfAuditRecords;
+		Integer minimumNumberOfAuditRecords;
+		Integer maximumNumberOfAuditRecords;
 
-		double averageTimeOfPeriodLegthOfAuditRecord;
-		double deviationTimeOfPeriodLegthOfAuditRecord;
-		int minimumTimeOfPeriodLegthOfAuditRecord;
-		int maximumTimeOfPeriodLegthOfAuditRecord;
+		Double averageTimeOfPeriodLegthOfAuditRecord;
+		Double deviationTimeOfPeriodLegthOfAuditRecord;
+		Double minimumTimeOfPeriodLegthOfAuditRecord;
+		Double maximumTimeOfPeriodLegthOfAuditRecord;
 
 		totalNumberOfCodeAuditsWithTypeStatic = this.repository.totalNumberOfCodeAuditsWithTypeStatic(super.getRequest().getPrincipal().getActiveRoleId());
 		totalNumberOfCodeAuditsWithTypeDynamic = this.repository.totalNumberOfCodeAuditsWithTypeDynamic(super.getRequest().getPrincipal().getActiveRoleId());
 
-		//		averageNumberOfAuditRecords = this.repository.averageNumberOfAuditRecords(super.getRequest().getPrincipal().getActiveRoleId());
-		//		deviationNumberOfAuditRecords = this.repository.deviationNumberOfAuditRecords(super.getRequest().getPrincipal().getActiveRoleId());
-		//		minimumNumberOfAuditRecords = this.repository.minimumNumberOfAuditRecords(super.getRequest().getPrincipal().getActiveRoleId());
-		//		maximumNumberOfAuditRecords = this.repository.maximumNumberOfAuditRecords(super.getRequest().getPrincipal().getActiveRoleId());
-
+		averageNumberOfAuditRecords = this.repository.averageNumberOfAuditRecords(super.getRequest().getPrincipal().getActiveRoleId());
+		deviationNumberOfAuditRecords = this.deviation(this.repository.countAuditRecordsOfCodeAudit(super.getRequest().getPrincipal().getActiveRoleId()));
+		minimumNumberOfAuditRecords = this.repository.minimumNumberOfAuditRecords(super.getRequest().getPrincipal().getActiveRoleId());
+		maximumNumberOfAuditRecords = this.repository.maximumNumberOfAuditRecords(super.getRequest().getPrincipal().getActiveRoleId());
 		averageTimeOfPeriodLegthOfAuditRecord = this.repository.averageTimeOfPeriodLegthOfAuditRecord(super.getRequest().getPrincipal().getActiveRoleId());
 		deviationTimeOfPeriodLegthOfAuditRecord = this.repository.deviationTimeOfPeriodLegthOfAuditRecord(super.getRequest().getPrincipal().getActiveRoleId());
 		minimumTimeOfPeriodLegthOfAuditRecord = this.repository.minimumTimeOfPeriodLegthOfAuditRecord(super.getRequest().getPrincipal().getActiveRoleId());
@@ -62,14 +63,20 @@ public class AuditorDashboardShowService extends AbstractService<Auditor, Audito
 		dashboard = new AuditorDashboard();
 		dashboard.setTotalNumberOfCodeAuditsWithTypeStatic(totalNumberOfCodeAuditsWithTypeStatic);
 		dashboard.setTotalNumberOfCodeAuditsWithTypeDynamic(totalNumberOfCodeAuditsWithTypeDynamic);
-		//		dashboard.setAverageNumberOfAuditRecords(averageNumberOfAuditRecords);
-		//		dashboard.setDeviationNumberOfAuditRecords(deviationNumberOfAuditRecords);
-		//		dashboard.setMinimumNumberOfAuditRecords(minimumNumberOfAuditRecords);
-		//		dashboard.setMaximumNumberOfAuditRecords(maximumNumberOfAuditRecords);
-		dashboard.setAverageTimeOfPeriodLegthOfAuditRecord(averageTimeOfPeriodLegthOfAuditRecord);
-		dashboard.setDeviationTimeOfPeriodLegthOfAuditRecord(deviationTimeOfPeriodLegthOfAuditRecord);
-		dashboard.setMinimumTimeOfPeriodLegthOfAuditRecord(minimumTimeOfPeriodLegthOfAuditRecord);
-		dashboard.setMaximumTimeOfPeriodLegthOfAuditRecord(maximumTimeOfPeriodLegthOfAuditRecord);
+		if (averageNumberOfAuditRecords != null)
+			dashboard.setAverageNumberOfAuditRecords(averageNumberOfAuditRecords);
+		if (deviationNumberOfAuditRecords != null)
+			dashboard.setDeviationNumberOfAuditRecords(deviationNumberOfAuditRecords);
+		dashboard.setMinimumNumberOfAuditRecords(minimumNumberOfAuditRecords);
+		dashboard.setMaximumNumberOfAuditRecords(maximumNumberOfAuditRecords);
+		if (averageTimeOfPeriodLegthOfAuditRecord != null)
+			dashboard.setAverageTimeOfPeriodLegthOfAuditRecord(averageTimeOfPeriodLegthOfAuditRecord);
+		if (deviationTimeOfPeriodLegthOfAuditRecord != null)
+			dashboard.setDeviationTimeOfPeriodLegthOfAuditRecord(deviationTimeOfPeriodLegthOfAuditRecord);
+		if (minimumTimeOfPeriodLegthOfAuditRecord != null)
+			dashboard.setMinimumTimeOfPeriodLegthOfAuditRecord(minimumTimeOfPeriodLegthOfAuditRecord);
+		if (maximumTimeOfPeriodLegthOfAuditRecord != null)
+			dashboard.setMaximumTimeOfPeriodLegthOfAuditRecord(maximumTimeOfPeriodLegthOfAuditRecord);
 
 		super.getBuffer().addData(dashboard);
 	}
@@ -85,5 +92,26 @@ public class AuditorDashboardShowService extends AbstractService<Auditor, Audito
 			"minimumTimeOfPeriodLegthOfAuditRecord", "maximumTimeOfPeriodLegthOfAuditRecord");
 
 		super.getResponse().addData(dataset);
+	}
+
+	public Double deviation(final Collection<Double> set) {
+		Double res;
+		Double aux;
+		res = null;
+		if (!set.isEmpty()) {
+			Double average = this.average(set);
+			aux = 0.0;
+			for (final Double s : set)
+				aux += Math.pow(s - average, 2);
+			res = Math.sqrt(aux / set.size());
+		}
+		return res;
+	}
+
+	private Double average(final Collection<Double> set) {
+		double sum = 0.0;
+		for (Double s : set)
+			sum += s;
+		return sum / set.size();
 	}
 }
