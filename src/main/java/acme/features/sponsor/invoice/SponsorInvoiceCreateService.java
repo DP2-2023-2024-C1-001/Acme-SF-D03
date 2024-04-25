@@ -2,6 +2,7 @@
 package acme.features.sponsor.invoice;
 
 import java.time.temporal.ChronoUnit;
+import java.util.Collection;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,11 +74,11 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("dueDate")) {
+		if (!super.getBuffer().getErrors().hasErrors("dueDate") && object.getDueDate() != null && object.getRegistrationTime() != null) {
 			Date minimumPeriod;
 
 			minimumPeriod = MomentHelper.deltaFromMoment(object.getRegistrationTime(), 30, ChronoUnit.DAYS);
-			super.state(MomentHelper.isBeforeOrEqual(object.getDueDate(), minimumPeriod), "dueDate", "sponsor.invoice.form.error.too-close");
+			super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), minimumPeriod), "dueDate", "sponsor.invoice.form.error.too-close");
 
 		}
 
@@ -89,6 +90,26 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 			final SystemConfiguration systemConfig = this.repository.findActualSystemConfiguration();
 			final String currency = object.getQuantity().getCurrency();
 			super.state(systemConfig.getAcceptedCurrencies().contains(" " + currency + " "), "quantity", "sponsor.invoice.form.error.currency");
+
+			int sponsorshipId = object.getSponsorship().getId();
+
+			// Obtener el valor total del patrocinio
+			double sponsorshipAmount = object.getSponsorship().getAmount().getAmount();
+
+			// Obtener todas las facturas publicadas para este patrocinio
+			Collection<Invoice> invoicesForSponsorship = this.repository.findAllPublisedInvoicesBySponsorShipsId(sponsorshipId);
+
+			// Calcular el valor total de todas las facturas existentes, incluyendo la nueva factura
+			double sumOfInvoicesTotalAmount = 0.0;
+			for (Invoice invoice : invoicesForSponsorship)
+				sumOfInvoicesTotalAmount += invoice.totalAmount().getAmount();
+
+			// Añadir el valor de la nueva factura a la suma total
+			sumOfInvoicesTotalAmount += object.totalAmount().getAmount();
+
+			// Comprobar si la suma de las facturas, incluida la nueva factura, excede el valor del patrocinio
+			super.state(sponsorshipAmount >= sumOfInvoicesTotalAmount, "quantity", "sponsor.invoice.form.error.sponsorship-amount");
+
 		}
 
 		if (!super.getBuffer().getErrors().hasErrors("tax")) {

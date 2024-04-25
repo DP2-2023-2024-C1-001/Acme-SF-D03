@@ -97,7 +97,7 @@ public class SponsorSponsorshipPublishService extends AbstractService<Sponsor, S
 
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("finalDate")) {
+		if (!super.getBuffer().getErrors().hasErrors("finalDate") && object.getMoment() != null) {
 			Date minimumPeriod;
 
 			minimumPeriod = MomentHelper.deltaFromMoment(object.getMoment(), 1, ChronoUnit.MONTHS);
