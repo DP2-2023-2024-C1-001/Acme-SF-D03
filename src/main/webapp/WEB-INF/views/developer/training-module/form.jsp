@@ -33,10 +33,10 @@
 	
 	
 	<jstl:choose>
-		<jstl:when test="${acme:anyOf(_command, 'show|update|delete') && published==true}">
+		<jstl:when test="${acme:anyOf(_command, 'show') && published==true}">
 			<acme:button code="developer.training-module.form.button.trainingSessions" action="/developer/training-session/list?masterId=${id}"/>
 		</jstl:when>
-		<jstl:when test="${acme:anyOf(_command, 'show|update|delete') && published==false}">
+		<jstl:when test="${acme:anyOf(_command, 'show|update|delete|publish') && published==false}">
 			<acme:button code="developer.training-module.form.button.trainingSessions" action="/developer/training-session/list?masterId=${id}"/>
 			<acme:submit code="developer.training-module.form.button.delete" action="/developer/training-module/delete"/>
 			<acme:submit code="developer.training-module.form.button.update" action="/developer/training-module/update"/>

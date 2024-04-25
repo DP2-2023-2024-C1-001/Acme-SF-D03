@@ -49,13 +49,37 @@ public class DeveloperDashboardShowService extends AbstractService<Developer, De
 		maximumTimeOfTrainingModules = this.repository.maximumTimeOfTrainingModules(super.getRequest().getPrincipal().getActiveRoleId());
 
 		dashboard = new DeveloperDashboard();
-		dashboard.setTotalNumberOfTrainingModulesWithUpdateMoment(totalNumberOfTrainingModulesWithUpdateMoment);
-		dashboard.setTotalNumberOfTrainingSessionsWithLink(totalNumberOfTrainingSessionsWithLink);
 
-		dashboard.setAverageTimeOfTrainingModules(averageTimeOfTrainingModules);
-		dashboard.setDeviationTimeOfTrainigModules(deviationTimeOfTrainigModules);
-		dashboard.setMinimumTimeOfTrainingModules(minimumTimeOfTrainingModules);
-		dashboard.setMaximumTimeOfTrainingModules(maximumTimeOfTrainingModules);
+		if (totalNumberOfTrainingModulesWithUpdateMoment == null)
+			dashboard.setTotalNumberOfTrainingModulesWithUpdateMoment(0);
+		else
+			dashboard.setTotalNumberOfTrainingModulesWithUpdateMoment(totalNumberOfTrainingModulesWithUpdateMoment);
+
+		if (totalNumberOfTrainingSessionsWithLink == null)
+			dashboard.setTotalNumberOfTrainingModulesWithUpdateMoment(0);
+		else
+			dashboard.setTotalNumberOfTrainingSessionsWithLink(totalNumberOfTrainingSessionsWithLink);
+
+		if (averageTimeOfTrainingModules == null)
+			dashboard.setAverageTimeOfTrainingModules(0.);
+		else
+			dashboard.setAverageTimeOfTrainingModules(averageTimeOfTrainingModules);
+
+		if (deviationTimeOfTrainigModules == null)
+			dashboard.setDeviationTimeOfTrainigModules(0.);
+
+		else
+			dashboard.setDeviationTimeOfTrainigModules(deviationTimeOfTrainigModules);
+
+		if (minimumTimeOfTrainingModules == null)
+			dashboard.setMinimumTimeOfTrainingModules(0);
+		else
+			dashboard.setMinimumTimeOfTrainingModules(minimumTimeOfTrainingModules);
+
+		if (maximumTimeOfTrainingModules == null)
+			dashboard.setMaximumTimeOfTrainingModules(0);
+		else
+			dashboard.setMaximumTimeOfTrainingModules(maximumTimeOfTrainingModules);
 
 		super.getBuffer().addData(dashboard);
 	}

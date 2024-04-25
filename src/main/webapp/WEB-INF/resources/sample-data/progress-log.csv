@@ -1,10 +1,10 @@
 key,code,completeness,comment,registration-moment,responsible-person,key:contract,published
-progresslog-00,PG-AA-0000,1.00,Todo funciona correctamente,2022/07/24 00:00,Gerente Manuel,contract-00,true
-progresslog-01,PG-A-0000,1.00,Todo funciona correctamente,2022/07/24 00:00,Gerente Manuel,contract-00,false
+progresslog-00,PG-AA-0000,100.00,Todo funciona correctamente,2022/07/24 00:00,Gerente Manuel,contract-00,true
+progresslog-01,PG-A-0000,0.00,Todo funciona correctamente,2022/07/24 00:00,Gerente Manuel,contract-00,false
 progresslog-02,PG-AA-0001,0.00,Todo funciona correctamente,2022/07/24 00:00,Gerente Manuel,contract-01,true
 progresslog-03,PG-AA-0002,0.01,Todo funciona correctamente,2022/07/24 00:00,Gerente Manuel,contract-01,false
-progresslog-04,PG-AA-0003,100.00,Todo funciona correctamente,2022/07/24 00:00,Gerente Manuel,contract-01,true
-progresslog-05,PG-AA-0004,99.99,Todo funciona correctamente,2022/07/24 00:00,Gerente Manuel,contract-01,false
+progresslog-04,PG-AA-0003,25.00,Todo funciona correctamente,2022/07/24 00:00,Gerente Manuel,contract-01,true
+progresslog-05,PG-AA-0004,20.99,Todo funciona correctamente,2022/07/24 00:00,Gerente Manuel,contract-01,false
 progresslog-06,PG-AA-0005,50.00,Todo funciona correctamente,2022/07/24 00:00,Gerente Manuel,contract-01,true
 progresslog-07,PG-AA-0006,1.00,T,2022/07/24 00:00,Gerente Manuel,contract-02,true
 progresslog-08,PG-AA-0007,1.00,To,2022/07/24 00:00,Gerente Manuel,contract-02,false

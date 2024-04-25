@@ -61,9 +61,9 @@ public class TrainingModule extends AbstractEntity {
 
 	private boolean				published;
 
-	// Derived attributes -----------------------------------------------------
+	private int					totalTime;
 
-	private int					totalTime; //Se calculara como la suma del tiempo de las tranining sessions ya en el service. 
+	// Derived attributes -----------------------------------------------------
 
 	// Relationships ----------------------------------------------------------
 
