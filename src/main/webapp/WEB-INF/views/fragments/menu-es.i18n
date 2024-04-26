@@ -86,6 +86,7 @@ master.menu.sponsor.dashboard = Dashboard con datos de patrocinios
 
 master.menu.auditor = Auditor
 master.menu.auditor.codeaudits = Lista de mis auditorías de código
+master.menu.auditor.dashboard = Dashboard de auditor
 
 # master.menu.provider ########################################################
 
