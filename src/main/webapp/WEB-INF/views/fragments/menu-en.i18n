@@ -37,6 +37,8 @@ master.menu.anonymous.list-all-claims = List all claims
 master.menu.anonymous.projects = List projects
 master.menu.anonymous.list-published-contracts = List published contracts
 master.menu.anonymous.list-published-training-modules = List published training modules
+master.menu.anonymous.list-published-code-audits = List published code audits
+
 
 
 # master.menu.developer ###################################################
