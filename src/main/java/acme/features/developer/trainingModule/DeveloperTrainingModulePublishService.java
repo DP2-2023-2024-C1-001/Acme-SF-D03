@@ -94,14 +94,11 @@ public class DeveloperTrainingModulePublishService extends AbstractService<Devel
 			super.state(existing == null || existing.equals(object), "code", "developer.Training-Modules.form.error.duplicated");
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("project")) {
+		Collection<TrainingSession> ts;
+		ts = this.repository.findTrainingSessionsByTrainingModuleId(object.getId());
+		super.state(!ts.isEmpty(), "*", "developer.Training-Modules.form.error.no-training-session");
 
-			Collection<TrainingSession> ts;
-			ts = this.repository.findTrainingSessionsByTrainingModuleId(object.getId());
-
-			super.state(!ts.isEmpty(), "project", "developer.Training-Modules.form.error.no-training-session");
-
-		}
+		super.state(ts.stream().allMatch(x -> x.isPublished() == true), "*", "developer.Training-Modules.form.error.must-be-all-published");
 
 	}
 

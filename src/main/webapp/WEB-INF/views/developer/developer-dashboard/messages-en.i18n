@@ -15,7 +15,7 @@ developer.developer-dashboard.form.title = Developer dashboard
 developer.developer-dashboard.form.title.training-module-indicators = Training Module indicators
 
 developer.developer-dashboard.form.label.training-module-numbers-update = Total number of training modules with update moment
-developer.developer-dashboard.form.label.training-module-numbers-link =  Total number of training modules with link 
+developer.developer-dashboard.form.label.training-module-numbers-link =  Total number of training session with link 
 developer.developer-dashboard.form.label.training-module-avg = Average time of training modules
 developer.developer-dashboard.form.label.training-module-deviation = Deviation time of training modules
 developer.developer-dashboard.form.label.training-module-min = Minimum time of training modules

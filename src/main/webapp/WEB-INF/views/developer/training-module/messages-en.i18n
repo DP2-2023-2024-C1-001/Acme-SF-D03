@@ -23,6 +23,7 @@ developer.training-module.form.label.project = Project:
 developer.Training-Modules.form.error.invalidUpdateMoment = Update moment must start at any moment after the creation moment 
 developer.Training-Modules.form.error.duplicated = Code cannot be duplicated
 developer.Training-Modules.form.error.no-training-session= Cannot publish if there is no assigned training session
+developer.Training-Modules.form.error.must-be-all-published = Cannot publish if training sessions assigned are not published
 
 developer.training-module.list.label.code = Code
 developer.training-module.list.label.creationMoment = Creation Moment

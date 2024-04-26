@@ -15,7 +15,7 @@ developer.developer-dashboard.form.title = Dashboard de desarrollador
 developer.developer-dashboard.form.title.training-module-indicators = Indicadores de módulos de entrenamiento
 
 developer.developer-dashboard.form.label.training-module-numbers-update = Número de módulos de entrenamiento con fecha de actualización
-developer.developer-dashboard.form.label.training-module-numbers-link =  Número de módulos de entrenamiento con enlace
+developer.developer-dashboard.form.label.training-module-numbers-link =  Número de sesiones de entrenamiento con enlace
 developer.developer-dashboard.form.label.training-module-avg = Tiempo medio de un módulo de entrenamiento 
 developer.developer-dashboard.form.label.training-module-deviation = Desviación típica del tiempo de un módulo de entrenamiento
 developer.developer-dashboard.form.label.training-module-min = Tiempo mínimo de un módulo de entrenamiento

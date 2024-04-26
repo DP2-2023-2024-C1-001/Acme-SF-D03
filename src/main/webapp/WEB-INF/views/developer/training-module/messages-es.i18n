@@ -23,6 +23,8 @@ developer.training-module.form.label.project = Proyecto:
 developer.Training-Modules.form.error.invalidUpdateMoment =  el instante de actualizacion debe ser posterior al instante de creación
 developer.Training-Modules.form.error.duplicated = el código no puede ser duplicado
 developer.Training-Modules.form.error.no-training-session = No se puede publicar si no hay ninguna sesión de entrenamiento asignada
+developer.Training-Modules.form.error.must-be-all-published = No se puede publicar si las sesiones de entrenamiento asignadas no están publicadas
+
 
 developer.training-module.list.label.code = Código
 developer.training-module.list.label.creationMoment = Instante de Creación
