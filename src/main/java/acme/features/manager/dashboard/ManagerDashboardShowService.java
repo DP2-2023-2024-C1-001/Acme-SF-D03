@@ -47,8 +47,8 @@ public class ManagerDashboardShowService extends AbstractService<Manager, Manage
 
 		double avgUserStoryEstimatedCost;
 		double devUserStoryEstimatedCost;
-		int minUserStoryEstimatedCost;
-		int maxUserStoryEstimatedCost;
+		double minUserStoryEstimatedCost;
+		double maxUserStoryEstimatedCost;
 
 		Collection<Object[]> avgProjectCost;
 		Collection<Object[]> devProjectCost;
@@ -70,6 +70,8 @@ public class ManagerDashboardShowService extends AbstractService<Manager, Manage
 
 		dashboard.setAverageCostOfUserStory(Double.NaN);
 		dashboard.setDeviationCostOfUserStory(Double.NaN);
+		dashboard.setMinimumCostOfUserStory(Double.NaN);
+		dashboard.setMaximumCostOfUserStory(Double.NaN);
 
 		if (!userStories.isEmpty()) {
 			countOfUserStoryWithPriorityMust = this.repository.countOfUserStoryWithPriorityMust(managerId);

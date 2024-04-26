@@ -24,8 +24,8 @@ public class ManagerDashboard extends AbstractForm {
 
 	double						averageCostOfUserStory;
 	double						deviationCostOfUserStory;
-	int							minimumCostOfUserStory;
-	int							maximumCostOfUserStory;
+	double						minimumCostOfUserStory;
+	double						maximumCostOfUserStory;
 
 	Map<String, Double>			averageCostOfProject;
 	Map<String, Double>			deviationCostOfProject;
