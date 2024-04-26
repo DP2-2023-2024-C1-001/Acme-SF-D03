@@ -11,7 +11,6 @@ import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
 import acme.entities.contract.Contract;
 import acme.entities.project.Project;
-import acme.entities.systemconfiguration.SystemConfiguration;
 import acme.roles.Client;
 
 @Service
@@ -69,14 +68,12 @@ public class ClientContractCreateService extends AbstractService<Client, Contrac
 
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("budget")) {
+		if (!super.getBuffer().getErrors().hasErrors("budget") && object.getProject() != null) {
 			Double amount;
 			amount = object.getBudget().getAmount();
 			super.state(amount >= 0, "budget", "client.contract.form.error.negativeBudget");
 
-			final SystemConfiguration systemConfig = this.repository.findActualSystemConfiguration();
-			final String currency = object.getBudget().getCurrency();
-			super.state(systemConfig.getAcceptedCurrencies().contains(" " + currency + " "), "budget", "client.contract.form.error.currency");
+			super.state(object.getBudget().getCurrency().equals(object.getProject().getCost().getCurrency()), "budget", "client.contract.form.error.currency");
 		}
 	}
 

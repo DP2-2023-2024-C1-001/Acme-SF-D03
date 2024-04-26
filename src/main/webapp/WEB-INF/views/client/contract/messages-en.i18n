@@ -27,7 +27,7 @@ client.contract.form.button.publish = Publish
 
 client.contract.form.error.duplicated = This code is taken
 client.contract.form.error.negativeBudget = The budget cannot be negative
-client.contract.form.error.currency = The system cannot accept that currency
+client.contract.form.error.currency = The project is created with other currency
 client.contract.form.error.budget = The sum of all budgets cannot exceed the total cost of the corresponding project 
 
 

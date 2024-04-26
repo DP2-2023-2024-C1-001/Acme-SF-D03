@@ -74,9 +74,11 @@ public class ClientProgressLogUpdateService extends AbstractService<Client, Prog
 			ProgressLog progressLog;
 			contract = this.repository.findOneContractByProgressLogId(object.getId());
 			actualCompleteness = this.repository.findActualCompletenessForAContract(contract.getId());
+			if (actualCompleteness == null)
+				actualCompleteness = 0.;
 			progressLog = this.repository.findOneProgressLogById(object.getId());
-			totalCompleteness = actualCompleteness - progressLog.getCompleteness() + object.getCompleteness();
-			super.state(totalCompleteness <= 100.00, "code", "client.progress-log.form.error.completeness");
+			totalCompleteness = actualCompleteness + object.getCompleteness();
+			super.state(totalCompleteness <= 100.00, "completeness", "client.progress-log.form.error.completeness");
 
 		}
 	}
@@ -96,6 +98,7 @@ public class ClientProgressLogUpdateService extends AbstractService<Client, Prog
 
 		dataset = super.unbind(object, "code", "completeness", "comment", "registrationMoment", "responsiblePerson", "published");
 		dataset.put("masterId", object.getContract().getId());
+		dataset.put("contractPublished", object.getContract().isPublished());
 
 		super.getResponse().addData(dataset);
 	}
