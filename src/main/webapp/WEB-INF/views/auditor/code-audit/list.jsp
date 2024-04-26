@@ -23,4 +23,6 @@
 	
 </acme:list>
 
-<acme:button code="auditor.code-audit.list.button.create" action="/auditor/code-audit/create"/>
+<jstl:if test="${_command == 'list'}">
+	<acme:button code="auditor.code-audit.list.button.create" action="/auditor/code-audit/create"/>
+</jstl:if>
