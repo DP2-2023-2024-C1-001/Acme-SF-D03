@@ -14,6 +14,7 @@ import acme.client.services.AbstractService;
 import acme.client.views.SelectChoices;
 import acme.entities.invoice.Invoice;
 import acme.entities.project.Project;
+import acme.entities.sponsorship.SponsorType;
 import acme.entities.sponsorship.Sponsorship;
 import acme.entities.systemconfiguration.SystemConfiguration;
 import acme.roles.Sponsor;
@@ -84,18 +85,18 @@ public class SponsorSponsorshipPublishService extends AbstractService<Sponsor, S
 			final String currency = object.getAmount().getCurrency();
 			super.state(systemConfig.getAcceptedCurrencies().contains(" " + currency + " "), "amount", "sponsor.sponsorship.form.error.currency");
 
-			int sponsorshipId;
-			double sumOfInvoicesTotalAmount = 0.00;
-			sponsorshipId = object.getId();
-			Collection<Invoice> invoicesForSponsorship;
-			invoicesForSponsorship = this.repository.findAllPublisedInvoicesBySponsorShipsId(sponsorshipId);
-
-			for (Invoice i : invoicesForSponsorship)
-				sumOfInvoicesTotalAmount += i.totalAmount().getAmount();
-
-			super.state(object.getAmount().getAmount() == sumOfInvoicesTotalAmount, "amount", "sponsor.sponsorship.form.error.amount");
-
 		}
+
+		int sponsorshipId;
+		double sumOfInvoicesTotalAmount = 0.00;
+		sponsorshipId = object.getId();
+		Collection<Invoice> invoicesForSponsorship;
+		invoicesForSponsorship = this.repository.findAllPublisedInvoicesBySponsorShipsId(sponsorshipId);
+
+		for (Invoice i : invoicesForSponsorship)
+			sumOfInvoicesTotalAmount += i.totalAmount().getAmount();
+
+		super.state(object.getAmount().getAmount() == sumOfInvoicesTotalAmount, "*", "sponsor.sponsorship.form.error.amount");
 
 		if (!super.getBuffer().getErrors().hasErrors("finalDate") && object.getMoment() != null) {
 			Date minimumPeriod;
@@ -129,14 +130,17 @@ public class SponsorSponsorshipPublishService extends AbstractService<Sponsor, S
 
 		Collection<Project> projects;
 		SelectChoices choices;
+		SelectChoices typesChoices;
 		Dataset dataset;
 
 		projects = this.repository.findAllProjects();
 		choices = SelectChoices.from(projects, "code", object.getProject());
+		typesChoices = SelectChoices.from(SponsorType.class, object.getType());
 
-		dataset = super.unbind(object, "code", "moment", "initialDate", "finalDate", "amount", "type", "email", "link", "published");
+		dataset = super.unbind(object, "code", "moment", "initialDate", "finalDate", "amount", "email", "link", "published");
 		dataset.put("project", choices.getSelected().getKey());
 		dataset.put("projects", choices);
+		dataset.put("types", typesChoices);
 
 		super.getResponse().addData(dataset);
 	}

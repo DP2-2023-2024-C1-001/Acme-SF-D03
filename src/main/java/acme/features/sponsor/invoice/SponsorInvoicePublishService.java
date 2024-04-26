@@ -103,7 +103,7 @@ public class SponsorInvoicePublishService extends AbstractService<Sponsor, Invoi
 			// Añadir el valor de la nueva factura a la suma total
 			sumOfInvoicesTotalAmount += object.totalAmount().getAmount();
 
-			// Comprobar si la suma de las facturas, incluida la nueva factura, excede el valor del patrocinio
+			// Comprobar si la suma de las facturas publicadas, incluida la nueva factura, excede el valor del patrocinio
 			super.state(sponsorshipAmount >= sumOfInvoicesTotalAmount, "quantity", "sponsor.invoice.form.error.sponsorship-amount");
 		}
 
@@ -111,7 +111,7 @@ public class SponsorInvoicePublishService extends AbstractService<Sponsor, Invoi
 			Double tax;
 
 			tax = object.getTax();
-			super.state(100 >= tax && tax >= 0, "code", "sponsor.invoice.form.error.invalid-tax");
+			super.state(100 >= tax && tax >= 0, "tax", "sponsor.invoice.form.error.invalid-tax");
 
 		}
 	}
@@ -131,7 +131,7 @@ public class SponsorInvoicePublishService extends AbstractService<Sponsor, Invoi
 		Dataset dataset;
 
 		dataset = super.unbind(object, "code", "registrationTime", "dueDate", "quantity", "tax", "link", "published");
-		dataset.put("masterId", super.getRequest().getData("masterId", int.class));
+		dataset.put("masterId", object.getSponsorship().getId());
 
 		super.getResponse().addData(dataset);
 	}

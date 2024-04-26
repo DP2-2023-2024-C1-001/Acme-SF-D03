@@ -33,7 +33,7 @@ sponsor.sponsorship.form.error.duplicated = Este código ya está en uso
 sponsor.sponsorship.form.error.too-close-date = La fecha final debe ser al menos un mes antes del momento de inicio
 sponsor.sponsorship.form.error.negativeAmount = La cantidad no puede ser negativa
 sponsor.sponsorship.form.error.currency = El sistema no acepta este tipo monetario
-sponsor.sponsorship.form.error.amount = La suma del importe total de todas sus facturas debe ser igual al importe del patrocinio
+sponsor.sponsorship.form.error.amount = La suma del importe total de todas sus facturas publicadas debe ser igual al importe del patrocinio
 
 
 sponsor.sponsorship.list.label.code = Código

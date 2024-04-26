@@ -77,7 +77,7 @@ public class SponsorInvoiceCreateService extends AbstractService<Sponsor, Invoic
 		if (!super.getBuffer().getErrors().hasErrors("dueDate") && object.getDueDate() != null && object.getRegistrationTime() != null) {
 			Date minimumPeriod;
 
-			minimumPeriod = MomentHelper.deltaFromMoment(object.getRegistrationTime(), 30, ChronoUnit.DAYS);
+			minimumPeriod = MomentHelper.deltaFromMoment(object.getRegistrationTime(), 1, ChronoUnit.MONTHS);
 			super.state(MomentHelper.isAfterOrEqual(object.getDueDate(), minimumPeriod), "dueDate", "sponsor.invoice.form.error.too-close");
 
 		}

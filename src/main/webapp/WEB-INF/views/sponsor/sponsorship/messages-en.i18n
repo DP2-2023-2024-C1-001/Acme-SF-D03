@@ -34,7 +34,7 @@ sponsor.sponsorship.form.error.duplicated = This code is taken
 sponsor.sponsorship.form.error.too-close-date = After the moment, at least one month long
 sponsor.sponsorship.form.error.negativeAmount = The amount cannot be negative
 sponsor.sponsorship.form.error.currency = The system cannot accept that currency
-sponsor.sponsorship.form.error.amount = the sum of the total amount of all their invoices must be equal to the amount of the sponsorship
+sponsor.sponsorship.form.error.amount = The sum of the total amount of all the publish invoices must be equal to the amount of the sponsorship
 
 sponsor.sponsorship.list.label.code = Code
 sponsor.sponsorship.list.label.moment = Moment
