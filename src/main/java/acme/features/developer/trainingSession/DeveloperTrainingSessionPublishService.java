@@ -75,15 +75,15 @@ public class DeveloperTrainingSessionPublishService extends AbstractService<Deve
 			super.state(existing == null || existing.equals(object), "code", "developer.training-session.form.error.duplicated");
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("finalPeriod")) {
+		if (!super.getBuffer().getErrors().hasErrors("initialPeriod") && object.getFinalPeriod() != null && tm.getCreationMoment() != null) {
 			Date minimumFinalPeriod;
 
-			minimumFinalPeriod = MomentHelper.deltaFromMoment(object.getFinalPeriod(), 7, ChronoUnit.DAYS);
-			super.state(MomentHelper.isAfterOrEqual(tm.getCreationMoment(), minimumFinalPeriod), "finalPeriod", "developer.training-session.form.error.too-close-to-training-module-creation-moment");
+			minimumFinalPeriod = MomentHelper.deltaFromMoment(tm.getCreationMoment(), 7, ChronoUnit.DAYS);
+			super.state(MomentHelper.isAfterOrEqual(object.getInitialPeriod(), minimumFinalPeriod), "initialPeriod", "developer.training-session.form.error.too-close-to-training-module-creation-moment");
 
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("finalPeriod")) {
+		if (!super.getBuffer().getErrors().hasErrors("finalPeriod") && object.getInitialPeriod() != null && object.getFinalPeriod() != null) {
 			Date minimumInitialPeriod;
 
 			minimumInitialPeriod = MomentHelper.deltaFromMoment(object.getInitialPeriod(), 7, ChronoUnit.DAYS);

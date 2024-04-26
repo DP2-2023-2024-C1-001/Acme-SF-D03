@@ -60,25 +60,16 @@ public class DeveloperDashboardShowService extends AbstractService<Developer, De
 		else
 			dashboard.setTotalNumberOfTrainingSessionsWithLink(totalNumberOfTrainingSessionsWithLink);
 
-		if (averageTimeOfTrainingModules == null)
-			dashboard.setAverageTimeOfTrainingModules(0.);
-		else
+		if (averageTimeOfTrainingModules != null)
 			dashboard.setAverageTimeOfTrainingModules(averageTimeOfTrainingModules);
 
-		if (deviationTimeOfTrainigModules == null)
-			dashboard.setDeviationTimeOfTrainigModules(0.);
-
-		else
+		if (deviationTimeOfTrainigModules != null)
 			dashboard.setDeviationTimeOfTrainigModules(deviationTimeOfTrainigModules);
 
-		if (minimumTimeOfTrainingModules == null)
-			dashboard.setMinimumTimeOfTrainingModules(0);
-		else
+		if (minimumTimeOfTrainingModules != null)
 			dashboard.setMinimumTimeOfTrainingModules(minimumTimeOfTrainingModules);
 
-		if (maximumTimeOfTrainingModules == null)
-			dashboard.setMaximumTimeOfTrainingModules(0);
-		else
+		if (maximumTimeOfTrainingModules != null)
 			dashboard.setMaximumTimeOfTrainingModules(maximumTimeOfTrainingModules);
 
 		super.getBuffer().addData(dashboard);

@@ -38,5 +38,5 @@ developer.training-session.form.button.update = Modificar
 developer.training-session.form.button.publish = Publicar
 
 developer.training-session.form.error.duplicated = Codigo debe ser único
-developer.training-session.form.error.too-close-to-training-module-creation-moment = Al menos una semana antes del momento de creación del modulo de entrenamiento
+developer.training-session.form.error.too-close-to-training-module-creation-moment = Al menos una semana después del momento de creación del modulo de entrenamiento
 developer.training-session.form.error.too-close-period = Al menos debe durar una semana
