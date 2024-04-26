@@ -63,18 +63,28 @@ public class AuditorDashboardShowService extends AbstractService<Auditor, Audito
 		dashboard = new AuditorDashboard();
 		dashboard.setTotalNumberOfCodeAuditsWithTypeStatic(totalNumberOfCodeAuditsWithTypeStatic);
 		dashboard.setTotalNumberOfCodeAuditsWithTypeDynamic(totalNumberOfCodeAuditsWithTypeDynamic);
+
 		if (averageNumberOfAuditRecords != null)
 			dashboard.setAverageNumberOfAuditRecords(averageNumberOfAuditRecords);
+
 		if (deviationNumberOfAuditRecords != null)
 			dashboard.setDeviationNumberOfAuditRecords(deviationNumberOfAuditRecords);
-		dashboard.setMinimumNumberOfAuditRecords(minimumNumberOfAuditRecords);
-		dashboard.setMaximumNumberOfAuditRecords(maximumNumberOfAuditRecords);
+
+		if (minimumNumberOfAuditRecords != null)
+			dashboard.setMinimumNumberOfAuditRecords(minimumNumberOfAuditRecords);
+
+		if (maximumNumberOfAuditRecords != null)
+			dashboard.setMaximumNumberOfAuditRecords(maximumNumberOfAuditRecords);
+
 		if (averageTimeOfPeriodLegthOfAuditRecord != null)
 			dashboard.setAverageTimeOfPeriodLegthOfAuditRecord(averageTimeOfPeriodLegthOfAuditRecord);
+
 		if (deviationTimeOfPeriodLegthOfAuditRecord != null)
 			dashboard.setDeviationTimeOfPeriodLegthOfAuditRecord(deviationTimeOfPeriodLegthOfAuditRecord);
+
 		if (minimumTimeOfPeriodLegthOfAuditRecord != null)
 			dashboard.setMinimumTimeOfPeriodLegthOfAuditRecord(minimumTimeOfPeriodLegthOfAuditRecord);
+
 		if (maximumTimeOfPeriodLegthOfAuditRecord != null)
 			dashboard.setMaximumTimeOfPeriodLegthOfAuditRecord(maximumTimeOfPeriodLegthOfAuditRecord);
 
