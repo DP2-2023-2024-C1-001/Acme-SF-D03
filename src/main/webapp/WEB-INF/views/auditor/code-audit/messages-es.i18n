@@ -22,6 +22,7 @@ auditor.code-audit.form.label.project = Proyecto:
 auditor.code-audit.form.button.create = Crear
 auditor.code-audit.form.button.update = Editar
 auditor.code-audit.form.button.delete = Borrar
+auditor.code-audit.form.button.publish = Publicar
 
 auditor.code-audit.list.label.code = Código
 auditor.code-audit.list.label.execution = Comienzo
@@ -29,3 +30,8 @@ auditor.code-audit.list.label.type = Tipo de auditoría de código
 auditor.code-audit.list.label.correctiveActions = Acciones correctivas
 
 auditor.code-audit.list.button.create = Crear
+auditor.code-audit.list.button.create = Crear
+
+auditor.code-audit.form.error.duplicated = El código ya esta en uso
+auditor.code-audit.form.error.auditRecordsNotPublished = Los registros de auditoria deben estar publicadas
+auditor.code-audit.form.error.mark = La moda de las calificaciones debe ser mas alta que C

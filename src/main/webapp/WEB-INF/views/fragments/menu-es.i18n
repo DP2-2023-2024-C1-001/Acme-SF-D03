@@ -23,7 +23,6 @@ master.menu.authenticated.list-all-objectives = Lista de objetivos
 master.menu.authenticated.list-all-risks = Listado de riesgos
 master.menu.authenticated.list-recent-notices = Lista las noticias recientes
 
-
 # master.menu.anonymous #######################################################
 
 master.menu.anonymous = Anónimo
@@ -33,8 +32,11 @@ master.menu.anonymous.manu = 47265720F: Velez Lopez, Manuel
 master.menu.anonymous.guille = 45813076C: Gomez Romero, Guillermo
 master.menu.anonymous.josemaria = 29588315B: Baquero Rodriguez, Jose Maria
 master.menu.anonymous.list-all-claims = Lista de reclamaciones
+master.menu.anonymous.projects = Listado de proyectos
 master.menu.anonymous.list-published-contracts = Lista de contratos publicados
 master.menu.anonymous.list-published-training-modules = Lista de módulos de entrenamiento
+master.menu.anonymous.list-published-code-audits = Lista de auditorías de código publicadas
+
 
 
 # master.menu.developer ###################################################
@@ -68,6 +70,14 @@ master.menu.client.contracts = Lista de mis Contratos
 master.menu.client.dashboard = Dashboards con datos de contratos
 
 
+# master.menu.manager #########################################################
+
+master.menu.manager = Manager
+master.menu.manager.projects = Listado de proyectos
+master.menu.list.user-story = Listado de historias de usuario
+master.menu.list.user-story-project = Listado de asignaciones
+master.menu.manager.dashboard = Dashboards con datos de proyectos
+
 # master.menu.sponsor ###################################################
 
 master.menu.sponsor = Patrocinador
@@ -78,6 +88,7 @@ master.menu.sponsor.dashboard = Dashboard con datos de patrocinios
 
 master.menu.auditor = Auditor
 master.menu.auditor.codeaudits = Lista de mis auditorías de código
+master.menu.auditor.dashboard = Dashboard de auditor
 
 # master.menu.provider ########################################################
 
@@ -100,6 +111,12 @@ master.menu.user-account.consumer = Datos de consumidor
 master.menu.user-account.become-consumer = Hazte consumidor
 master.menu.user-account.become-client = Hazte cliente
 master.menu.user-account.client = Datos de cliente
-
+master.menu.user-account.become-manager = Hazte manager
+master.menu.user-account.manager = Datos de manager
+master.menu.user-account.become-developer = Hazte desarrollador
+master.menu.user-account.developer = Datos de desarrollador 
 master.menu.user-account.become-sponsor = Hazte patrocinador
 master.menu.user-account.sponsor = Datos de patrocinador
+
+master.menu.user-account.become-auditor = Hazte auditor
+master.menu.user-account.auditor = Datos de auditor

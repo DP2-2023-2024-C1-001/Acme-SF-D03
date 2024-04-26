@@ -50,7 +50,7 @@ public class AuditorCodeAuditCreateService extends AbstractService<Auditor, Code
 		projectId = super.getRequest().getData("project", int.class);
 		project = this.repository.findOneProjectById(projectId);
 
-		super.bind(object, "code", "execution", "type", "correctiveActions", "link", "published");
+		super.bind(object, "code", "execution", "type", "correctiveActions", "link");
 		object.setProject(project);
 
 	}
@@ -58,6 +58,13 @@ public class AuditorCodeAuditCreateService extends AbstractService<Auditor, Code
 	@Override
 	public void validate(final CodeAudit object) {
 		assert object != null;
+		if (!super.getBuffer().getErrors().hasErrors("code")) {
+			CodeAudit existing;
+
+			existing = this.repository.findOneCodeAuditByCode(object.getCode());
+			super.state(existing == null || existing.getId() == object.getId(), "code", "auditor.code-audit.form.error.duplicated");
+
+		}
 	}
 
 	@Override
