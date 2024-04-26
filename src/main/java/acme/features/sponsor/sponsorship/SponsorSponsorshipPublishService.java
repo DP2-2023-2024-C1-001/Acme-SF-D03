@@ -16,7 +16,6 @@ import acme.entities.invoice.Invoice;
 import acme.entities.project.Project;
 import acme.entities.sponsorship.SponsorType;
 import acme.entities.sponsorship.Sponsorship;
-import acme.entities.systemconfiguration.SystemConfiguration;
 import acme.roles.Sponsor;
 
 @Service
@@ -75,15 +74,13 @@ public class SponsorSponsorshipPublishService extends AbstractService<Sponsor, S
 	public void validate(final Sponsorship object) {
 		assert object != null;
 
-		if (!super.getBuffer().getErrors().hasErrors("amount")) {
+		if (!super.getBuffer().getErrors().hasErrors("amount") && object.getProject() != null) {
 
 			Double amount;
 			amount = object.getAmount().getAmount();
 			super.state(amount >= 0, "amount", "sponsor.sponsorship.form.error.negativeAmount");
 
-			final SystemConfiguration systemConfig = this.repository.findActualSystemConfiguration();
-			final String currency = object.getAmount().getCurrency();
-			super.state(systemConfig.getAcceptedCurrencies().contains(" " + currency + " "), "amount", "sponsor.sponsorship.form.error.currency");
+			super.state(object.getAmount().getCurrency().equals(object.getProject().getCost().getCurrency()), "amount", "sponsor.sponsorship.form.error.currency");
 
 		}
 
@@ -98,10 +95,13 @@ public class SponsorSponsorshipPublishService extends AbstractService<Sponsor, S
 
 		super.state(object.getAmount().getAmount() == sumOfInvoicesTotalAmount, "*", "sponsor.sponsorship.form.error.amount");
 
-		if (!super.getBuffer().getErrors().hasErrors("finalDate") && object.getMoment() != null) {
+		if (!super.getBuffer().getErrors().hasErrors("initialDate") && object.getMoment() != null)
+			super.state(MomentHelper.isBefore(object.getMoment(), object.getInitialDate()), "initialDate", "sponsor.sponsorship.form.error.date-before-moment");
+
+		if (!super.getBuffer().getErrors().hasErrors("finalDate") && object.getInitialDate() != null) {
 			Date minimumPeriod;
 
-			minimumPeriod = MomentHelper.deltaFromMoment(object.getMoment(), 1, ChronoUnit.MONTHS);
+			minimumPeriod = MomentHelper.deltaFromMoment(object.getInitialDate(), 1, ChronoUnit.MONTHS);
 			super.state(MomentHelper.isAfterOrEqual(object.getFinalDate(), minimumPeriod), "finalDate", "sponsor.sponsorship.form.error.too-close-date");
 		}
 

@@ -16,8 +16,8 @@ sponsor.sponsorship.form.label.code = Código:
 sponsor.sponsorship.form.label.moment = Momento de inicio:
 sponsor.sponsorship.form.label.amount = Cantidad:
 sponsor.sponsorship.form.label.type = Tipo de patrocinio:
-sponsor.sponsorship.form.label.email = Email:
-sponsor.sponsorship.form.label.link = Link:
+sponsor.sponsorship.form.label.email = Email (Opcional):
+sponsor.sponsorship.form.label.link = Link (Opcional):
 sponsor.sponsorship.form.label.duration = Duración:
 sponsor.sponsorship.form.label.project = Proyecto:
 sponsor.sponsorship.form.label.initialDate= Fecha Inicio:
@@ -30,10 +30,12 @@ sponsor.sponsorship.form.button.delete = Eliminar
 sponsor.sponsorship.form.button.publish = Publicar
 
 sponsor.sponsorship.form.error.duplicated = Este código ya está en uso
-sponsor.sponsorship.form.error.too-close-date = La fecha final debe ser al menos un mes antes del momento de inicio
+sponsor.sponsorship.form.error.too-close-date = Después del momento de la fecah de inicio, al menos un mes de duración
 sponsor.sponsorship.form.error.negativeAmount = La cantidad no puede ser negativa
-sponsor.sponsorship.form.error.currency = El sistema no acepta este tipo monetario
+sponsor.sponsorship.form.error.currency = No se puede crear el patrocinio porque la unidad monetaria especificada no coincide con la del proyecto.
 sponsor.sponsorship.form.error.amount = La suma del importe total de todas sus facturas publicadas debe ser igual al importe del patrocinio
+sponsor.sponsorship.form.error.date-before-moment = Debe ser posterior al momento
+
 
 
 sponsor.sponsorship.list.label.code = Código

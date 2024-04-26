@@ -13,7 +13,6 @@ import acme.client.helpers.MomentHelper;
 import acme.client.services.AbstractService;
 import acme.entities.invoice.Invoice;
 import acme.entities.sponsorship.Sponsorship;
-import acme.entities.systemconfiguration.SystemConfiguration;
 import acme.roles.Sponsor;
 
 @Service
@@ -80,14 +79,12 @@ public class SponsorInvoiceUpdateService extends AbstractService<Sponsor, Invoic
 
 		}
 
-		if (!super.getBuffer().getErrors().hasErrors("quantity")) {
+		if (!super.getBuffer().getErrors().hasErrors("quantity") && object.getSponsorship() != null) {
 			Double quantity;
 			quantity = object.getQuantity().getAmount();
 			super.state(quantity > 0, "quantity", "sponsor.invoice.form.error.negativeQuantity");
 
-			final SystemConfiguration systemConfig = this.repository.findActualSystemConfiguration();
-			final String currency = object.getQuantity().getCurrency();
-			super.state(systemConfig.getAcceptedCurrencies().contains(" " + currency + " "), "quantity", "sponsor.invoice.form.error.currency");
+			super.state(object.getQuantity().getCurrency().equals(object.getSponsorship().getAmount().getCurrency()), "quantity", "sponsor.invoice.form.error.currency");
 
 			int sponsorshipId = object.getSponsorship().getId();
 
