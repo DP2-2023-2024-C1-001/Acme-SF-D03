@@ -57,7 +57,7 @@ public class AdministratorSystemConfigurationUpdateService extends AbstractServi
 		if (!super.getBuffer().getErrors().hasErrors("systemCurrency")) {
 			final String acceptedCurrencies = object.getAcceptedCurrencies();
 			final String systemCurrency = object.getSystemCurrency();
-			super.state(acceptedCurrencies.contains(systemCurrency), "systemCurrency", "administrator.config.form.error.systemCurrency");
+			super.state(acceptedCurrencies.contains(" " + systemCurrency + " "), "systemCurrency", "administrator.config.form.error.systemCurrency");
 		}
 
 	}
@@ -70,7 +70,7 @@ public class AdministratorSystemConfigurationUpdateService extends AbstractServi
 
 		String resultado = "";
 		for (String p : palabras.split(","))
-			resultado = resultado + " " + p + " ";
+			resultado = resultado + " " + p.trim() + " ,";
 
 		object.setAcceptedCurrencies(resultado);
 		this.repository.save(object);
