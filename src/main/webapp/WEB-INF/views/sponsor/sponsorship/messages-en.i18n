@@ -17,8 +17,8 @@ sponsor.sponsorship.form.label.code = Code:
 sponsor.sponsorship.form.label.moment = Moment:
 sponsor.sponsorship.form.label.amount = Amount:
 sponsor.sponsorship.form.label.type = Type:
-sponsor.sponsorship.form.label.email = Email:
-sponsor.sponsorship.form.label.link = Link:
+sponsor.sponsorship.form.label.email = Email (Optional):
+sponsor.sponsorship.form.label.link = Link (Optional):
 sponsor.sponsorship.form.label.duration = Duration:
 sponsor.sponsorship.form.label.project = Project:
 sponsor.sponsorship.form.label.initialDate= Initial Date:
@@ -31,10 +31,12 @@ sponsor.sponsorship.form.button.delete = Delete
 sponsor.sponsorship.form.button.publish = Publish
 
 sponsor.sponsorship.form.error.duplicated = This code is taken
-sponsor.sponsorship.form.error.too-close-date = After the moment, at least one month long
+sponsor.sponsorship.form.error.too-close-date = After the initialDate, at least one month long
 sponsor.sponsorship.form.error.negativeAmount = The amount cannot be negative
-sponsor.sponsorship.form.error.currency = The system cannot accept that currency
-sponsor.sponsorship.form.error.amount = the sum of the total amount of all their invoices must be equal to the amount of the sponsorship
+sponsor.sponsorship.form.error.currency = Unable to create sponsorship because the specified monetary unit does not match that of the project 
+sponsor.sponsorship.form.error.amount = The sum of the total amount of all the publish invoices must be equal to the amount of the sponsorship
+sponsor.sponsorship.form.error.date-before-moment = Must be after the moment
+
 
 sponsor.sponsorship.list.label.code = Code
 sponsor.sponsorship.list.label.moment = Moment
