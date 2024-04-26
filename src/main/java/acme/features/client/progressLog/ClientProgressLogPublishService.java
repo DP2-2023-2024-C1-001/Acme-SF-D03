@@ -31,7 +31,7 @@ public class ClientProgressLogPublishService extends AbstractService<Client, Pro
 		progressLogId = super.getRequest().getData("id", int.class);
 		contract = this.repository.findOneContractByProgressLogId(progressLogId);
 		progressLog = this.repository.findOneProgressLogById(progressLogId);
-		status = contract != null && progressLog != null && !progressLog.isPublished() && super.getRequest().getPrincipal().hasRole(contract.getClient());
+		status = contract != null && contract.isPublished() && progressLog != null && !progressLog.isPublished() && super.getRequest().getPrincipal().hasRole(contract.getClient());
 
 		super.getResponse().setAuthorised(status);
 	}
@@ -73,9 +73,11 @@ public class ClientProgressLogPublishService extends AbstractService<Client, Pro
 			ProgressLog progressLog;
 			contract = this.repository.findOneContractByProgressLogId(object.getId());
 			actualCompleteness = this.repository.findActualCompletenessForAContract(contract.getId());
+			if (actualCompleteness == null)
+				actualCompleteness = 0.;
 			progressLog = this.repository.findOneProgressLogById(object.getId());
-			totalCompleteness = actualCompleteness - progressLog.getCompleteness() + object.getCompleteness();
-			super.state(totalCompleteness <= 100.00, "code", "client.progress-log.form.error.completeness");
+			totalCompleteness = actualCompleteness + object.getCompleteness();
+			super.state(totalCompleteness <= 100.00, "completeness", "client.progress-log.form.error.completeness");
 
 		}
 
@@ -97,6 +99,7 @@ public class ClientProgressLogPublishService extends AbstractService<Client, Pro
 
 		dataset = super.unbind(object, "code", "completeness", "comment", "registrationMoment", "responsiblePerson", "published");
 		dataset.put("masterId", object.getContract().getId());
+		dataset.put("contractPublished", object.getContract().isPublished());
 
 		super.getResponse().addData(dataset);
 	}

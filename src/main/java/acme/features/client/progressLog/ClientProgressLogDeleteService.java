@@ -74,6 +74,7 @@ public class ClientProgressLogDeleteService extends AbstractService<Client, Prog
 
 		dataset = super.unbind(object, "code", "completeness", "comment", "registrationMoment", "responsiblePerson", "published");
 		dataset.put("masterId", object.getContract().getId());
+		dataset.put("contractPublished", object.getContract().isPublished());
 
 		super.getResponse().addData(dataset);
 	}
