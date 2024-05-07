@@ -40,6 +40,7 @@ public class ManagerUserStoryUpdateService extends AbstractService<Manager, User
 	@Override
 	public void load() {
 		int id = super.getRequest().getData("id", int.class);
+
 		UserStory userStory = this.repository.findOneUserStoryById(id);
 
 		super.getBuffer().addData(userStory);
@@ -73,12 +74,21 @@ public class ManagerUserStoryUpdateService extends AbstractService<Manager, User
 	@Override
 	public void unbind(final UserStory object) {
 		assert object != null;
+		boolean isMine;
+		UserStory userStory;
+		Manager manager;
+
+		userStory = this.repository.findOneUserStoryById(super.getRequest().getData("id", int.class));
+		manager = this.repository.findOneManagerById(super.getRequest().getPrincipal().getActiveRoleId());
+
+		isMine = userStory.getManager().equals(manager);
 
 		SelectChoices choices = SelectChoices.from(Priority.class, object.getPriority());
 
 		Dataset dataset = super.unbind(object, "title", "description", "estimatedCost", "acceptanceCriteria", "link", "priority", "draftMode");
 
 		dataset.put("priorityChoices", choices);
+		dataset.put("isMine", isMine);
 
 		super.getResponse().addData(dataset);
 	}

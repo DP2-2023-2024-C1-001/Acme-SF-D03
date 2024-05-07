@@ -1,10 +1,13 @@
 
 package acme.features.sponsor.dashboard;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import acme.client.data.datatypes.Money;
 import acme.client.data.models.Dataset;
 import acme.client.services.AbstractService;
 import acme.forms.SponsorDashboard;
@@ -36,63 +39,72 @@ public class SponsorDashboardShowService extends AbstractService<Sponsor, Sponso
 		Integer totalNumberOfInvoicesWithTaxLessOrEquals21Percent;
 		Integer totalNumberOfSponsorshipWithLink;
 
-		Money averageAmountOfSponsorship;
-		Money deviationAmountOfSponsorship;
-		Money minimumAmountOfSponsorship;
-		Money maximumAmountOfSponsorship;
+		Collection<Object[]> averageAmountOfSponsorship;
+		Collection<Object[]> deviationAmountOfSponsorship;
+		Collection<Object[]> minimumAmountOfSponsorship;
+		Collection<Object[]> maximumAmountOfSponsorship;
 
-		Money averageQuantityOfInvoice;
-		Money deviationQuantityOfInvoice;
-		Money minimumQuantityOfInvoice;
-		Money maximumQuantityOfInvoice;
+		Collection<Object[]> averageQuantityOfInvoice;
+		Collection<Object[]> deviationQuantityOfInvoice;
+		Collection<Object[]> minimumQuantityOfInvoice;
+		Collection<Object[]> maximumQuantityOfInvoice;
 
+		Map<String, Double> mapAverageAmountOfSponsorship;
+		Map<String, Double> mapDeviationAmountOfSponsorship;
+		Map<String, Double> mapMinimumAmountOfSponsorship;
+		Map<String, Double> mapMaximumAmountOfSponsorship;
+
+		Map<String, Double> mapAverageQuantityOfInvoice;
+		Map<String, Double> mapDeviationQuantityOfInvoice;
+		Map<String, Double> mapMinimumQuantityOfInvoice;
+		Map<String, Double> mapMaximumQuantityOfInvoice;
 		//--------
 		totalNumberOfInvoicesWithTaxLessOrEquals21Percent = this.repository.totalNumberOfInvoicesWithTaxLessOrEquals21Percent(super.getRequest().getPrincipal().getActiveRoleId());
 		totalNumberOfSponsorshipWithLink = this.repository.totalNumberOfSponsorshipWithLink(super.getRequest().getPrincipal().getActiveRoleId());
 
-		averageAmountOfSponsorship = new Money();
-		averageAmountOfSponsorship.setAmount(this.repository.averageAmountOfSponsorship(super.getRequest().getPrincipal().getActiveRoleId()));
-		averageAmountOfSponsorship.setCurrency("EUR");
+		//sponsorship---------
+		averageAmountOfSponsorship = this.repository.averageAmountOfSponsorship(super.getRequest().getPrincipal().getActiveRoleId());
+		deviationAmountOfSponsorship = this.repository.deviationAmountOfSponsorship(super.getRequest().getPrincipal().getActiveRoleId());
+		minimumAmountOfSponsorship = this.repository.minimumAmountOfSponsorship(super.getRequest().getPrincipal().getActiveRoleId());
+		maximumAmountOfSponsorship = this.repository.maximumAmountOfSponsorship(super.getRequest().getPrincipal().getActiveRoleId());
 
-		deviationAmountOfSponsorship = new Money();
-		deviationAmountOfSponsorship.setAmount(this.repository.deviationAmountOfSponsorship(super.getRequest().getPrincipal().getActiveRoleId()));
-		deviationAmountOfSponsorship.setCurrency("EUR");
+		//invoice-------------
+		averageQuantityOfInvoice = this.repository.averageQuantityOfInvoice(super.getRequest().getPrincipal().getActiveRoleId());
+		deviationQuantityOfInvoice = this.repository.deviationQuantityOfInvoice(super.getRequest().getPrincipal().getActiveRoleId());
+		minimumQuantityOfInvoice = this.repository.minimumQuantityOfInvoice(super.getRequest().getPrincipal().getActiveRoleId());
+		maximumQuantityOfInvoice = this.repository.maximumQuantityOfInvoice(super.getRequest().getPrincipal().getActiveRoleId());
 
-		minimumAmountOfSponsorship = new Money();
-		minimumAmountOfSponsorship.setAmount(this.repository.minimumAmountOfSponsorship(super.getRequest().getPrincipal().getActiveRoleId()));
-		minimumAmountOfSponsorship.setCurrency("EUR");
+		mapAverageAmountOfSponsorship = new HashMap<>();
+		mapDeviationAmountOfSponsorship = new HashMap<>();
+		mapMinimumAmountOfSponsorship = new HashMap<>();
+		mapMaximumAmountOfSponsorship = new HashMap<>();
 
-		maximumAmountOfSponsorship = new Money();
-		maximumAmountOfSponsorship.setAmount(this.repository.maximumAmountOfSponsorship(super.getRequest().getPrincipal().getActiveRoleId()));
-		maximumAmountOfSponsorship.setCurrency("EUR");
+		mapAverageQuantityOfInvoice = new HashMap<>();
+		mapDeviationQuantityOfInvoice = new HashMap<>();
+		mapMinimumQuantityOfInvoice = new HashMap<>();
+		mapMaximumQuantityOfInvoice = new HashMap<>();
 
-		averageQuantityOfInvoice = new Money();
-		averageQuantityOfInvoice.setAmount(this.repository.averageQuantityOfInvoice(super.getRequest().getPrincipal().getActiveRoleId()));
-		averageQuantityOfInvoice.setCurrency("EUR");
+		mapAverageAmountOfSponsorship = this.repository.convertToMap(averageAmountOfSponsorship);
+		mapDeviationAmountOfSponsorship = this.repository.convertToMap(deviationAmountOfSponsorship);
+		mapMinimumAmountOfSponsorship = this.repository.convertToMap(minimumAmountOfSponsorship);
+		mapMaximumAmountOfSponsorship = this.repository.convertToMap(maximumAmountOfSponsorship);
 
-		deviationQuantityOfInvoice = new Money();
-		deviationQuantityOfInvoice.setAmount(this.repository.deviationQuantityOfInvoice(super.getRequest().getPrincipal().getActiveRoleId()));
-		deviationQuantityOfInvoice.setCurrency("EUR");
-
-		minimumQuantityOfInvoice = new Money();
-		minimumQuantityOfInvoice.setAmount(this.repository.minimumQuantityOfInvoice(super.getRequest().getPrincipal().getActiveRoleId()));
-		minimumQuantityOfInvoice.setCurrency("EUR");
-
-		maximumQuantityOfInvoice = new Money();
-		maximumQuantityOfInvoice.setAmount(this.repository.maximumQuantityOfInvoice(super.getRequest().getPrincipal().getActiveRoleId()));
-		maximumQuantityOfInvoice.setCurrency("EUR");
+		mapAverageQuantityOfInvoice = this.repository.convertToMap(averageQuantityOfInvoice);
+		mapDeviationQuantityOfInvoice = this.repository.convertToMap(deviationQuantityOfInvoice);
+		mapMinimumQuantityOfInvoice = this.repository.convertToMap(minimumQuantityOfInvoice);
+		mapMaximumQuantityOfInvoice = this.repository.convertToMap(maximumQuantityOfInvoice);
 
 		dashboard = new SponsorDashboard();
 		dashboard.setTotalNumberOfInvoicesWithTaxLessOrEquals21Percent(totalNumberOfInvoicesWithTaxLessOrEquals21Percent);
 		dashboard.setTotalNumberOfSponsorshipWithLink(totalNumberOfSponsorshipWithLink);
-		dashboard.setAverageAmountOfSponsorship(averageAmountOfSponsorship);
-		dashboard.setDeviationAmountOfSponsorship(deviationAmountOfSponsorship);
-		dashboard.setMinimumAmountOfSponsorship(minimumAmountOfSponsorship);
-		dashboard.setMaximumAmountOfSponsorship(maximumAmountOfSponsorship);
-		dashboard.setAverageQuantityOfInvoice(averageQuantityOfInvoice);
-		dashboard.setDeviationQuantityOfInvoice(deviationQuantityOfInvoice);
-		dashboard.setMinimumQuantityOfInvoice(minimumQuantityOfInvoice);
-		dashboard.setMaximumQuantityOfInvoice(maximumQuantityOfInvoice);
+		dashboard.setAverageAmountOfSponsorship(mapAverageAmountOfSponsorship);
+		dashboard.setDeviationAmountOfSponsorship(mapDeviationAmountOfSponsorship);
+		dashboard.setMinimumAmountOfSponsorship(mapMinimumAmountOfSponsorship);
+		dashboard.setMaximumAmountOfSponsorship(mapMaximumAmountOfSponsorship);
+		dashboard.setAverageQuantityOfInvoice(mapAverageQuantityOfInvoice);
+		dashboard.setDeviationQuantityOfInvoice(mapDeviationQuantityOfInvoice);
+		dashboard.setMinimumQuantityOfInvoice(mapMinimumQuantityOfInvoice);
+		dashboard.setMaximumQuantityOfInvoice(mapMaximumQuantityOfInvoice);
 
 		super.getBuffer().addData(dashboard);
 

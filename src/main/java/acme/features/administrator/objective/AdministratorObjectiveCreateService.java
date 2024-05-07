@@ -74,10 +74,6 @@ public class AdministratorObjectiveCreateService extends AbstractService<Adminis
 	public void perform(final Objective object) {
 		assert object != null;
 
-		Date moment;
-
-		moment = MomentHelper.getCurrentMoment();
-		object.setInstantiationMoment(moment);
 		this.repository.save(object);
 	}
 
